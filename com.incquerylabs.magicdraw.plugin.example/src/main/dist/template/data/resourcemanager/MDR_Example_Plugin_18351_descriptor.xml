@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDescriptor critical="false"
+                    date="${build.timestamp}"
+                    description="Example MagicDraw plug-in"
+                    id="17151"
+                    mdVersionMax="higher"
+                    mdVersionMin="19.0 beta"
+                    name="Example Plug-in"
+                    product="Example Product"
+                    type="Plugin">
+    <version human="${human.version}" resource="${internal.version}" internal="${internal.version}"/>
+    <provider name="IncQuery Labs Ltd."/>
+    <edition>Reader</edition>
+    <edition>Community</edition>
+    <edition>Standard</edition>
+    <edition>Professional Java</edition>
+    <edition>Professional C++</edition>
+    <edition>Professional C#</edition>
+    <edition>Professional ArcStyler</edition>
+    <edition>Professional EFFS ArcStyler</edition>
+    <edition>OptimalJ</edition>
+    <edition>Professional</edition>
+    <edition>Architect</edition>
+    <edition>Enterprise</edition>
+
+    <requiredResource id="1440" name="SysML"/>
+    
+    <installation>
+        <!-- START AUTO-GENERATED -->
+        <!-- END AUTO-GENERATED -->
+    </installation>
+</resourceDescriptor>

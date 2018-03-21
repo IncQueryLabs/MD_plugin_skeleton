@@ -1,0 +1,17 @@
+build
+javadoc
+out
+target
+bin
+/.classpath
+.gradle
+.idea
+META-INF
+/.project
+*.iml
+*.mdxml.bak
+*.jresult
+*.diff
+rebel.xml
+.DS_Store
+*._trace
