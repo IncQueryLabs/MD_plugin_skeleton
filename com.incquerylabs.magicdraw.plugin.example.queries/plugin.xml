@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="com.incquerylabs.magicdraw.plugin.example.queries.TEST" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:com.incquerylabs.magicdraw.plugin.example.queries.TEST" id="com.incquerylabs.magicdraw.plugin.example.queries.TEST">
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.TESTPattern"/>
+    </group>
+  </extension>
+</plugin>
