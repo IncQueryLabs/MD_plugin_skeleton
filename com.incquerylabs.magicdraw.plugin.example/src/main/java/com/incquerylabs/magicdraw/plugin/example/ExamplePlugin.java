@@ -1,17 +1,12 @@
 package com.incquerylabs.magicdraw.plugin.example;
 
 import java.awt.event.ActionEvent;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 
-import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine;
 
-import com.incquerylabs.magicdraw.plugin.example.queries.TEST;
-import com.incquerylabs.magicdraw.plugin.example.queries.TESTPattern.Match;
+import com.incquerylabs.magicdraw.plugin.example.trafos.FullModelBatchTransformation;
 import com.incquerylabs.v4md.ViatraQueryAdapter;
 import com.nomagic.magicdraw.actions.ActionsConfiguratorsManager;
 import com.nomagic.magicdraw.actions.MDAction;
@@ -30,7 +25,7 @@ public class ExamplePlugin extends Plugin {
 	public void init() {
 
 		ActionsConfiguratorsManager manager = ActionsConfiguratorsManager.getInstance();
-		manager.addMainMenuConfigurator(new ExampleMainMenuConfigurator(new SimpleAction("EXAMPLE_ACTION", "Example Action")));
+		manager.addMainMenuConfigurator(new ExampleMainMenuConfigurator(new PortTypeCorrectorAction("PORT_CORRECTOR_TRANSFORMATION", "Correct all port type")));
 
 	}
 
@@ -39,10 +34,10 @@ public class ExamplePlugin extends Plugin {
 		return true;
 	}
 
-	class SimpleAction extends MDAction {
+	class PortTypeCorrectorAction extends MDAction {
 		private static final long serialVersionUID = 8437220468635496371L;
 
-		public SimpleAction(String id, String name) {
+		public PortTypeCorrectorAction(String id, String name) {
 			super(id, name, null, null);
 		}
 
@@ -55,11 +50,10 @@ public class ExamplePlugin extends Plugin {
 			ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project);
 			AdvancedViatraQueryEngine engine = adapter.getEngine();
 			
-			String string = TEST.instance().getTESTPattern(engine).getAllMatches().stream().map( c -> c.getValueOfClass().getName()).collect(Collectors.joining("\n"));
+			FullModelBatchTransformation trafo = new FullModelBatchTransformation(engine);
+			trafo.execute();
 			
-			
-			JOptionPane.showMessageDialog(MDDialogParentProvider.getProvider().getDialogParent(),
-					string);
+			JOptionPane.showMessageDialog(MDDialogParentProvider.getProvider().getDialogParent(), "The correction has been done");
 		}
 
 	}
