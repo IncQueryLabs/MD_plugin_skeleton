@@ -26,6 +26,7 @@ public class ExamplePlugin extends Plugin {
 
 		ActionsConfiguratorsManager manager = ActionsConfiguratorsManager.getInstance();
 		manager.addMainMenuConfigurator(new ExampleMainMenuConfigurator(new PortTypeCorrectorAction("PORT_CORRECTOR_TRANSFORMATION", "Correct all port type")));
+		manager.addContainmentBrowserContextConfigurator(new EventDrivenPortTypeCorrectorConfigurator());
 
 	}
 
