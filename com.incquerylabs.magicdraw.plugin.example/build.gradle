@@ -60,7 +60,7 @@ dependencies {
     preCompile group: 'com.nomagic', name: 'magicdraw', version: '185sp3', classifier: 'MagicDraw_185_sp3_no_install', ext: 'zip'
     preCompile group: 'com.nomagic', name: 'sysml', version: '185sp3', classifier: 'SysML_Plugin_185_sp3_bundle', ext: 'zip'
     preCompile group: 'com.nomagic', name: 'cst', version: '185sp3', classifier: 'Cameo_Simulation_Toolkit_185_sp3', ext: 'zip'
-    preCompile group: 'com.incquerylabs.v4md', name: 'com.incquerylabs.v4md', version: '2.0.0.M3', classifier: 'no-install', ext: 'zip'
+    preCompile group: 'com.incquerylabs.v4md', name: 'com.incquerylabs.v4md', version: '2.0.0.RC2', classifier: 'plugin', ext: 'zip'
     
     // This ensures classpath load order to match the MagicDraw provided order and then includes extras needed for non-OpenAPI stuff.
     compile files(classpathLibraries.collect { 'build/dependency-cache/extracted/' + it })
