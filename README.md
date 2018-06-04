@@ -5,7 +5,14 @@ How to use:
 - Install VIATRA SDK 2.0.0.RC2 http://download.eclipse.org/viatra/updates/milestone/latest
 - install MagicDraw Eclipse integration plug-ins https://docs.nomagic.com/display/MD185/Integrating+with+Eclipse
 - Clone this repo
-- Synchronize Gradle project (loads tasks, and downloads dependencies from maven)
+- Import the projects in it
+- Right click project com.incquerylabs.magicdraw.plugin.example > Configure > Add Gradle Nature
+  - This will synchronize it (loads tasks, and downloads dependencies from maven)
 - run 'extractDependencies' task (downloads and sets up MagicDraw)
-- Synchronize Gradle project again (loads MD dependencies)
+  - Show View: Gradle Tasks
+  - In the view toolbar, click Refresh Tasks for All Projects
+  - In the view menu, check Show All Tasks
+  - Run com.incquerylabs.magicdraw.plugin.example > other > extractDependencies
+- Right click project com.incquerylabs.magicdraw.plugin.example > Gradle > Refresh Gradle Project
+  - This will synchronize it again (loads MD dependencies)
 - run 'runJava' task
