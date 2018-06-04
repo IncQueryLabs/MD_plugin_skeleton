@@ -15,4 +15,11 @@ How to use:
   - Run com.incquerylabs.magicdraw.plugin.example > other > extractDependencies
 - Right click project com.incquerylabs.magicdraw.plugin.example > Gradle > Refresh Gradle Project
   - This will synchronize it again (loads MD dependencies)
-- run 'runJava' task
+- run 'runJava' task (this will start MagicDraw)
+- Create or open a project
+- Run menu Example > Example Action, it should display a list of classes
+
+## Troubleshooting
+
+- MagicDraw does not start, saying `Unable to create the actorSystem`
+  - Try to start it again
