@@ -1,6 +1,6 @@
 package com.incquerylabs.magicdraw.plugin.example.queries
 
-import "http://www.nomagic.com/magicdraw/UML/2.5.0";
+import "http://www.nomagic.com/magicdraw/UML/2.5.1";
 
 
 pattern DeduciblePortType(port : Port, type : Type){

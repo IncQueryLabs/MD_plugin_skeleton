@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/com.incquerylabs.magicdraw.plugin.example.queries/src/com/incquerylabs/magicdraw/plugin/example/queries/SearchQueries.vql
+ * Generated from platform:/resource/com.incquerylabs.magicdraw.plugin.example/src/main/java/com/incquerylabs/magicdraw/plugin/example/queries/SearchQueries.vql
  */
 package com.incquerylabs.magicdraw.plugin.example.queries.internal;
 

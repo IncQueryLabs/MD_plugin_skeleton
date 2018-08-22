@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/com.incquerylabs.magicdraw.plugin.example.queries/src/com/incquerylabs/magicdraw/plugin/example/queries/SearchQueries.vql
+ * Generated from platform:/resource/com.incquerylabs.magicdraw.plugin.example/src/main/java/com/incquerylabs/magicdraw/plugin/example/queries/SearchQueries.vql
  */
 package com.incquerylabs.magicdraw.plugin.example.queries;
 
@@ -321,10 +321,14 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
     }
     
     /**
-     * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
+     * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      * @param pPort the fixed value of pattern parameter port, or null if not bound.
      * @param pType the fixed value of pattern parameter type, or null if not bound.
-     * @return matches represented as a Match object.
+     * @return a stream of matches represented as a Match object.
      * 
      */
     public Stream<DeduciblePortType.Match> streamAllMatches(final Port pPort, final Type pType) {
@@ -421,7 +425,12 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
     
     /**
      * Retrieve the set of values that occur in matches for port.
-     * @return the Set of all values or empty set if there are no matches
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
     public Stream<Port> streamAllValuesOfport(final DeduciblePortType.Match partialMatch) {
@@ -430,7 +439,12 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
     
     /**
      * Retrieve the set of values that occur in matches for port.
-     * @return the Set of all values or empty set if there are no matches
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
     public Stream<Port> streamAllValuesOfport(final Type pType) {
@@ -484,7 +498,12 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
     
     /**
      * Retrieve the set of values that occur in matches for type.
-     * @return the Set of all values or empty set if there are no matches
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
     public Stream<Type> streamAllValuesOftype(final DeduciblePortType.Match partialMatch) {
@@ -493,7 +512,12 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
     
     /**
      * Retrieve the set of values that occur in matches for type.
-     * @return the Set of all values or empty set if there are no matches
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
     public Stream<Type> streamAllValuesOftype(final Port pPort) {
@@ -624,9 +648,9 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static DeduciblePortType.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pPort = new PParameter("port", "com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5", "Port")), PParameterDirection.INOUT);
+    private final PParameter parameter_pPort = new PParameter("port", "com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_pType = new PParameter("type", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Type", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5", "Type")), PParameterDirection.INOUT);
+    private final PParameter parameter_pType = new PParameter("type", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Type", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Type")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_pPort, parameter_pType);
     
@@ -657,8 +681,8 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
           PVariable var_port = body.getOrCreateVariableByName("port");
           PVariable var_type = body.getOrCreateVariableByName("type");
           PVariable var_other = body.getOrCreateVariableByName("other");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_port), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5", "Port")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_type), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5", "Type")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_port), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_type), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Type")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_port, parameter_pPort),
              new ExportedParameter(body, var_type, parameter_pType)
@@ -668,10 +692,10 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
           // 	find ConnectedPort(port, other)
           new PositivePatternCall(body, Tuples.flatTupleOf(var_port, var_other), ConnectedPort.instance().getInternalQueryRepresentation());
           // 	Port.type(other, type)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_other), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5", "Port")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_other), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_other, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.nomagic.com/magicdraw/UML/2.5", "TypedElement", "type")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5", "Type")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_other, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "TypedElement", "type")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Type")));
           new Equality(body, var__virtual_0_, var_type);
           bodies.add(body);
       }
