@@ -3,7 +3,11 @@ import java.time.format.DateTimeFormatter
 import java.util.stream.Collectors
 import java.util.zip.ZipFile
 
+plugins {
+  id "org.xtext.xtend" version "1.0.21"
+}
 
+xtext.version = "2.13.0"
 
 String buildNumber = project.hasProperty('buildNumber') ? project.getProperty('buildNumber') : System.currentTimeSeconds()
 String timestamp = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm").format(LocalDateTime.now())

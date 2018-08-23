@@ -7,7 +7,6 @@ bin
 .gradle
 .idea
 META-INF
-/.project
 *.iml
 *.mdxml.bak
 *.jresult
