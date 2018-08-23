@@ -2,8 +2,8 @@ How to use:
 
 
 - Install product: Eclipse IDE for Eclipse Committers, version: Photon
-- Install VIATRA SDK 2.0.0.RC2 http://download.eclipse.org/viatra/updates/milestone/latest
-- install MagicDraw Eclipse integration plug-ins https://docs.nomagic.com/display/MD185/Integrating+with+Eclipse
+- Install VIATRA SDK 2.0.1 http://download.eclipse.org/viatra/updates/release/latest
+- Install UML 2.5.1 metamodel: http://albert.internal.incquerylabs.com:10080/magicdraw.metamodel/
 - Clone this repo
 - Import the projects in it
 - Right click project com.incquerylabs.magicdraw.plugin.example > Configure > Add Gradle Nature
