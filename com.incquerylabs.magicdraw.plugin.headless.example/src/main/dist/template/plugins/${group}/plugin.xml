@@ -1,0 +1,19 @@
+<plugin
+        id="com.incquerylabs.magicdraw.plugin.headless.example"
+        name="IncQuery Labs MagicDraw Plugin Headless Example"
+        internalVersion="${internal.version}"
+        version="${human.version}"
+        provider-name="IncQuery Labs Ltd."
+        class-lookup="LocalFirst"
+        class="com.incquerylabs.magicdraw.plugin.headless.example.ExampleHeadlessPlugin">
+    
+	<requires>
+		<required-plugin id="com.nomagic.magicdraw.plugins.impl.sysml" name="SysML"/>
+	</requires>
+    
+    <runtime>
+        <!-- START AUTO-GENERATED -->
+        <!-- END AUTO-GENERATED -->
+    </runtime>
+    
+</plugin>
