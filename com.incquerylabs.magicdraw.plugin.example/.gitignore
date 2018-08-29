@@ -6,7 +6,6 @@ bin
 /.classpath
 .gradle
 .idea
-META-INF
 *.iml
 *.mdxml.bak
 *.jresult
@@ -14,3 +13,5 @@ META-INF
 rebel.xml
 .DS_Store
 *._trace
+src/generated/vql/com/incquerylabs/magicdraw/plugin/example/queries/internal/.gitignore
+src/generated/vql/com/incquerylabs/magicdraw/plugin/example/queries/.gitignore

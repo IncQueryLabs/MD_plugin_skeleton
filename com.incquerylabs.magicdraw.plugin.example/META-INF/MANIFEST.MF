@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: IncQuery Labs MagicDraw Plugin Example test
+Bundle-SymbolicName: com.incquerylabs.magicdraw.plugin.example;singleton:=true
+Bundle-Version: 0.1.0
+Bundle-Vendor: IncQuery Labs Ltd.
+Export-Package: com.incquerylabs.magicdraw.plugin.example,
+  com.incquerylabs.magicdraw.plugin.example.queries
+Automatic-Module-Name: com.incquerylabs.magicdraw.plugin.example
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

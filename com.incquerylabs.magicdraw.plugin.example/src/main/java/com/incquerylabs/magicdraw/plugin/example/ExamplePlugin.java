@@ -45,6 +45,7 @@ public class ExamplePlugin extends Plugin {
 		/**
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
+		@SuppressWarnings("deprecation")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Project project = Application.getInstance().getProject();
