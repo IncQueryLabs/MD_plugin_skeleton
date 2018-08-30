@@ -250,7 +250,13 @@ tasks.withType(JavaExec) {
     errorOutput = System.err
 	
     main = 'com.nomagic.osgi.launcher.ProductionFrameworkLauncher'
-    jvmArgs = platformConfigSetting + ['-Xmx8192M', '-Xss512M', '-noverify', '-splash:data/splash.png','-Dmd.class.path=$java.class.path']
+    jvmArgs = platformConfigSetting + ['-Xmx8192M', '-Xss512M', '-noverify', '-splash:data/splash.png', 
+    	'-Dmd.class.path=$java.class.path', 
+    	'-Dcom.nomagic.osgi.config.dir=configuration',
+    	'-Desi.system.config=build/install/data/application.conf',
+  		'-Dlogback.configurationFile=build/install/data/logback.xml',
+    	'-Dcom.nomagic.magicdraw.launcher=com.nomagic.magicdraw.commandline.CommandLineActionLauncher', 
+    	'-Dcom.nomagic.magicdraw.commandline.action=com.incquerylabs.magicdraw.plugin.headless.example.ExampleHeadlessAction'] // Change this!!!
 	args 'DEVELOPER'
 }
 
