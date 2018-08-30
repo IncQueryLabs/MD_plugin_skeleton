@@ -15,4 +15,5 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'com.incquerylabs.magicdraw.plugin.headless.example'
+rootProject.name = 'com.incquerylabs.magicdraw.plugin.example.root'
+include 'com.incquerylabs.magicdraw.plugin.example', 'com.incquerylabs.magicdraw.plugin.headless.example'
