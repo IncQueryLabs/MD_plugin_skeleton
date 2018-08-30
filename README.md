@@ -1,5 +1,12 @@
 How to use:
 
+There are two example projects
+- com.incquerylabs.magicdraw.plugin.example
+  - Viatra Based Graphical MagicDraw plugin example
+- com.incquerylabs.magicdraw.plugin.example.headless
+  - MagicDraw example commad line plugin
+
+The common build logic is extracted to the com.incquerylabs.magicdraw.plugin.example.root project.
 
 - Install product: Eclipse IDE for Eclipse Committers, version: Photon
 - Install VIATRA SDK 2.0.1 http://download.eclipse.org/viatra/updates/release/latest
@@ -7,15 +14,14 @@ How to use:
 - Clone this repo
 - Import the projects in it
 - Open Gradle Tasks View (Window > Show View > Other... > Gradle)
-- Right click project com.incquerylabs.magicdraw.plugin.example > Gradle > Refresh Gradle Project
+- Right click project com.incquerylabs.magicdraw.plugin.example.root > Gradle > Refresh Gradle Project
   - This will synchronize it (loads tasks, and downloads dependencies from maven)
-- In the Gradle Tasks view, View Menu > Show All Tasks
-- run Gradle Task other/'extractDependencies' task (downloads and sets up MagicDraw)
+- run Gradle 'extractDependencies' task on the root project (downloads and sets up MagicDraw for both example)
   - Show View: Gradle Tasks
   - In the view toolbar, click Refresh Tasks for All Projects
   - In the view menu, check Show All Tasks
-  - Run com.incquerylabs.magicdraw.plugin.example > other > extractDependencies
-- Right click project com.incquerylabs.magicdraw.plugin.example > Gradle > Refresh Gradle Project
+  - Run com.incquerylabs.magicdraw.plugin.example.root > other > extractDependencies
+- Right click project com.incquerylabs.magicdraw.plugin.example.root > Gradle > Refresh Gradle Project
   - This will synchronize it again (loads MD dependencies)
 - run 'runJava' task (this will start MagicDraw)
 - Create or open a project
