@@ -254,4 +254,30 @@ subprojects {
 			: ((os.isMacOsX())
 				? ['-DWINCONFIG=false', '-Xdock:name=MagicDraw', '-Xdock:icon=bin/md.icns', '-Dapple.laf.useScreenMenuBar=true']
 	: ['-DWINCONFIG=false'])
+	
+	
+	tasks.withType(JavaExec) {
+		doFirst {
+	        classpath fileTree(dir: installDir, include: ['lib/**/*.jar'])
+	    }
+	
+		workingDir installDir
+	    ignoreExitValue true
+	
+	    standardOutput = System.out
+	    errorOutput = System.err
+		
+	    main = 'com.nomagic.osgi.launcher.ProductionFrameworkLauncher'
+	    jvmArgs = platformConfigSetting + ['-Xmx8192M', '-Xss512M', '-noverify', '-splash:data/splash.png','-Dmd.class.path=$java.class.path']
+		args 'DEVELOPER'
+	}
+	
+	task runJava(type: JavaExec) {
+	}
+	runJava.dependsOn installDist
+	
+	task debugJava(type: JavaExec) {
+	    jvmArgs += ['-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=9099', '-Dcom.sun.management.jmxremote.port=1099', '-Dcom.sun.management.jmxremote.authenticate=false', '-Dcom.sun.management.jmxremote.ssl=false']
+	}
+	debugJava.dependsOn installDist
 }

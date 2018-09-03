@@ -1,30 +1,8 @@
 tasks.withType(JavaExec) {
-	doFirst {
-        classpath fileTree(dir: installDir, include: ['lib/**/*.jar'])
-    }
-
-	workingDir installDir
-    ignoreExitValue true
-
-    standardOutput = System.out
-    errorOutput = System.err
-	
-    main = 'com.nomagic.osgi.launcher.ProductionFrameworkLauncher'
-    jvmArgs = platformConfigSetting + ['-Xmx8192M', '-Xss512M', '-noverify', '-splash:data/splash.png', 
-    	'-Dmd.class.path=$java.class.path', 
-    	'-Dcom.nomagic.osgi.config.dir=configuration',
+	// Add headless parameters
+	jvmArgs += [ '-Dcom.nomagic.osgi.config.dir=configuration',
     	'-Desi.system.config=build/install/data/application.conf',
   		'-Dlogback.configurationFile=build/install/data/logback.xml',
     	'-Dcom.nomagic.magicdraw.launcher=com.nomagic.magicdraw.commandline.CommandLineActionLauncher', 
     	'-Dcom.nomagic.magicdraw.commandline.action=com.incquerylabs.magicdraw.plugin.headless.example.ExampleHeadlessAction'] // Change this!!!
-	args 'DEVELOPER'
 }
-
-task runJava(type: JavaExec) {
-}
-runJava.dependsOn installDist
-
-task debugJava(type: JavaExec) {
-    jvmArgs += ['-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=9099', '-Dcom.sun.management.jmxremote.port=1099', '-Dcom.sun.management.jmxremote.authenticate=false', '-Dcom.sun.management.jmxremote.ssl=false']
-}
-debugJava.dependsOn installDist
