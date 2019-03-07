@@ -1,0 +1,104 @@
+font:
+  catalog:
+    Roboto:
+      normal: Roboto-Regular.ttf
+      bold: Roboto-Bold.ttf
+      italic: Roboto-Italic.ttf
+      bold_italic: Roboto-BoldItalic.ttf
+    DroidSansMono:
+      normal: DroidSansMono.ttf
+      bold: DroidSansMono.ttf
+      italic: DroidSansMono.ttf
+      bold_italic: DroidSansMono.ttf
+    # M+ 1mn supports ASCII and the circled numbers used for conums
+    Mp1mn:
+      normal: mplus1mn-regular-ascii-conums.ttf
+      bold: mplus1mn-bold-ascii.ttf
+      italic: mplus1mn-italic-ascii.ttf
+      bold_italic: mplus1mn-bold_italic-ascii.ttf
+    # M+ 1p supports Latin, Latin-1 Supplement, Latin Extended, Greek, Cyrillic, Vietnamese, Japanese & an assortment of symbols
+    # It also provides arrows for ->, <-, => and <= replacements in case these glyphs are missing from font
+    Mp1p Fallback:
+      normal: mplus1p-regular-fallback.ttf
+      bold: mplus1p-regular-fallback.ttf
+      italic: mplus1p-regular-fallback.ttf
+      bold_italic: mplus1p-regular-fallback.ttf
+  fallbacks:
+    - Mp1p Fallback
+page:
+  layout: portrait
+  margin: [3.75cm, 2.5cm, 2.5cm, 2.5cm]
+  size: A4
+base:
+  font_color: #000000
+  font_family: Roboto
+  font_size: 11
+  line_height_length: 11
+  line_height: $base_line_height_length / $base_font_size
+  vertical_spacing: 2
+heading:
+  font_color: #5A5755
+  line_height: 1.08
+  h2:
+    font_size: 16
+    margin_top: 12
+    margin_bottom: 12
+  h3:
+    font_size: 13
+    margin_top: 2
+    margin_bottom: 2
+  h4:
+    font_size: 12
+    margin_top: 2
+    margin_bottom: 2
+link:
+  font_color: #002FA7
+code:
+  font_size: 8
+  font_family: DroidSansMono
+  background_color: #f4f7ec
+outline_list:
+  indent: $base_font_size * 1.5
+title_page:
+  margin: 
+  align: center
+  title:
+    font_size: 20
+    font_style: bold
+    line_height: 1
+    margin_top: 22
+    margin_bottom: 6
+  logo:
+    image: image:title-page-logo.png[width=310]
+    top: 10%
+  header:
+    center:
+      content: image:title-page-logo.png[width=310]
+  footer:
+    center:
+      content: |
+        {orgname} | {phone} +
+        {addressline1} | {email} +
+        {addressline2} | {webpage}
+header:
+  height: 2cm
+  font_margin_top: 85
+  image_vertical_align: middle # (1)
+  line_height_length: 100
+  recto:
+    center:
+      content: image:icon_1024.png[width=65]
+  verso:
+    center:
+      content: image:icon_1024.png[width=65]
+footer:
+  font_color: #5A5755
+  font_size: 9
+  height: 2cm
+  line_height: 1
+  recto:
+    center:
+      content: '{page-number}'
+  verso:
+    center:
+      content: '{page-number}'
