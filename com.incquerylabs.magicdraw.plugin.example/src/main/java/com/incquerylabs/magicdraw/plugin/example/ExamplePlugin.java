@@ -25,7 +25,9 @@ public class ExamplePlugin extends Plugin {
 	public void init() {
 
 		ActionsConfiguratorsManager manager = ActionsConfiguratorsManager.getInstance();
-		manager.addMainMenuConfigurator(new ExampleMainMenuConfigurator(new PortTypeCorrectorAction("PORT_CORRECTOR_TRANSFORMATION", "Correct all port type")));
+		manager.addMainMenuConfigurator(new ExampleMainMenuConfigurator(
+				new PortTypeCorrectorAction("PORT_CORRECTOR_TRANSFORMATION", "Correct all port types")
+		));
 		manager.addContainmentBrowserContextConfigurator(new EventDrivenPortTypeCorrectorConfigurator());
 
 	}
@@ -54,7 +56,7 @@ public class ExamplePlugin extends Plugin {
 			FullModelBatchTransformation trafo = new FullModelBatchTransformation(engine);
 			trafo.execute();
 			
-			JOptionPane.showMessageDialog(MDDialogParentProvider.getProvider().getDialogParent(), "The correction has been done");
+			JOptionPane.showMessageDialog(MDDialogParentProvider.getProvider().getDialogParent(), "The correction has been performed");
 		}
 
 	}
