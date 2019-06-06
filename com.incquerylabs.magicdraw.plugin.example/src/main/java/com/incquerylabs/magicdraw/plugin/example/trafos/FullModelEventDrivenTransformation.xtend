@@ -21,8 +21,8 @@ class FullModelEventDrivenTransformation {
     extension IModelManipulations manipulation
 
     protected ViatraQueryEngine engine
-    protected EventDrivenTransformationRule<?,?> portTypeCorrectorRule = createRule.name("Port_Type_Corrector")
-            .precondition(DeduciblePortType.instance)
+    protected EventDrivenTransformationRule<?,?> portTypeCorrectorRule = createRule(DeduciblePortType.instance)
+    		.name("Port_Type_Corrector")
             .action(CRUDActivationStateEnum.CREATED) [ it.port.type = it.type ]
             .addLifeCycle(Lifecycles.getDefault(true, true)).build
 
@@ -34,9 +34,9 @@ class FullModelEventDrivenTransformation {
 
     }
     
-    private static val Map<ViatraQueryEngine, FullModelEventDrivenTransformation> projectTrafoMap = newHashMap
+    static val Map<ViatraQueryEngine, FullModelEventDrivenTransformation> projectTrafoMap = newHashMap
     
-    public static def void start(ViatraQueryEngine engine) {
+    static def void start(ViatraQueryEngine engine) {
         if(!projectTrafoMap.containsKey(engine)) {
             val trafo = new FullModelEventDrivenTransformation(engine)
             projectTrafoMap.put(engine, trafo)
@@ -44,18 +44,18 @@ class FullModelEventDrivenTransformation {
         }
     }
     
-    public static def boolean isRunning(ViatraQueryEngine engine) {
+    static def boolean isRunning(ViatraQueryEngine engine) {
         return projectTrafoMap.containsKey(engine)
     }
     
-    public static def void stop(ViatraQueryEngine engine) {
+    static def void stop(ViatraQueryEngine engine) {
         if(projectTrafoMap.containsKey(engine)) {
             val trafo = projectTrafoMap.remove(engine)
             trafo.dispose
         }
     }
 
-    public def execute() {
+    def execute() {
         transformation.executionSchema.startUnscheduledExecution
     }
 

@@ -24,14 +24,14 @@ class FullModelBatchTransformation {
     val extension DeduciblePortType deduciblePortType = DeduciblePortType.instance
     
     /** Rules */
-    val portTypeCorrectorRule = createRule.precondition(deduciblePortType).action[ it.port.type = it.type ].build
+    val portTypeCorrectorRule = createRule(deduciblePortType).action[ it.port.type = it.type ].build
 
     new(ViatraQueryEngine engine) {
         this.engine = engine
         createTransformation
     }
 
-    public def execute() {
+    def execute() {
     	// Fire the defined rules here
     	portTypeCorrectorRule.fireAllCurrent
     }

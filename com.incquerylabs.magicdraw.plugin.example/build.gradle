@@ -33,13 +33,15 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'distribution'
+apply plugin: 'org.xtext.xtend'
 
 sourceSets {
     main {
         java {
             srcDir 'src/main/java'
             srcDir 'src/generated/vql'
-        }        
+        }    
+ 		xtendOutputDir = 'build/xtend/main'            
     }
 }
 
@@ -53,9 +55,9 @@ repositories {
     } 
     jcenter()
     mavenCentral()
-	jcenter()
 	maven { url 'https://build.incquerylabs.com/nexus/repository/v4md/' }
-}
+ 	maven { url "https://repo.eclipse.org/content/groups/viatra/" }
+ }
 
 configurations {
     preCompile
@@ -64,7 +66,10 @@ configurations {
 dependencies {      
     preCompile group: 'com.nomagic', name: 'magicdraw', version: '190', classifier: 'MagicDraw_190_no_install', ext: 'zip'
     preCompile group: 'com.nomagic', name: 'sysml', version: '190', classifier: 'SysML_Plugin_190_bundle', ext: 'zip'
-    preCompile group: 'com.incquerylabs.v4md', name: 'com.incquerylabs.v4md', version: viatraVersion, classifier: 'plugin', ext: 'zip'
+    preCompile group: 'com.incquerylabs.v4md', name: 'com.incquerylabs.v4md', version: v4mdVersion, classifier: 'plugin', ext: 'zip'
+    
+    implementation group: 'org.eclipse.viatra', name: 'viatra-query-runtime', version: viatraVersion
+	implementation group: 'org.eclipse.viatra', name: 'viatra-transformation-runtime', version: viatraVersion     
     
     // This ensures classpath load order to match the MagicDraw provided order and then includes extras needed for non-OpenAPI stuff.
     compile files(classpathLibraries.collect { 'build/dependency-cache/extracted/' + it })
@@ -105,32 +110,9 @@ processResources {
 	}
 }
 
-javadoc {
-    options.addStringOption("sourcepath", "")
-    options.tags = [ "generated", "noreference" ]
-}
-
-if (JavaVersion.current().isJava8Compatible()) {
-    tasks.withType(Javadoc) {
-        // disable the crazy super-strict doclint tool in Java 8
-        //noinspection SpellCheckingInspection
-        options.addStringOption('Xdoclint:none', '-quiet')
-    }
-}
-
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-task javadocZip(type: Zip, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
 }
 
 class PreDist extends DefaultTask {
@@ -161,10 +143,6 @@ class PreDist extends DefaultTask {
         project.copy {
             from 'src/main/dist/settings'
             into "build/generated-dist/plugins/${groupName}/settings"
-        }
-        project.copy {
-            from project.getTasks().getByName('javadocZip')
-            into "build/generated-dist/plugins/${groupName}/javadoc"
         }
         project.fileTree(dir: 'build/generated-dist', include: '**/*${group}*/**').each { file ->
             file.renameTo(project.file(file.getAbsolutePath().replace('${group}', "${groupName}")))
@@ -206,7 +184,6 @@ task preDist(type: PreDist) {
     descriptor = descriptorFile
 }
 preDist.dependsOn jar
-preDist.dependsOn javadocZip
 
 distributions {
     main {
