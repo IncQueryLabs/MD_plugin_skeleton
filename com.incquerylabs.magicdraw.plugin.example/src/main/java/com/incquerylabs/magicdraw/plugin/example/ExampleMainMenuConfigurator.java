@@ -18,7 +18,7 @@ public class ExampleMainMenuConfigurator implements AMConfigurator {
 	/**
 	 * Action will be added to manager.
 	 */
-	private NMAction action;
+	private NMAction[] actions;
 
 	/**
 	 * Creates configurator.
@@ -26,8 +26,8 @@ public class ExampleMainMenuConfigurator implements AMConfigurator {
 	 * @param action
 	 *            action to be added to main menu.
 	 */
-	public ExampleMainMenuConfigurator(NMAction action) {
-		this.action = action;
+	public ExampleMainMenuConfigurator(NMAction... actions) {
+		this.actions = actions;
 	}
 
 	/**
@@ -45,7 +45,9 @@ public class ExampleMainMenuConfigurator implements AMConfigurator {
 			category.setNested(true);
 			manager.addCategory(category);
 		}
-		category.addAction(action);
+		for (NMAction action : actions) {
+			category.addAction(action);
+		}
 	}
 
 	@Override

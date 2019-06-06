@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="com.incquerylabs.magicdraw.plugin.example.queries.CodegenControl" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:com.incquerylabs.magicdraw.plugin.example.queries.CodegenControl" id="com.incquerylabs.magicdraw.plugin.example.queries.CodegenControl">
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.mangledNameCollision"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.mangledNameInPackage"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.mangledName"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.packableElementToGen"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.block"/>
+    </group>
+  </extension>
   <extension id="com.incquerylabs.magicdraw.plugin.example.queries.SearchQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:com.incquerylabs.magicdraw.plugin.example.queries.SearchQueries" id="com.incquerylabs.magicdraw.plugin.example.queries.SearchQueries">
       <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.DeduciblePortType"/>
