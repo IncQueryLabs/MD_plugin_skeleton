@@ -1,12 +1,10 @@
 package com.incquerylabs.magicdraw.plugin.example.trafos
 
+import com.incquerylabs.magicdraw.plugin.example.queries.DeduciblePortType
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
-import org.eclipse.viatra.transformation.runtime.emf.modelmanipulation.IModelManipulations
-import org.eclipse.viatra.transformation.runtime.emf.modelmanipulation.SimpleModelManipulations
 import org.eclipse.viatra.transformation.runtime.emf.rules.batch.BatchTransformationRuleFactory
 import org.eclipse.viatra.transformation.runtime.emf.transformation.batch.BatchTransformation
 import org.eclipse.viatra.transformation.runtime.emf.transformation.batch.BatchTransformationStatements
-import com.incquerylabs.magicdraw.plugin.example.queries.DeduciblePortType
 
 class FullModelBatchTransformation {
 
@@ -16,7 +14,6 @@ class FullModelBatchTransformation {
     
     /* Transformation rule-related extensions */
     extension BatchTransformationRuleFactory = new BatchTransformationRuleFactory
-    extension IModelManipulations manipulation
 
     protected ViatraQueryEngine engine
     
@@ -37,8 +34,6 @@ class FullModelBatchTransformation {
     }
 
     private def createTransformation() {
-        //Create VIATRA model manipulations
-        this.manipulation = new SimpleModelManipulations(engine)
         //Create VIATRA Batch transformation
         transformation = BatchTransformation.forEngine(engine).build
         //Initialize batch transformation statements
