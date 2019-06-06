@@ -1,0 +1,31 @@
+package com.incquerylabs.magicdraw.plugin.example.queries
+
+import "http://www.nomagic.com/magicdraw/UML/2.5.1";
+import java com.incquerylabs.magicdraw.plugin.example.codegen.CodegenUtil;
+
+
+
+pattern mangledNameCollision(pack: Package, packElem: PackageableElement, mangledName: java String) {
+	find mangledNameInPackage(pack, packElem, mangledName);
+	sameMangledNameElements == count find mangledNameInPackage(pack, _, mangledName);
+	check(sameMangledNameElements > 1);
+}
+
+pattern mangledNameInPackage(pack: Package, packElem: PackageableElement, mangledName: java String) {
+	Package.packagedElement(pack, packElem);
+	find packableElementToGen(packElem);
+	find mangledName(packElem, mangledName);
+}
+
+pattern mangledName(element : NamedElement, mangledName: java String) {
+	NamedElement.name(element, name);
+	mangledName == eval(CodegenUtil.mangleName(name));
+}
+
+pattern packableElementToGen(packElem: PackageableElement) {
+	find block(packElem);
+}
+pattern block(block : Class) {
+	Class(block);
+}
+
