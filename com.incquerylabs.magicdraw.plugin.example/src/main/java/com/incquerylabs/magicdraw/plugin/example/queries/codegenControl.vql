@@ -22,10 +22,14 @@ pattern mangledName(element : NamedElement, mangledName: java String) {
 	mangledName == eval(CodegenUtil.mangleName(name));
 }
 
-pattern packableElementToGen(packElem: PackageableElement) {
-	find block(packElem);
+pattern packableElementToGen(packElem : PackageableElement) {
+	find blockToGen(packElem, _);
+}
+pattern blockToGen(block : Class, pack: Package) {
+	find block(block);
+	Package.packagedElement+(pack, block);
 }
 pattern block(block : Class) {
-	Class(block);
+	find sysml.Block(block, _);
 }
 

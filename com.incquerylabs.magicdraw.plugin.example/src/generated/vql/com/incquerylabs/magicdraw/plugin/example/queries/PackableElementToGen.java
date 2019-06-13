@@ -3,7 +3,7 @@
  */
 package com.incquerylabs.magicdraw.plugin.example.queries;
 
-import com.incquerylabs.magicdraw.plugin.example.queries.Block;
+import com.incquerylabs.magicdraw.plugin.example.queries.BlockToGen;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.PackageableElement;
 import java.util.Arrays;
 import java.util.Collection;
@@ -43,8 +43,8 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         pattern packableElementToGen(packElem: PackageableElement) {
- *         	find block(packElem);
+ *         pattern packableElementToGen(packElem : PackageableElement) {
+ *         	find blockToGen(packElem, _);
  *         }
  * </pre></code>
  * 
@@ -226,8 +226,8 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
    * 
    * <p>Original source:
    * <code><pre>
-   * pattern packableElementToGen(packElem: PackageableElement) {
-   * 	find block(packElem);
+   * pattern packableElementToGen(packElem : PackageableElement) {
+   * 	find blockToGen(packElem, _);
    * }
    * </pre></code>
    * 
@@ -522,12 +522,13 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
       {
           PBody body = new PBody(this);
           PVariable var_packElem = body.getOrCreateVariableByName("packElem");
+          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
           new TypeConstraint(body, Tuples.flatTupleOf(var_packElem), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "PackageableElement")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_packElem, parameter_packElem)
           ));
-          // 	find block(packElem)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_packElem), Block.instance().getInternalQueryRepresentation());
+          // 	find blockToGen(packElem, _)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_packElem, var___0_), BlockToGen.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;
