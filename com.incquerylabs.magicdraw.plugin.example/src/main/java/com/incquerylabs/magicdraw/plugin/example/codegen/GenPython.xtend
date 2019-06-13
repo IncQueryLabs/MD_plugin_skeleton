@@ -20,6 +20,9 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import java.io.File
 import java.io.FileWriter
 import com.incquerylabs.magicdraw.plugin.example.queries.CodegenControl
+import java.util.Map
+import java.util.Set
+import java.util.Collection
 
 /**
  * @author Gabor Bergmann
@@ -27,19 +30,34 @@ import com.incquerylabs.magicdraw.plugin.example.queries.CodegenControl
  */
 class GenPython {
 	val ViatraQueryEngine queryEngine
-	val String rootPath
+	val String codeOutletRootPath
+	val String pythonRootPackage
+	val Collection<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> modelPackagesToGen
 	
-	new(ViatraQueryEngine queryEngine, String rootPath) {
+	new(ViatraQueryEngine queryEngine, String codeOutletRootPath, String pythonRootPackage, Collection<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> modelPackagesToGen) {
 		this.queryEngine = queryEngine
-		this.rootPath = rootPath
+		this.codeOutletRootPath = codeOutletRootPath
+		this.pythonRootPackage = pythonRootPackage
+		this.modelPackagesToGen = modelPackagesToGen
 	}
 	
 	
 	val extension CodegenControl codegenControl = CodegenControl.instance
 	
+	
+	
 
 	def doGen() {
-		queryEngine.block.forEachMatch [ System.out.println(block.genBlockCode) ]
+		modelPackagesToGen.forEach[ pack |
+			System.out.println()
+			System.out.println("*******")
+			System.out.println(pack.humanName)
+			System.out.println("*******")
+			System.out.println()
+			queryEngine.blockToGen.streamAllValuesOfblock(pack).forEach[ block |
+				System.out.println(block.genBlockCode)
+			]
+		]
 	}
 
 	def doGenBlockFile(Classifier block) {
@@ -69,10 +87,10 @@ class GenPython {
 	'''
 	
 	def genBlockFilePath(Classifier block) 
-		'''«rootPath»/«block.genPackageableElementPathSteps.join('/')».py'''
+		'''«codeOutletRootPath»/«block.genPackageableElementPathSteps.join('/')».py'''
 
 	def CharSequence genPackageableElementRef(PackageableElement block) {
-		block.genPackageableElementPathSteps.join('.')
+		'''«pythonRootPackage».«block.genPackageableElementPathSteps.join('.')»'''
 	} 
 	
 	def List<String> genPackageableElementPathSteps(PackageableElement element) {

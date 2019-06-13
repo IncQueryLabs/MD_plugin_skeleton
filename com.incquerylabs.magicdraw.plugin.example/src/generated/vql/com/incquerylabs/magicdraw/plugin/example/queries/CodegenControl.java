@@ -4,6 +4,7 @@
 package com.incquerylabs.magicdraw.plugin.example.queries;
 
 import com.incquerylabs.magicdraw.plugin.example.queries.Block;
+import com.incquerylabs.magicdraw.plugin.example.queries.BlockToGen;
 import com.incquerylabs.magicdraw.plugin.example.queries.MangledName;
 import com.incquerylabs.magicdraw.plugin.example.queries.MangledNameCollision;
 import com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInPackage;
@@ -23,6 +24,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <li>mangledNameInPackage</li>
  * <li>mangledName</li>
  * <li>packableElementToGen</li>
+ * <li>blockToGen</li>
  * <li>block</li>
  * </ul>
  * 
@@ -52,6 +54,7 @@ public final class CodegenControl extends BaseGeneratedPatternGroup {
     querySpecifications.add(MangledNameInPackage.instance());
     querySpecifications.add(MangledName.instance());
     querySpecifications.add(PackableElementToGen.instance());
+    querySpecifications.add(BlockToGen.instance());
     querySpecifications.add(Block.instance());
   }
   
@@ -85,6 +88,14 @@ public final class CodegenControl extends BaseGeneratedPatternGroup {
   
   public PackableElementToGen.Matcher getPackableElementToGen(final ViatraQueryEngine engine) {
     return PackableElementToGen.Matcher.on(engine);
+  }
+  
+  public BlockToGen getBlockToGen() {
+    return BlockToGen.instance();
+  }
+  
+  public BlockToGen.Matcher getBlockToGen(final ViatraQueryEngine engine) {
+    return BlockToGen.Matcher.on(engine);
   }
   
   public Block getBlock() {

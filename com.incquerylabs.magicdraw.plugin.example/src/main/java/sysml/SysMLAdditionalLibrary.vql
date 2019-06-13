@@ -1,0 +1,424 @@
+package sysml
+
+import "http://www.nomagic.com/magicdraw/UML/2.5.1"
+
+// Aspects
+
+/*
+ * Pattern that queries elements with the stereotype 'Conceptual' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Diagram' object with the stereotype Conceptual.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern Conceptual(element : Diagram, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "Conceptual");
+}
+/*
+ * Pattern that queries elements with the stereotype 'Electrical' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Diagram' object with the stereotype Electrical.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern Electrical(element : Diagram, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "Electrical");
+}
+/*
+ * Pattern that queries elements with the stereotype 'Logical' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Diagram' object with the stereotype Logical.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern Logical(element : Diagram, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "Logical");
+}
+/*
+ * Pattern that queries elements with the stereotype 'Mechanical' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Diagram' object with the stereotype Mechanical.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern Mechanical(element : Diagram, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "Mechanical");
+}
+/*
+ * Pattern that queries elements with the stereotype 'Optical' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Diagram' object with the stereotype Optical.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern Optical(element : Diagram, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "Optical");
+}
+/*
+ * Pattern that queries elements with the stereotype 'Software' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Diagram' object with the stereotype Software.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern Software(element : Diagram, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "Software");
+}
+
+// Stereotypes
+
+/*
+ * Pattern that queries elements with the stereotype 'AbstractReferenceProperty' or other stereotypes generalizing it.
+ *
+
+ * Parameters:
+ * element : 'Property' object with the stereotype AbstractReferenceProperty.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern AbstractReferenceProperty(element : Property, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "AbstractReferenceProperty");
+}
+/*
+ * Pattern that queries elements with the stereotype 'Analysis' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Element' object with the stereotype Analysis.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern Analysis(element : Element, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "Analysis");
+}
+/*
+ * Pattern that queries elements with the stereotype 'BlackBoxICDTable' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Diagram' object with the stereotype BlackBoxICDTable.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern BlackBoxICDTable(element : Diagram, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "BlackBoxICDTable");
+}
+/*
+ * Pattern that queries the 'query' attribute of elements with the stereotype 'BlackBoxICDTable'.
+ * 
+ * Parameters: 
+ * 	element: 'Diagram' object with the stereotype 'BlackBoxICDTable'.
+ * 	value : Element : A value of the attribute 'query'.
+ */
+pattern BlackBoxICDTable_query(element : Diagram, value : Element){
+	find BlackBoxICDTable(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "query", valuespec);
+	ElementValue.element(valuespec, value);
+}
+/*
+ * Pattern that queries elements with the stereotype 'BlockProperty' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Property' object with the stereotype BlockProperty.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern BlockProperty(element : Property, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "BlockProperty");
+}
+/*
+ * Pattern that queries elements with the stereotype 'ConstraintParameter' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Port' object with the stereotype ConstraintParameter.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern ConstraintParameter(element : Port, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "ConstraintParameter");
+}
+/*
+ * Pattern that queries elements with the stereotype 'PartProperty' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Property' object with the stereotype PartProperty.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern PartProperty(element : Property, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "PartProperty");
+}
+/*
+ * Pattern that queries elements with the stereotype 'Pattern' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Element' object with the stereotype Pattern.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern Pattern(element : Element, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "Pattern");
+}
+/*
+ * Pattern that queries elements with the stereotype 'ReferenceProperty' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Property' object with the stereotype ReferenceProperty.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern ReferenceProperty(element : Property, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "ReferenceProperty");
+}
+/*
+ * Pattern that queries elements with the stereotype 'SharedProperty' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Property' object with the stereotype SharedProperty.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern SharedProperty(element : Property, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "SharedProperty");
+}
+/*
+ * Pattern that queries elements with the stereotype 'ValueProperty' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Property' object with the stereotype ValueProperty.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern ValueProperty(element : Property, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "ValueProperty");
+}
+/*
+ * Pattern that queries elements with the stereotype 'WhiteBoxICDTable' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Diagram' object with the stereotype WhiteBoxICDTable.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern WhiteBoxICDTable(element : Diagram, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "WhiteBoxICDTable");
+}
+/*
+ * Pattern that queries the 'query' attribute of elements with the stereotype 'WhiteBoxICDTable'.
+ * 
+ * Parameters: 
+ * 	element: 'Diagram' object with the stereotype 'WhiteBoxICDTable'.
+ * 	value : Element : A value of the attribute 'query'.
+ */
+pattern WhiteBoxICDTable_query(element : Diagram, value : Element){
+	find WhiteBoxICDTable(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "query", valuespec);
+	ElementValue.element(valuespec, value);
+}
+/*
+ * Pattern that queries elements with the stereotype 'contextSpecificDefaultValue' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'InstanceSpecification' object with the stereotype contextSpecificDefaultValue.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern contextSpecificDefaultValue(element : InstanceSpecification, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "contextSpecificDefaultValue");
+}
+/*
+ * Pattern that queries the 'path' attribute of elements with the stereotype 'contextSpecificDefaultValue'.
+ * 
+ * Parameters: 
+ * 	element: 'InstanceSpecification' object with the stereotype 'contextSpecificDefaultValue'.
+ * 	value : Property : A value of the attribute 'path'.
+ */
+pattern contextSpecificDefaultValue_path(element : InstanceSpecification, value : Property){
+	find contextSpecificDefaultValue(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "path", valuespec);
+	ElementValue.element(valuespec, value);
+}
+/*
+ * Pattern that queries elements with the stereotype 'contextSpecificValuesHolder' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Diagram' object with the stereotype contextSpecificValuesHolder.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern contextSpecificValuesHolder(element : Diagram, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "contextSpecificValuesHolder");
+}
+/*
+ * Pattern that queries the 'instances' attribute of elements with the stereotype 'contextSpecificValuesHolder'.
+ * 
+ * Parameters: 
+ * 	element: 'Diagram' object with the stereotype 'contextSpecificValuesHolder'.
+ * 	value : InstanceSpecification : A value of the attribute 'instances'.
+ */
+pattern contextSpecificValuesHolder_instances(element : Diagram, value : InstanceSpecification){
+	find contextSpecificValuesHolder(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "instances", valuespec);
+	ElementValue.element(valuespec, value);
+}
+/*
+ * Pattern that queries elements with the stereotype 'fmu' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Element' object with the stereotype fmu.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern fmu(element : Element, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "fmu");
+}
+/*
+ * Pattern that queries the 'FMIVersion' attribute of elements with the stereotype 'fmu'.
+ * 
+ * Parameters: 
+ * 	element: 'Element' object with the stereotype 'fmu'.
+ * 	valuespec : LiteralString : A value of the attribute 'FMIVersion'.
+ */
+pattern fmu_FMIVersion(element : Element, valuespec : LiteralString){
+	find fmu(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "FMIVersion", valuespec);
+}
+/*
+ * Pattern that queries the 'GUID' attribute of elements with the stereotype 'fmu'.
+ * 
+ * Parameters: 
+ * 	element: 'Element' object with the stereotype 'fmu'.
+ * 	valuespec : LiteralString : A value of the attribute 'GUID'.
+ */
+pattern fmu_GUID(element : Element, valuespec : LiteralString){
+	find fmu(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "GUID", valuespec);
+}
+/*
+ * Pattern that queries the 'fileName' attribute of elements with the stereotype 'fmu'.
+ * 
+ * Parameters: 
+ * 	element: 'Element' object with the stereotype 'fmu'.
+ * 	valuespec : LiteralString : A value of the attribute 'fileName'.
+ */
+pattern fmu_fileName(element : Element, valuespec : LiteralString){
+	find fmu(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "fileName", valuespec);
+}
+/*
+ * Pattern that queries the 'modelIdentifier' attribute of elements with the stereotype 'fmu'.
+ * 
+ * Parameters: 
+ * 	element: 'Element' object with the stereotype 'fmu'.
+ * 	valuespec : LiteralString : A value of the attribute 'modelIdentifier'.
+ */
+pattern fmu_modelIdentifier(element : Element, valuespec : LiteralString){
+	find fmu(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "modelIdentifier", valuespec);
+}
+/*
+ * Pattern that queries the 'modelName' attribute of elements with the stereotype 'fmu'.
+ * 
+ * Parameters: 
+ * 	element: 'Element' object with the stereotype 'fmu'.
+ * 	valuespec : LiteralString : A value of the attribute 'modelName'.
+ */
+pattern fmu_modelName(element : Element, valuespec : LiteralString){
+	find fmu(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "modelName", valuespec);
+}
+
+// Deprecated Elements
+
+/*
+ * Pattern that queries elements with the stereotype 'ConstraintProperty' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Property' object with the stereotype ConstraintProperty.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern ConstraintProperty(element : Property, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "ConstraintProperty");
+}
+/*
+ * Pattern that queries elements with the stereotype 'QuantityKind' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'PackageableElement' object with the stereotype QuantityKind.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern QuantityKind(element : PackageableElement, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "QuantityKind");
+}
+/*
+ * Pattern that queries the 'definitionURI' attribute of elements with the stereotype 'QuantityKind'.
+ * 
+ * Parameters: 
+ * 	element: 'PackageableElement' object with the stereotype 'QuantityKind'.
+ * 	valuespec : LiteralString : A value of the attribute 'definitionURI'.
+ */
+pattern QuantityKind_definitionURI(element : PackageableElement, valuespec : LiteralString){
+	find QuantityKind(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "definitionURI", valuespec);
+}
+/*
+ * Pattern that queries the 'description' attribute of elements with the stereotype 'QuantityKind'.
+ * 
+ * Parameters: 
+ * 	element: 'PackageableElement' object with the stereotype 'QuantityKind'.
+ * 	valuespec : LiteralString : A value of the attribute 'description'.
+ */
+pattern QuantityKind_description(element : PackageableElement, valuespec : LiteralString){
+	find QuantityKind(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "description", valuespec);
+}
+/*
+ * Pattern that queries the 'symbol' attribute of elements with the stereotype 'QuantityKind'.
+ * 
+ * Parameters: 
+ * 	element: 'PackageableElement' object with the stereotype 'QuantityKind'.
+ * 	valuespec : LiteralString : A value of the attribute 'symbol'.
+ */
+pattern QuantityKind_symbol(element : PackageableElement, valuespec : LiteralString){
+	find QuantityKind(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "symbol", valuespec);
+}
+/*
+ * Pattern that queries elements with the stereotype 'Unit' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'PackageableElement' object with the stereotype Unit.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern Unit(element : PackageableElement, domainStereotypeInstance : InstanceSpecification){
+	find util.stereotypedElement(element, domainStereotypeInstance, "additional_stereotypes", "Unit");
+}
+/*
+ * Pattern that queries the 'definitionURI' attribute of elements with the stereotype 'Unit'.
+ * 
+ * Parameters: 
+ * 	element: 'PackageableElement' object with the stereotype 'Unit'.
+ * 	valuespec : LiteralString : A value of the attribute 'definitionURI'.
+ */
+pattern Unit_definitionURI(element : PackageableElement, valuespec : LiteralString){
+	find Unit(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "definitionURI", valuespec);
+}
+/*
+ * Pattern that queries the 'description' attribute of elements with the stereotype 'Unit'.
+ * 
+ * Parameters: 
+ * 	element: 'PackageableElement' object with the stereotype 'Unit'.
+ * 	valuespec : LiteralString : A value of the attribute 'description'.
+ */
+pattern Unit_description(element : PackageableElement, valuespec : LiteralString){
+	find Unit(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "description", valuespec);
+}
+/*
+ * Pattern that queries the 'quantityKind' attribute of elements with the stereotype 'Unit'.
+ * 
+ * Parameters: 
+ * 	element: 'PackageableElement' object with the stereotype 'Unit'.
+ * 	value : PackageableElement : A value of the attribute 'quantityKind'.
+ */
+pattern Unit_quantityKind(element : PackageableElement, value : PackageableElement){
+	find Unit(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "quantityKind", valuespec);
+	ElementValue.element(valuespec, value);
+}
+/*
+ * Pattern that queries the 'symbol' attribute of elements with the stereotype 'Unit'.
+ * 
+ * Parameters: 
+ * 	element: 'PackageableElement' object with the stereotype 'Unit'.
+ * 	valuespec : LiteralString : A value of the attribute 'symbol'.
+ */
+pattern Unit_symbol(element : PackageableElement, valuespec : LiteralString){
+	find Unit(element, domainStereotypeInstance);
+	find util.slotValue(domainStereotypeInstance, "symbol", valuespec);
+}

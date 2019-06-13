@@ -27,6 +27,7 @@ import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -41,7 +42,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * <p>Original source:
  *         <code><pre>
  *         pattern block(block : Class) {
- *         	Class(block);
+ *         	find sysml.Block(block, _);
  *         }
  * </pre></code>
  * 
@@ -224,7 +225,7 @@ public final class Block extends BaseGeneratedEMFQuerySpecification<Block.Matche
    * <p>Original source:
    * <code><pre>
    * pattern block(block : Class) {
-   * 	Class(block);
+   * 	find sysml.Block(block, _);
    * }
    * </pre></code>
    * 
@@ -519,12 +520,13 @@ public final class Block extends BaseGeneratedEMFQuerySpecification<Block.Matche
       {
           PBody body = new PBody(this);
           PVariable var_block = body.getOrCreateVariableByName("block");
+          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
           new TypeConstraint(body, Tuples.flatTupleOf(var_block), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Class")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_block, parameter_block)
           ));
-          // 	Class(block)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_block), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Class")));
+          // 	find sysml.Block(block, _)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_block, var___0_), sysml.Block.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;
