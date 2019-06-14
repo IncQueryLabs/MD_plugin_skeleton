@@ -4,8 +4,10 @@
 package com.incquerylabs.magicdraw.plugin.example.queries;
 
 import com.incquerylabs.magicdraw.plugin.example.queries.MangledName;
-import com.incquerylabs.magicdraw.plugin.example.queries.PackableElementToGen;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.PackageableElement;
+import com.incquerylabs.magicdraw.plugin.example.queries.NamedElementToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.internal.ElementInNamespace;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -26,12 +28,10 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.context.common.JavaTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
@@ -48,10 +48,10 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         pattern mangledNameInPackage(pack: Package, packElem: PackageableElement, mangledName: java String) {
- *         	Package.packagedElement(pack, packElem);
- *         	find packableElementToGen(packElem);
- *         	find mangledName(packElem, mangledName);
+ *         pattern mangledNameInNamespace(namespace: Namespace, element : NamedElement, mangledName: java String) {
+ *         	find elementInNamespace(element, namespace);
+ *         	find namedElementToGen(element);
+ *         	find mangledName(element, mangledName);
  *         }
  * </pre></code>
  * 
@@ -60,9 +60,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  */
 @SuppressWarnings("all")
-public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecification<MangledNameInPackage.Matcher> {
+public final class MangledNameInNamespace extends BaseGeneratedEMFQuerySpecification<MangledNameInNamespace.Matcher> {
   /**
-   * Pattern-specific match representation of the com.incquerylabs.magicdraw.plugin.example.queries.mangledNameInPackage pattern,
+   * Pattern-specific match representation of the com.incquerylabs.magicdraw.plugin.example.queries.mangledNameInNamespace pattern,
    * to be used in conjunction with {@link Matcher}.
    * 
    * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -74,34 +74,34 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package fPack;
+    private Namespace fNamespace;
     
-    private PackageableElement fPackElem;
+    private NamedElement fElement;
     
     private String fMangledName;
     
-    private static List<String> parameterNames = makeImmutableList("pack", "packElem", "mangledName");
+    private static List<String> parameterNames = makeImmutableList("namespace", "element", "mangledName");
     
-    private Match(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName) {
-      this.fPack = pPack;
-      this.fPackElem = pPackElem;
+    private Match(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+      this.fNamespace = pNamespace;
+      this.fElement = pElement;
       this.fMangledName = pMangledName;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("pack".equals(parameterName)) return this.fPack;
-      if ("packElem".equals(parameterName)) return this.fPackElem;
+      if ("namespace".equals(parameterName)) return this.fNamespace;
+      if ("element".equals(parameterName)) return this.fElement;
       if ("mangledName".equals(parameterName)) return this.fMangledName;
       return null;
     }
     
-    public com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package getPack() {
-      return this.fPack;
+    public Namespace getNamespace() {
+      return this.fNamespace;
     }
     
-    public PackageableElement getPackElem() {
-      return this.fPackElem;
+    public NamedElement getElement() {
+      return this.fElement;
     }
     
     public String getMangledName() {
@@ -111,12 +111,12 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("pack".equals(parameterName) ) {
-          this.fPack = (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package) newValue;
+      if ("namespace".equals(parameterName) ) {
+          this.fNamespace = (Namespace) newValue;
           return true;
       }
-      if ("packElem".equals(parameterName) ) {
-          this.fPackElem = (PackageableElement) newValue;
+      if ("element".equals(parameterName) ) {
+          this.fElement = (NamedElement) newValue;
           return true;
       }
       if ("mangledName".equals(parameterName) ) {
@@ -126,14 +126,14 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
       return false;
     }
     
-    public void setPack(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack) {
+    public void setNamespace(final Namespace pNamespace) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fPack = pPack;
+      this.fNamespace = pNamespace;
     }
     
-    public void setPackElem(final PackageableElement pPackElem) {
+    public void setElement(final NamedElement pElement) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fPackElem = pPackElem;
+      this.fElement = pElement;
     }
     
     public void setMangledName(final String pMangledName) {
@@ -143,36 +143,36 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
     
     @Override
     public String patternName() {
-      return "com.incquerylabs.magicdraw.plugin.example.queries.mangledNameInPackage";
+      return "com.incquerylabs.magicdraw.plugin.example.queries.mangledNameInNamespace";
     }
     
     @Override
     public List<String> parameterNames() {
-      return MangledNameInPackage.Match.parameterNames;
+      return MangledNameInNamespace.Match.parameterNames;
     }
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fPack, fPackElem, fMangledName};
+      return new Object[]{fNamespace, fElement, fMangledName};
     }
     
     @Override
-    public MangledNameInPackage.Match toImmutable() {
-      return isMutable() ? newMatch(fPack, fPackElem, fMangledName) : this;
+    public MangledNameInNamespace.Match toImmutable() {
+      return isMutable() ? newMatch(fNamespace, fElement, fMangledName) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"pack\"=" + prettyPrintValue(fPack) + ", ");
-      result.append("\"packElem\"=" + prettyPrintValue(fPackElem) + ", ");
+      result.append("\"namespace\"=" + prettyPrintValue(fNamespace) + ", ");
+      result.append("\"element\"=" + prettyPrintValue(fElement) + ", ");
       result.append("\"mangledName\"=" + prettyPrintValue(fMangledName));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash(fPack, fPackElem, fMangledName);
+      return Objects.hash(fNamespace, fElement, fMangledName);
     }
     
     @Override
@@ -182,9 +182,9 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
       if (obj == null) {
           return false;
       }
-      if ((obj instanceof MangledNameInPackage.Match)) {
-          MangledNameInPackage.Match other = (MangledNameInPackage.Match) obj;
-          return Objects.equals(fPack, other.fPack) && Objects.equals(fPackElem, other.fPackElem) && Objects.equals(fMangledName, other.fMangledName);
+      if ((obj instanceof MangledNameInNamespace.Match)) {
+          MangledNameInNamespace.Match other = (MangledNameInNamespace.Match) obj;
+          return Objects.equals(fNamespace, other.fNamespace) && Objects.equals(fElement, other.fElement) && Objects.equals(fMangledName, other.fMangledName);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -196,8 +196,8 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
     }
     
     @Override
-    public MangledNameInPackage specification() {
-      return MangledNameInPackage.instance();
+    public MangledNameInNamespace specification() {
+      return MangledNameInNamespace.instance();
     }
     
     /**
@@ -207,7 +207,7 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @return the empty match.
      * 
      */
-    public static MangledNameInPackage.Match newEmptyMatch() {
+    public static MangledNameInNamespace.Match newEmptyMatch() {
       return new Mutable(null, null, null);
     }
     
@@ -215,33 +215,33 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pPack the fixed value of pattern parameter pack, or null if not bound.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pNamespace the fixed value of pattern parameter namespace, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @param pMangledName the fixed value of pattern parameter mangledName, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static MangledNameInPackage.Match newMutableMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName) {
-      return new Mutable(pPack, pPackElem, pMangledName);
+    public static MangledNameInNamespace.Match newMutableMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+      return new Mutable(pNamespace, pElement, pMangledName);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pPack the fixed value of pattern parameter pack, or null if not bound.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pNamespace the fixed value of pattern parameter namespace, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @param pMangledName the fixed value of pattern parameter mangledName, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static MangledNameInPackage.Match newMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName) {
-      return new Immutable(pPack, pPackElem, pMangledName);
+    public static MangledNameInNamespace.Match newMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+      return new Immutable(pNamespace, pElement, pMangledName);
     }
     
-    private static final class Mutable extends MangledNameInPackage.Match {
-      Mutable(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName) {
-        super(pPack, pPackElem, pMangledName);
+    private static final class Mutable extends MangledNameInNamespace.Match {
+      Mutable(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+        super(pNamespace, pElement, pMangledName);
       }
       
       @Override
@@ -250,9 +250,9 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
       }
     }
     
-    private static final class Immutable extends MangledNameInPackage.Match {
-      Immutable(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName) {
-        super(pPack, pPackElem, pMangledName);
+    private static final class Immutable extends MangledNameInNamespace.Match {
+      Immutable(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+        super(pNamespace, pElement, pMangledName);
       }
       
       @Override
@@ -263,7 +263,7 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
   }
   
   /**
-   * Generated pattern matcher API of the com.incquerylabs.magicdraw.plugin.example.queries.mangledNameInPackage pattern,
+   * Generated pattern matcher API of the com.incquerylabs.magicdraw.plugin.example.queries.mangledNameInNamespace pattern,
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -273,18 +273,18 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
    * 
    * <p>Original source:
    * <code><pre>
-   * pattern mangledNameInPackage(pack: Package, packElem: PackageableElement, mangledName: java String) {
-   * 	Package.packagedElement(pack, packElem);
-   * 	find packableElementToGen(packElem);
-   * 	find mangledName(packElem, mangledName);
+   * pattern mangledNameInNamespace(namespace: Namespace, element : NamedElement, mangledName: java String) {
+   * 	find elementInNamespace(element, namespace);
+   * 	find namedElementToGen(element);
+   * 	find mangledName(element, mangledName);
    * }
    * </pre></code>
    * 
    * @see Match
-   * @see MangledNameInPackage
+   * @see MangledNameInNamespace
    * 
    */
-  public static class Matcher extends BaseMatcher<MangledNameInPackage.Match> {
+  public static class Matcher extends BaseMatcher<MangledNameInNamespace.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -293,7 +293,7 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
      */
-    public static MangledNameInPackage.Matcher on(final ViatraQueryEngine engine) {
+    public static MangledNameInNamespace.Matcher on(final ViatraQueryEngine engine) {
       // check if matcher already exists
       Matcher matcher = engine.getExistingMatcher(querySpecification());
       if (matcher == null) {
@@ -308,17 +308,17 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
      * 
      */
-    public static MangledNameInPackage.Matcher create() {
+    public static MangledNameInNamespace.Matcher create() {
       return new Matcher();
     }
     
-    private static final int POSITION_PACK = 0;
+    private static final int POSITION_NAMESPACE = 0;
     
-    private static final int POSITION_PACKELEM = 1;
+    private static final int POSITION_ELEMENT = 1;
     
     private static final int POSITION_MANGLEDNAME = 2;
     
-    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(MangledNameInPackage.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(MangledNameInNamespace.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -334,14 +334,14 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pPack the fixed value of pattern parameter pack, or null if not bound.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pNamespace the fixed value of pattern parameter namespace, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @param pMangledName the fixed value of pattern parameter mangledName, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<MangledNameInPackage.Match> getAllMatches(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName) {
-      return rawStreamAllMatches(new Object[]{pPack, pPackElem, pMangledName}).collect(Collectors.toSet());
+    public Collection<MangledNameInNamespace.Match> getAllMatches(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+      return rawStreamAllMatches(new Object[]{pNamespace, pElement, pMangledName}).collect(Collectors.toSet());
     }
     
     /**
@@ -350,111 +350,111 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     * @param pPack the fixed value of pattern parameter pack, or null if not bound.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pNamespace the fixed value of pattern parameter namespace, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @param pMangledName the fixed value of pattern parameter mangledName, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<MangledNameInPackage.Match> streamAllMatches(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName) {
-      return rawStreamAllMatches(new Object[]{pPack, pPackElem, pMangledName});
+    public Stream<MangledNameInNamespace.Match> streamAllMatches(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+      return rawStreamAllMatches(new Object[]{pNamespace, pElement, pMangledName});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pPack the fixed value of pattern parameter pack, or null if not bound.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pNamespace the fixed value of pattern parameter namespace, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @param pMangledName the fixed value of pattern parameter mangledName, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<MangledNameInPackage.Match> getOneArbitraryMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName) {
-      return rawGetOneArbitraryMatch(new Object[]{pPack, pPackElem, pMangledName});
+    public Optional<MangledNameInNamespace.Match> getOneArbitraryMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+      return rawGetOneArbitraryMatch(new Object[]{pNamespace, pElement, pMangledName});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pPack the fixed value of pattern parameter pack, or null if not bound.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pNamespace the fixed value of pattern parameter namespace, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @param pMangledName the fixed value of pattern parameter mangledName, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName) {
-      return rawHasMatch(new Object[]{pPack, pPackElem, pMangledName});
+    public boolean hasMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+      return rawHasMatch(new Object[]{pNamespace, pElement, pMangledName});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pPack the fixed value of pattern parameter pack, or null if not bound.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pNamespace the fixed value of pattern parameter namespace, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @param pMangledName the fixed value of pattern parameter mangledName, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName) {
-      return rawCountMatches(new Object[]{pPack, pPackElem, pMangledName});
+    public int countMatches(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+      return rawCountMatches(new Object[]{pNamespace, pElement, pMangledName});
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pPack the fixed value of pattern parameter pack, or null if not bound.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pNamespace the fixed value of pattern parameter namespace, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @param pMangledName the fixed value of pattern parameter mangledName, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName, final Consumer<? super MangledNameInPackage.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pPack, pPackElem, pMangledName}, processor);
+    public boolean forOneArbitraryMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName, final Consumer<? super MangledNameInNamespace.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pNamespace, pElement, pMangledName}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pPack the fixed value of pattern parameter pack, or null if not bound.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pNamespace the fixed value of pattern parameter namespace, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @param pMangledName the fixed value of pattern parameter mangledName, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public MangledNameInPackage.Match newMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem, final String pMangledName) {
-      return MangledNameInPackage.Match.newMatch(pPack, pPackElem, pMangledName);
+    public MangledNameInNamespace.Match newMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+      return MangledNameInNamespace.Match.newMatch(pNamespace, pElement, pMangledName);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for pack.
+     * Retrieve the set of values that occur in matches for namespace.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> rawStreamAllValuesOfpack(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_PACK, parameters).map(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package.class::cast);
+    protected Stream<Namespace> rawStreamAllValuesOfnamespace(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_NAMESPACE, parameters).map(Namespace.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for pack.
+     * Retrieve the set of values that occur in matches for namespace.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> getAllValuesOfpack() {
-      return rawStreamAllValuesOfpack(emptyArray()).collect(Collectors.toSet());
+    public Set<Namespace> getAllValuesOfnamespace() {
+      return rawStreamAllValuesOfnamespace(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for pack.
+     * Retrieve the set of values that occur in matches for namespace.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> streamAllValuesOfpack() {
-      return rawStreamAllValuesOfpack(emptyArray());
+    public Stream<Namespace> streamAllValuesOfnamespace() {
+      return rawStreamAllValuesOfnamespace(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for pack.
+     * Retrieve the set of values that occur in matches for namespace.
      * </p>
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
@@ -463,12 +463,12 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> streamAllValuesOfpack(final MangledNameInPackage.Match partialMatch) {
-      return rawStreamAllValuesOfpack(partialMatch.toArray());
+    public Stream<Namespace> streamAllValuesOfnamespace(final MangledNameInNamespace.Match partialMatch) {
+      return rawStreamAllValuesOfnamespace(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for pack.
+     * Retrieve the set of values that occur in matches for namespace.
      * </p>
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
@@ -477,57 +477,57 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> streamAllValuesOfpack(final PackageableElement pPackElem, final String pMangledName) {
-      return rawStreamAllValuesOfpack(new Object[]{null, pPackElem, pMangledName});
+    public Stream<Namespace> streamAllValuesOfnamespace(final NamedElement pElement, final String pMangledName) {
+      return rawStreamAllValuesOfnamespace(new Object[]{null, pElement, pMangledName});
     }
     
     /**
-     * Retrieve the set of values that occur in matches for pack.
+     * Retrieve the set of values that occur in matches for namespace.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> getAllValuesOfpack(final MangledNameInPackage.Match partialMatch) {
-      return rawStreamAllValuesOfpack(partialMatch.toArray()).collect(Collectors.toSet());
+    public Set<Namespace> getAllValuesOfnamespace(final MangledNameInNamespace.Match partialMatch) {
+      return rawStreamAllValuesOfnamespace(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for pack.
+     * Retrieve the set of values that occur in matches for namespace.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> getAllValuesOfpack(final PackageableElement pPackElem, final String pMangledName) {
-      return rawStreamAllValuesOfpack(new Object[]{null, pPackElem, pMangledName}).collect(Collectors.toSet());
+    public Set<Namespace> getAllValuesOfnamespace(final NamedElement pElement, final String pMangledName) {
+      return rawStreamAllValuesOfnamespace(new Object[]{null, pElement, pMangledName}).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for packElem.
+     * Retrieve the set of values that occur in matches for element.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<PackageableElement> rawStreamAllValuesOfpackElem(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_PACKELEM, parameters).map(PackageableElement.class::cast);
+    protected Stream<NamedElement> rawStreamAllValuesOfelement(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_ELEMENT, parameters).map(NamedElement.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for packElem.
+     * Retrieve the set of values that occur in matches for element.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<PackageableElement> getAllValuesOfpackElem() {
-      return rawStreamAllValuesOfpackElem(emptyArray()).collect(Collectors.toSet());
+    public Set<NamedElement> getAllValuesOfelement() {
+      return rawStreamAllValuesOfelement(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for packElem.
+     * Retrieve the set of values that occur in matches for element.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<PackageableElement> streamAllValuesOfpackElem() {
-      return rawStreamAllValuesOfpackElem(emptyArray());
+    public Stream<NamedElement> streamAllValuesOfelement() {
+      return rawStreamAllValuesOfelement(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for packElem.
+     * Retrieve the set of values that occur in matches for element.
      * </p>
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
@@ -536,12 +536,12 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<PackageableElement> streamAllValuesOfpackElem(final MangledNameInPackage.Match partialMatch) {
-      return rawStreamAllValuesOfpackElem(partialMatch.toArray());
+    public Stream<NamedElement> streamAllValuesOfelement(final MangledNameInNamespace.Match partialMatch) {
+      return rawStreamAllValuesOfelement(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for packElem.
+     * Retrieve the set of values that occur in matches for element.
      * </p>
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
@@ -550,26 +550,26 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<PackageableElement> streamAllValuesOfpackElem(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final String pMangledName) {
-      return rawStreamAllValuesOfpackElem(new Object[]{pPack, null, pMangledName});
+    public Stream<NamedElement> streamAllValuesOfelement(final Namespace pNamespace, final String pMangledName) {
+      return rawStreamAllValuesOfelement(new Object[]{pNamespace, null, pMangledName});
     }
     
     /**
-     * Retrieve the set of values that occur in matches for packElem.
+     * Retrieve the set of values that occur in matches for element.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<PackageableElement> getAllValuesOfpackElem(final MangledNameInPackage.Match partialMatch) {
-      return rawStreamAllValuesOfpackElem(partialMatch.toArray()).collect(Collectors.toSet());
+    public Set<NamedElement> getAllValuesOfelement(final MangledNameInNamespace.Match partialMatch) {
+      return rawStreamAllValuesOfelement(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for packElem.
+     * Retrieve the set of values that occur in matches for element.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<PackageableElement> getAllValuesOfpackElem(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final String pMangledName) {
-      return rawStreamAllValuesOfpackElem(new Object[]{pPack, null, pMangledName}).collect(Collectors.toSet());
+    public Set<NamedElement> getAllValuesOfelement(final Namespace pNamespace, final String pMangledName) {
+      return rawStreamAllValuesOfelement(new Object[]{pNamespace, null, pMangledName}).collect(Collectors.toSet());
     }
     
     /**
@@ -609,7 +609,7 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<String> streamAllValuesOfmangledName(final MangledNameInPackage.Match partialMatch) {
+    public Stream<String> streamAllValuesOfmangledName(final MangledNameInNamespace.Match partialMatch) {
       return rawStreamAllValuesOfmangledName(partialMatch.toArray());
     }
     
@@ -623,8 +623,8 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<String> streamAllValuesOfmangledName(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem) {
-      return rawStreamAllValuesOfmangledName(new Object[]{pPack, pPackElem, null});
+    public Stream<String> streamAllValuesOfmangledName(final Namespace pNamespace, final NamedElement pElement) {
+      return rawStreamAllValuesOfmangledName(new Object[]{pNamespace, pElement, null});
     }
     
     /**
@@ -632,7 +632,7 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfmangledName(final MangledNameInPackage.Match partialMatch) {
+    public Set<String> getAllValuesOfmangledName(final MangledNameInNamespace.Match partialMatch) {
       return rawStreamAllValuesOfmangledName(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
@@ -641,14 +641,14 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfmangledName(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package pPack, final PackageableElement pPackElem) {
-      return rawStreamAllValuesOfmangledName(new Object[]{pPack, pPackElem, null}).collect(Collectors.toSet());
+    public Set<String> getAllValuesOfmangledName(final Namespace pNamespace, final NamedElement pElement) {
+      return rawStreamAllValuesOfmangledName(new Object[]{pNamespace, pElement, null}).collect(Collectors.toSet());
     }
     
     @Override
-    protected MangledNameInPackage.Match tupleToMatch(final Tuple t) {
+    protected MangledNameInNamespace.Match tupleToMatch(final Tuple t) {
       try {
-          return MangledNameInPackage.Match.newMatch((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package) t.get(POSITION_PACK), (PackageableElement) t.get(POSITION_PACKELEM), (String) t.get(POSITION_MANGLEDNAME));
+          return MangledNameInNamespace.Match.newMatch((Namespace) t.get(POSITION_NAMESPACE), (NamedElement) t.get(POSITION_ELEMENT), (String) t.get(POSITION_MANGLEDNAME));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -656,9 +656,9 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
     }
     
     @Override
-    protected MangledNameInPackage.Match arrayToMatch(final Object[] match) {
+    protected MangledNameInNamespace.Match arrayToMatch(final Object[] match) {
       try {
-          return MangledNameInPackage.Match.newMatch((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package) match[POSITION_PACK], (PackageableElement) match[POSITION_PACKELEM], (String) match[POSITION_MANGLEDNAME]);
+          return MangledNameInNamespace.Match.newMatch((Namespace) match[POSITION_NAMESPACE], (NamedElement) match[POSITION_ELEMENT], (String) match[POSITION_MANGLEDNAME]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -666,9 +666,9 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
     }
     
     @Override
-    protected MangledNameInPackage.Match arrayToMatchMutable(final Object[] match) {
+    protected MangledNameInNamespace.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return MangledNameInPackage.Match.newMutableMatch((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package) match[POSITION_PACK], (PackageableElement) match[POSITION_PACKELEM], (String) match[POSITION_MANGLEDNAME]);
+          return MangledNameInNamespace.Match.newMutableMatch((Namespace) match[POSITION_NAMESPACE], (NamedElement) match[POSITION_ELEMENT], (String) match[POSITION_MANGLEDNAME]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -680,12 +680,12 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<MangledNameInPackage.Matcher> querySpecification() {
-      return MangledNameInPackage.instance();
+    public static IQuerySpecification<MangledNameInNamespace.Matcher> querySpecification() {
+      return MangledNameInNamespace.instance();
     }
   }
   
-  private MangledNameInPackage() {
+  private MangledNameInNamespace() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -694,7 +694,7 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
    * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
    * 
    */
-  public static MangledNameInPackage instance() {
+  public static MangledNameInNamespace instance() {
     try{
         return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -703,35 +703,35 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
   }
   
   @Override
-  protected MangledNameInPackage.Matcher instantiate(final ViatraQueryEngine engine) {
-    return MangledNameInPackage.Matcher.on(engine);
+  protected MangledNameInNamespace.Matcher instantiate(final ViatraQueryEngine engine) {
+    return MangledNameInNamespace.Matcher.on(engine);
   }
   
   @Override
-  public MangledNameInPackage.Matcher instantiate() {
-    return MangledNameInPackage.Matcher.create();
+  public MangledNameInNamespace.Matcher instantiate() {
+    return MangledNameInNamespace.Matcher.create();
   }
   
   @Override
-  public MangledNameInPackage.Match newEmptyMatch() {
-    return MangledNameInPackage.Match.newEmptyMatch();
+  public MangledNameInNamespace.Match newEmptyMatch() {
+    return MangledNameInNamespace.Match.newEmptyMatch();
   }
   
   @Override
-  public MangledNameInPackage.Match newMatch(final Object... parameters) {
-    return MangledNameInPackage.Match.newMatch((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package) parameters[0], (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.PackageableElement) parameters[1], (java.lang.String) parameters[2]);
+  public MangledNameInNamespace.Match newMatch(final Object... parameters) {
+    return MangledNameInNamespace.Match.newMatch((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace) parameters[0], (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement) parameters[1], (java.lang.String) parameters[2]);
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInPackage (visibility: PUBLIC, simpleName: MangledNameInPackage, identifier: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInPackage, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInNamespace (visibility: PUBLIC, simpleName: MangledNameInNamespace, identifier: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInNamespace, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInPackage (visibility: PUBLIC, simpleName: MangledNameInPackage, identifier: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInPackage, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInNamespace (visibility: PUBLIC, simpleName: MangledNameInNamespace, identifier: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInNamespace, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private static final MangledNameInPackage INSTANCE = new MangledNameInPackage();
+    private static final MangledNameInNamespace INSTANCE = new MangledNameInNamespace();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -749,15 +749,15 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private static final MangledNameInPackage.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final MangledNameInNamespace.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pack = new PParameter("pack", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Package")), PParameterDirection.INOUT);
+    private final PParameter parameter_namespace = new PParameter("namespace", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Namespace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_packElem = new PParameter("packElem", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.PackageableElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "PackageableElement")), PParameterDirection.INOUT);
+    private final PParameter parameter_element = new PParameter("element", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "NamedElement")), PParameterDirection.INOUT);
     
     private final PParameter parameter_mangledName = new PParameter("mangledName", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_pack, parameter_packElem, parameter_mangledName);
+    private final List<PParameter> parameters = Arrays.asList(parameter_namespace, parameter_element, parameter_mangledName);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -765,12 +765,12 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
     
     @Override
     public String getFullyQualifiedName() {
-      return "com.incquerylabs.magicdraw.plugin.example.queries.mangledNameInPackage";
+      return "com.incquerylabs.magicdraw.plugin.example.queries.mangledNameInNamespace";
     }
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("pack","packElem","mangledName");
+      return Arrays.asList("namespace","element","mangledName");
     }
     
     @Override
@@ -784,27 +784,23 @@ public final class MangledNameInPackage extends BaseGeneratedEMFQuerySpecificati
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_pack = body.getOrCreateVariableByName("pack");
-          PVariable var_packElem = body.getOrCreateVariableByName("packElem");
+          PVariable var_namespace = body.getOrCreateVariableByName("namespace");
+          PVariable var_element = body.getOrCreateVariableByName("element");
           PVariable var_mangledName = body.getOrCreateVariableByName("mangledName");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_pack), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Package")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_packElem), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "PackageableElement")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_namespace), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Namespace")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_element), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "NamedElement")));
           new TypeFilterConstraint(body, Tuples.flatTupleOf(var_mangledName), new JavaTransitiveInstancesKey(java.lang.String.class));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_pack, parameter_pack),
-             new ExportedParameter(body, var_packElem, parameter_packElem),
+             new ExportedParameter(body, var_namespace, parameter_namespace),
+             new ExportedParameter(body, var_element, parameter_element),
              new ExportedParameter(body, var_mangledName, parameter_mangledName)
           ));
-          // 	Package.packagedElement(pack, packElem)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_pack), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Package")));
-          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_pack, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Package", "packagedElement")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "PackageableElement")));
-          new Equality(body, var__virtual_0_, var_packElem);
-          // 	find packableElementToGen(packElem)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_packElem), PackableElementToGen.instance().getInternalQueryRepresentation());
-          // 	find mangledName(packElem, mangledName)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_packElem, var_mangledName), MangledName.instance().getInternalQueryRepresentation());
+          // 	find elementInNamespace(element, namespace)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_element, var_namespace), ElementInNamespace.instance().getInternalQueryRepresentation());
+          // 	find namedElementToGen(element)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_element), NamedElementToGen.instance().getInternalQueryRepresentation());
+          // 	find mangledName(element, mangledName)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_element, var_mangledName), MangledName.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;

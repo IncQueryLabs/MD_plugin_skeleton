@@ -5,31 +5,61 @@ import java com.incquerylabs.magicdraw.plugin.example.codegen.CodegenUtil;
 
 
 
-pattern mangledNameCollision(pack: Package, packElem: PackageableElement, mangledName: java String) {
-	find mangledNameInPackage(pack, packElem, mangledName);
-	sameMangledNameElements == count find mangledNameInPackage(pack, _, mangledName);
+pattern mangledNameCollision(namespace: Namespace, element : NamedElement, mangledName: java String) {
+	find mangledNameInNamespace(namespace, element, mangledName);
+	sameMangledNameElements == count find mangledNameInNamespace(namespace, _, mangledName);
 	check(sameMangledNameElements > 1);
 }
 
-pattern mangledNameInPackage(pack: Package, packElem: PackageableElement, mangledName: java String) {
-	Package.packagedElement(pack, packElem);
-	find packableElementToGen(packElem);
-	find mangledName(packElem, mangledName);
+pattern mangledNameInNamespace(namespace: Namespace, element : NamedElement, mangledName: java String) {
+	find elementInNamespace(element, namespace);
+	find namedElementToGen(element);
+	find mangledName(element, mangledName);
 }
+
+private pattern elementInNamespace(element : NamedElement, namespace: Namespace) {
+	Package.packagedElement(namespace, element);
+} or {
+	Class.ownedAttribute(namespace, element);
+} // or {...} // extend as needed
 
 pattern mangledName(element : NamedElement, mangledName: java String) {
 	NamedElement.name(element, name);
 	mangledName == eval(CodegenUtil.mangleName(name));
 }
 
-pattern packableElementToGen(packElem : PackageableElement) {
-	find blockToGen(packElem, _);
-}
+pattern namedElementToGen(element : NamedElement) {
+	find blockToGen(element, _);
+} or {
+	find portToGen(element, _);
+} or {
+	find mandatoryPartToGen(element, _);
+} // or {...} // extend as needed
+
 pattern blockToGen(block : Class, pack: Package) {
 	find block(block);
 	Package.packagedElement+(pack, block);
 }
+pattern portToGen(port : Port, block: Class) {
+	// find toOneUpper(port);
+	find blockToGen(block, _);
+	find elementInNamespace(port, block);
+}
+pattern mandatoryPartToGen(part : Property, block: Class) {
+	Property.aggregation(part, ::composite);
+	find toOneUpper(part);
+	find toOneLower(part);
+	find blockToGen(block, _);
+	find elementInNamespace(part, block);
+}
 pattern block(block : Class) {
 	find sysml.Block(block, _);
 }
-
+pattern toOneUpper(multiplicityElement: MultiplicityElement) {
+	MultiplicityElement.upperValue(multiplicityElement, upperValue);
+	LiteralUnlimitedNatural.value(upperValue, 1);
+}
+pattern toOneLower(multiplicityElement: MultiplicityElement) {
+	MultiplicityElement.lowerValue(multiplicityElement, lowerValue);
+	LiteralInteger.value(lowerValue, 1);
+}

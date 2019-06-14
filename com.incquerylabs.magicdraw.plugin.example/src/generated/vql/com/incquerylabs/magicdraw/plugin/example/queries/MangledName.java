@@ -51,6 +51,8 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
+ *         // or {...} // extend as needed
+ *         
  *         pattern mangledName(element : NamedElement, mangledName: java String) {
  *         	NamedElement.name(element, name);
  *         	mangledName == eval(CodegenUtil.mangleName(name));
@@ -255,6 +257,8 @@ public final class MangledName extends BaseGeneratedEMFQuerySpecification<Mangle
    * 
    * <p>Original source:
    * <code><pre>
+   * // or {...} // extend as needed
+   * 
    * pattern mangledName(element : NamedElement, mangledName: java String) {
    * 	NamedElement.name(element, name);
    * 	mangledName == eval(CodegenUtil.mangleName(name));
