@@ -2,3 +2,10 @@
 /Discrete.java
 /AbstractRequirement_SatisfiedBy.java
 /Fmu_modelName.java
+/Block.java
+/PhysicalRequirement_RefinedBy.java
+/DesignConstraint_DerivedFrom.java
+/DesignConstraint_Derived.java
+/DesignConstraint_Id.java
+/DesignConstraint_Master.java
+/ItemFlow.java

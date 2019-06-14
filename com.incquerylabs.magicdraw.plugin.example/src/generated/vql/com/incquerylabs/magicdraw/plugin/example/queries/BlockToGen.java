@@ -46,6 +46,8 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
+ *         // or {...} // extend as needed
+ *         
  *         pattern blockToGen(block : Class, pack: Package) {
  *         	find block(block);
  *         	Package.packagedElement+(pack, block);
@@ -250,6 +252,8 @@ public final class BlockToGen extends BaseGeneratedEMFQuerySpecification<BlockTo
    * 
    * <p>Original source:
    * <code><pre>
+   * // or {...} // extend as needed
+   * 
    * pattern blockToGen(block : Class, pack: Package) {
    * 	find block(block);
    * 	Package.packagedElement+(pack, block);

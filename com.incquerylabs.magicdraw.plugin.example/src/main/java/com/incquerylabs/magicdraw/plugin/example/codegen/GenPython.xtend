@@ -10,19 +10,18 @@
  *******************************************************************************/
 package com.incquerylabs.magicdraw.plugin.example.codegen
 
+import com.incquerylabs.magicdraw.plugin.example.queries.CodegenControl
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.PackageableElement
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.TypedElement
+import java.io.FileWriter
+import java.util.Collection
+import java.util.List
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 
 import static com.incquerylabs.magicdraw.plugin.example.codegen.CodegenUtil.mangleName
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement
-import java.util.List
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Classifier
-import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
-import java.io.File
-import java.io.FileWriter
-import com.incquerylabs.magicdraw.plugin.example.queries.CodegenControl
-import java.util.Map
-import java.util.Set
-import java.util.Collection
 
 /**
  * @author Gabor Bergmann
@@ -32,9 +31,9 @@ class GenPython {
 	val ViatraQueryEngine queryEngine
 	val String codeOutletRootPath
 	val String pythonRootPackage
-	val Collection<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> modelPackagesToGen
+	val Collection<Package> modelPackagesToGen
 	
-	new(ViatraQueryEngine queryEngine, String codeOutletRootPath, String pythonRootPackage, Collection<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package> modelPackagesToGen) {
+	new(ViatraQueryEngine queryEngine, String codeOutletRootPath, String pythonRootPackage, Collection<Package> modelPackagesToGen) {
 		this.queryEngine = queryEngine
 		this.codeOutletRootPath = codeOutletRootPath
 		this.pythonRootPackage = pythonRootPackage
@@ -49,31 +48,64 @@ class GenPython {
 
 	def doGen() {
 		modelPackagesToGen.forEach[ pack |
-			System.out.println()
-			System.out.println("*******")
-			System.out.println(pack.humanName)
-			System.out.println("*******")
-			System.out.println()
 			queryEngine.blockToGen.streamAllValuesOfblock(pack).forEach[ block |
-				System.out.println(block.genBlockCode)
+				if (block.checkName)
+					// block.doGenBlockFile
+					System.out.println(block.genBlockCode)
 			]
 		]
 	}
 
-	def doGenBlockFile(Classifier block) {
-		if (checkBlock(block)) {
+	def doGenBlockFile(Class block) {
+		if (checkName(block)) {
 			val fileW = new FileWriter(block.genBlockFilePath.toString)
 			fileW.write(block.genBlockCode.toString)
 			fileW.close
 		}
 	}
 	
-	def boolean checkBlock(Classifier classifier) {
-		// TODO more elaborate validity check
-		return ! queryEngine.mangledNameCollision.hasMatch(null, classifier, null)
+	def boolean checkName(NamedElement element) {
+		val violation = queryEngine.mangledNameCollision.getOneArbitraryMatch(null, element, null)
+		if (violation.present) {
+			System.err.println(String.format(
+				"Mangled name ambiguity: name of %s is mangled to non-unique form %s, skipping code generation", 
+				element.humanName, violation.get.mangledName
+			))
+			return false
+		}
+		return true
+	}
+	def boolean checkTypeIsBlock(TypedElement element) {
+		val type = element.type
+		if (type === null) {
+			System.err.println(String.format(
+				"Missing type for typed element %s", 
+				element.humanName
+			))
+			return false
+		}
+		if (type instanceof Class) {
+			if (queryEngine.blockToGen.hasMatch(type, null)) {
+				return true
+			} else {
+				System.err.println(String.format(
+					"Block %s as type of %s not possible to generate", 
+					type.humanName, element.humanName
+				))
+				return false
+			}
+		} else {
+			System.err.println(String.format(
+				"Block type expected for typed element %s instead of %s", 
+				element.humanName, type.humanName
+			))
+			return false
+		}
 	}
 		
-	def genBlockCode(Classifier block) '''
+	def genBlockCode(Class block) '''
+		# TODO gen imports
+	
 		class «block.genName»:
 		    """ 
 		        Class automatically generated from «block.humanName».
@@ -82,11 +114,36 @@ class GenPython {
 		    """
 		    
 		    def __init__(self):
+		    	«FOR part : queryEngine.mandatoryPartToGen.getAllValuesOfpart(block)»
+		    		«IF part.checkName && part.checkTypeIsBlock»
+		    			self.«part.genName» = «part.type.genPackageableElementRef»()
+		    		«ENDIF»
+		    	«ENDFOR»
+		    	«FOR port : queryEngine.portToGen.getAllValuesOfport(block)»
+		    		«IF port.checkName && port.checkTypeIsBlock»
+		    			self.set_«port.genName»(None)
+		    		«ENDIF»
+		    	«ENDFOR»
+		    	# TODO set up internal connections based on IBD
 		        pass
-		        
+		    
+		    	«FOR port : queryEngine.portToGen.getAllValuesOfport(block)»
+		    		«IF port.checkName && port.checkTypeIsBlock»
+		    			@property
+		    			def «port.genName»(self):
+		    				return self.«CodegenUtil.V4MD_FIELD_PREFIX»«port.genName»
+	
+		    			@«port.genName».setter
+		    			def set_«port.genName»(self, value):
+		    				self.«CodegenUtil.V4MD_FIELD_PREFIX»«port.genName» = value
+		    				if (value):
+		    					# TODO set up external connections based on IBD
+		    					pass
+		    		«ENDIF»
+		    	«ENDFOR»
 	'''
 	
-	def genBlockFilePath(Classifier block) 
+	def genBlockFilePath(Class block) 
 		'''«codeOutletRootPath»/«block.genPackageableElementPathSteps.join('/')».py'''
 
 	def CharSequence genPackageableElementRef(PackageableElement block) {

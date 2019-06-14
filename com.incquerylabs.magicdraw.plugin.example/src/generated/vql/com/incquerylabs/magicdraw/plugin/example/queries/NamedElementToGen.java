@@ -4,7 +4,9 @@
 package com.incquerylabs.magicdraw.plugin.example.queries;
 
 import com.incquerylabs.magicdraw.plugin.example.queries.BlockToGen;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.PackageableElement;
+import com.incquerylabs.magicdraw.plugin.example.queries.MandatoryPartToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.PortToGen;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -43,8 +45,12 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         pattern packableElementToGen(packElem : PackageableElement) {
- *         	find blockToGen(packElem, _);
+ *         pattern namedElementToGen(element : NamedElement) {
+ *         	find blockToGen(element, _);
+ *         } or {
+ *         	find portToGen(element, _);
+ *         } or {
+ *         	find mandatoryPartToGen(element, _);
  *         }
  * </pre></code>
  * 
@@ -53,9 +59,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  */
 @SuppressWarnings("all")
-public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecification<PackableElementToGen.Matcher> {
+public final class NamedElementToGen extends BaseGeneratedEMFQuerySpecification<NamedElementToGen.Matcher> {
   /**
-   * Pattern-specific match representation of the com.incquerylabs.magicdraw.plugin.example.queries.packableElementToGen pattern,
+   * Pattern-specific match representation of the com.incquerylabs.magicdraw.plugin.example.queries.namedElementToGen pattern,
    * to be used in conjunction with {@link Matcher}.
    * 
    * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -67,69 +73,69 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private PackageableElement fPackElem;
+    private NamedElement fElement;
     
-    private static List<String> parameterNames = makeImmutableList("packElem");
+    private static List<String> parameterNames = makeImmutableList("element");
     
-    private Match(final PackageableElement pPackElem) {
-      this.fPackElem = pPackElem;
+    private Match(final NamedElement pElement) {
+      this.fElement = pElement;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("packElem".equals(parameterName)) return this.fPackElem;
+      if ("element".equals(parameterName)) return this.fElement;
       return null;
     }
     
-    public PackageableElement getPackElem() {
-      return this.fPackElem;
+    public NamedElement getElement() {
+      return this.fElement;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("packElem".equals(parameterName) ) {
-          this.fPackElem = (PackageableElement) newValue;
+      if ("element".equals(parameterName) ) {
+          this.fElement = (NamedElement) newValue;
           return true;
       }
       return false;
     }
     
-    public void setPackElem(final PackageableElement pPackElem) {
+    public void setElement(final NamedElement pElement) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fPackElem = pPackElem;
+      this.fElement = pElement;
     }
     
     @Override
     public String patternName() {
-      return "com.incquerylabs.magicdraw.plugin.example.queries.packableElementToGen";
+      return "com.incquerylabs.magicdraw.plugin.example.queries.namedElementToGen";
     }
     
     @Override
     public List<String> parameterNames() {
-      return PackableElementToGen.Match.parameterNames;
+      return NamedElementToGen.Match.parameterNames;
     }
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fPackElem};
+      return new Object[]{fElement};
     }
     
     @Override
-    public PackableElementToGen.Match toImmutable() {
-      return isMutable() ? newMatch(fPackElem) : this;
+    public NamedElementToGen.Match toImmutable() {
+      return isMutable() ? newMatch(fElement) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"packElem\"=" + prettyPrintValue(fPackElem));
+      result.append("\"element\"=" + prettyPrintValue(fElement));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash(fPackElem);
+      return Objects.hash(fElement);
     }
     
     @Override
@@ -139,9 +145,9 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
       if (obj == null) {
           return false;
       }
-      if ((obj instanceof PackableElementToGen.Match)) {
-          PackableElementToGen.Match other = (PackableElementToGen.Match) obj;
-          return Objects.equals(fPackElem, other.fPackElem);
+      if ((obj instanceof NamedElementToGen.Match)) {
+          NamedElementToGen.Match other = (NamedElementToGen.Match) obj;
+          return Objects.equals(fElement, other.fElement);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -153,8 +159,8 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
     }
     
     @Override
-    public PackableElementToGen specification() {
-      return PackableElementToGen.instance();
+    public NamedElementToGen specification() {
+      return NamedElementToGen.instance();
     }
     
     /**
@@ -164,7 +170,7 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
      * @return the empty match.
      * 
      */
-    public static PackableElementToGen.Match newEmptyMatch() {
+    public static NamedElementToGen.Match newEmptyMatch() {
       return new Mutable(null);
     }
     
@@ -172,29 +178,29 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static PackableElementToGen.Match newMutableMatch(final PackageableElement pPackElem) {
-      return new Mutable(pPackElem);
+    public static NamedElementToGen.Match newMutableMatch(final NamedElement pElement) {
+      return new Mutable(pElement);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static PackableElementToGen.Match newMatch(final PackageableElement pPackElem) {
-      return new Immutable(pPackElem);
+    public static NamedElementToGen.Match newMatch(final NamedElement pElement) {
+      return new Immutable(pElement);
     }
     
-    private static final class Mutable extends PackableElementToGen.Match {
-      Mutable(final PackageableElement pPackElem) {
-        super(pPackElem);
+    private static final class Mutable extends NamedElementToGen.Match {
+      Mutable(final NamedElement pElement) {
+        super(pElement);
       }
       
       @Override
@@ -203,9 +209,9 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
       }
     }
     
-    private static final class Immutable extends PackableElementToGen.Match {
-      Immutable(final PackageableElement pPackElem) {
-        super(pPackElem);
+    private static final class Immutable extends NamedElementToGen.Match {
+      Immutable(final NamedElement pElement) {
+        super(pElement);
       }
       
       @Override
@@ -216,7 +222,7 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
   }
   
   /**
-   * Generated pattern matcher API of the com.incquerylabs.magicdraw.plugin.example.queries.packableElementToGen pattern,
+   * Generated pattern matcher API of the com.incquerylabs.magicdraw.plugin.example.queries.namedElementToGen pattern,
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -226,16 +232,20 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
    * 
    * <p>Original source:
    * <code><pre>
-   * pattern packableElementToGen(packElem : PackageableElement) {
-   * 	find blockToGen(packElem, _);
+   * pattern namedElementToGen(element : NamedElement) {
+   * 	find blockToGen(element, _);
+   * } or {
+   * 	find portToGen(element, _);
+   * } or {
+   * 	find mandatoryPartToGen(element, _);
    * }
    * </pre></code>
    * 
    * @see Match
-   * @see PackableElementToGen
+   * @see NamedElementToGen
    * 
    */
-  public static class Matcher extends BaseMatcher<PackableElementToGen.Match> {
+  public static class Matcher extends BaseMatcher<NamedElementToGen.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -244,7 +254,7 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
      */
-    public static PackableElementToGen.Matcher on(final ViatraQueryEngine engine) {
+    public static NamedElementToGen.Matcher on(final ViatraQueryEngine engine) {
       // check if matcher already exists
       Matcher matcher = engine.getExistingMatcher(querySpecification());
       if (matcher == null) {
@@ -259,13 +269,13 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
      * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
      * 
      */
-    public static PackableElementToGen.Matcher create() {
+    public static NamedElementToGen.Matcher create() {
       return new Matcher();
     }
     
-    private static final int POSITION_PACKELEM = 0;
+    private static final int POSITION_ELEMENT = 0;
     
-    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(PackableElementToGen.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(NamedElementToGen.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -281,12 +291,12 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<PackableElementToGen.Match> getAllMatches(final PackageableElement pPackElem) {
-      return rawStreamAllMatches(new Object[]{pPackElem}).collect(Collectors.toSet());
+    public Collection<NamedElementToGen.Match> getAllMatches(final NamedElement pElement) {
+      return rawStreamAllMatches(new Object[]{pElement}).collect(Collectors.toSet());
     }
     
     /**
@@ -295,101 +305,101 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<PackableElementToGen.Match> streamAllMatches(final PackageableElement pPackElem) {
-      return rawStreamAllMatches(new Object[]{pPackElem});
+    public Stream<NamedElementToGen.Match> streamAllMatches(final NamedElement pElement) {
+      return rawStreamAllMatches(new Object[]{pElement});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<PackableElementToGen.Match> getOneArbitraryMatch(final PackageableElement pPackElem) {
-      return rawGetOneArbitraryMatch(new Object[]{pPackElem});
+    public Optional<NamedElementToGen.Match> getOneArbitraryMatch(final NamedElement pElement) {
+      return rawGetOneArbitraryMatch(new Object[]{pElement});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final PackageableElement pPackElem) {
-      return rawHasMatch(new Object[]{pPackElem});
+    public boolean hasMatch(final NamedElement pElement) {
+      return rawHasMatch(new Object[]{pElement});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final PackageableElement pPackElem) {
-      return rawCountMatches(new Object[]{pPackElem});
+    public int countMatches(final NamedElement pElement) {
+      return rawCountMatches(new Object[]{pElement});
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final PackageableElement pPackElem, final Consumer<? super PackableElementToGen.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pPackElem}, processor);
+    public boolean forOneArbitraryMatch(final NamedElement pElement, final Consumer<? super NamedElementToGen.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pElement}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pPackElem the fixed value of pattern parameter packElem, or null if not bound.
+     * @param pElement the fixed value of pattern parameter element, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public PackableElementToGen.Match newMatch(final PackageableElement pPackElem) {
-      return PackableElementToGen.Match.newMatch(pPackElem);
+    public NamedElementToGen.Match newMatch(final NamedElement pElement) {
+      return NamedElementToGen.Match.newMatch(pElement);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for packElem.
+     * Retrieve the set of values that occur in matches for element.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<PackageableElement> rawStreamAllValuesOfpackElem(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_PACKELEM, parameters).map(PackageableElement.class::cast);
+    protected Stream<NamedElement> rawStreamAllValuesOfelement(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_ELEMENT, parameters).map(NamedElement.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for packElem.
+     * Retrieve the set of values that occur in matches for element.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<PackageableElement> getAllValuesOfpackElem() {
-      return rawStreamAllValuesOfpackElem(emptyArray()).collect(Collectors.toSet());
+    public Set<NamedElement> getAllValuesOfelement() {
+      return rawStreamAllValuesOfelement(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for packElem.
+     * Retrieve the set of values that occur in matches for element.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<PackageableElement> streamAllValuesOfpackElem() {
-      return rawStreamAllValuesOfpackElem(emptyArray());
+    public Stream<NamedElement> streamAllValuesOfelement() {
+      return rawStreamAllValuesOfelement(emptyArray());
     }
     
     @Override
-    protected PackableElementToGen.Match tupleToMatch(final Tuple t) {
+    protected NamedElementToGen.Match tupleToMatch(final Tuple t) {
       try {
-          return PackableElementToGen.Match.newMatch((PackageableElement) t.get(POSITION_PACKELEM));
+          return NamedElementToGen.Match.newMatch((NamedElement) t.get(POSITION_ELEMENT));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -397,9 +407,9 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
     }
     
     @Override
-    protected PackableElementToGen.Match arrayToMatch(final Object[] match) {
+    protected NamedElementToGen.Match arrayToMatch(final Object[] match) {
       try {
-          return PackableElementToGen.Match.newMatch((PackageableElement) match[POSITION_PACKELEM]);
+          return NamedElementToGen.Match.newMatch((NamedElement) match[POSITION_ELEMENT]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -407,9 +417,9 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
     }
     
     @Override
-    protected PackableElementToGen.Match arrayToMatchMutable(final Object[] match) {
+    protected NamedElementToGen.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return PackableElementToGen.Match.newMutableMatch((PackageableElement) match[POSITION_PACKELEM]);
+          return NamedElementToGen.Match.newMutableMatch((NamedElement) match[POSITION_ELEMENT]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -421,12 +431,12 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<PackableElementToGen.Matcher> querySpecification() {
-      return PackableElementToGen.instance();
+    public static IQuerySpecification<NamedElementToGen.Matcher> querySpecification() {
+      return NamedElementToGen.instance();
     }
   }
   
-  private PackableElementToGen() {
+  private NamedElementToGen() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -435,7 +445,7 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
    * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
    * 
    */
-  public static PackableElementToGen instance() {
+  public static NamedElementToGen instance() {
     try{
         return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -444,35 +454,35 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
   }
   
   @Override
-  protected PackableElementToGen.Matcher instantiate(final ViatraQueryEngine engine) {
-    return PackableElementToGen.Matcher.on(engine);
+  protected NamedElementToGen.Matcher instantiate(final ViatraQueryEngine engine) {
+    return NamedElementToGen.Matcher.on(engine);
   }
   
   @Override
-  public PackableElementToGen.Matcher instantiate() {
-    return PackableElementToGen.Matcher.create();
+  public NamedElementToGen.Matcher instantiate() {
+    return NamedElementToGen.Matcher.create();
   }
   
   @Override
-  public PackableElementToGen.Match newEmptyMatch() {
-    return PackableElementToGen.Match.newEmptyMatch();
+  public NamedElementToGen.Match newEmptyMatch() {
+    return NamedElementToGen.Match.newEmptyMatch();
   }
   
   @Override
-  public PackableElementToGen.Match newMatch(final Object... parameters) {
-    return PackableElementToGen.Match.newMatch((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.PackageableElement) parameters[0]);
+  public NamedElementToGen.Match newMatch(final Object... parameters) {
+    return NamedElementToGen.Match.newMatch((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement) parameters[0]);
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.PackableElementToGen (visibility: PUBLIC, simpleName: PackableElementToGen, identifier: com.incquerylabs.magicdraw.plugin.example.queries.PackableElementToGen, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.NamedElementToGen (visibility: PUBLIC, simpleName: NamedElementToGen, identifier: com.incquerylabs.magicdraw.plugin.example.queries.NamedElementToGen, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.PackableElementToGen (visibility: PUBLIC, simpleName: PackableElementToGen, identifier: com.incquerylabs.magicdraw.plugin.example.queries.PackableElementToGen, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.NamedElementToGen (visibility: PUBLIC, simpleName: NamedElementToGen, identifier: com.incquerylabs.magicdraw.plugin.example.queries.NamedElementToGen, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private static final PackableElementToGen INSTANCE = new PackableElementToGen();
+    private static final NamedElementToGen INSTANCE = new NamedElementToGen();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -490,11 +500,11 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private static final PackableElementToGen.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final NamedElementToGen.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_packElem = new PParameter("packElem", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.PackageableElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "PackageableElement")), PParameterDirection.INOUT);
+    private final PParameter parameter_element = new PParameter("element", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "NamedElement")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_packElem);
+    private final List<PParameter> parameters = Arrays.asList(parameter_element);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -502,12 +512,12 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
     
     @Override
     public String getFullyQualifiedName() {
-      return "com.incquerylabs.magicdraw.plugin.example.queries.packableElementToGen";
+      return "com.incquerylabs.magicdraw.plugin.example.queries.namedElementToGen";
     }
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("packElem");
+      return Arrays.asList("element");
     }
     
     @Override
@@ -521,14 +531,38 @@ public final class PackableElementToGen extends BaseGeneratedEMFQuerySpecificati
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_packElem = body.getOrCreateVariableByName("packElem");
+          PVariable var_element = body.getOrCreateVariableByName("element");
           PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_packElem), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "PackageableElement")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_element), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "NamedElement")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_packElem, parameter_packElem)
+             new ExportedParameter(body, var_element, parameter_element)
           ));
-          // 	find blockToGen(packElem, _)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_packElem, var___0_), BlockToGen.instance().getInternalQueryRepresentation());
+          // 	find blockToGen(element, _)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_element, var___0_), BlockToGen.instance().getInternalQueryRepresentation());
+          bodies.add(body);
+      }
+      {
+          PBody body = new PBody(this);
+          PVariable var_element = body.getOrCreateVariableByName("element");
+          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_element), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "NamedElement")));
+          body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+             new ExportedParameter(body, var_element, parameter_element)
+          ));
+          // 	find portToGen(element, _)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_element, var___0_), PortToGen.instance().getInternalQueryRepresentation());
+          bodies.add(body);
+      }
+      {
+          PBody body = new PBody(this);
+          PVariable var_element = body.getOrCreateVariableByName("element");
+          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_element), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "NamedElement")));
+          body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+             new ExportedParameter(body, var_element, parameter_element)
+          ));
+          // 	find mandatoryPartToGen(element, _)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_element, var___0_), MandatoryPartToGen.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;

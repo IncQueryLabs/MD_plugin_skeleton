@@ -5,10 +5,14 @@ package com.incquerylabs.magicdraw.plugin.example.queries;
 
 import com.incquerylabs.magicdraw.plugin.example.queries.Block;
 import com.incquerylabs.magicdraw.plugin.example.queries.BlockToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.MandatoryPartToGen;
 import com.incquerylabs.magicdraw.plugin.example.queries.MangledName;
 import com.incquerylabs.magicdraw.plugin.example.queries.MangledNameCollision;
-import com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInPackage;
-import com.incquerylabs.magicdraw.plugin.example.queries.PackableElementToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInNamespace;
+import com.incquerylabs.magicdraw.plugin.example.queries.NamedElementToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.PortToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.ToOneLower;
+import com.incquerylabs.magicdraw.plugin.example.queries.ToOneUpper;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 
@@ -21,11 +25,15 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * 
  * <p> From package com.incquerylabs.magicdraw.plugin.example.queries, the group contains the definition of the following patterns: <ul>
  * <li>mangledNameCollision</li>
- * <li>mangledNameInPackage</li>
+ * <li>mangledNameInNamespace</li>
  * <li>mangledName</li>
- * <li>packableElementToGen</li>
+ * <li>namedElementToGen</li>
  * <li>blockToGen</li>
+ * <li>portToGen</li>
+ * <li>mandatoryPartToGen</li>
  * <li>block</li>
+ * <li>toOneUpper</li>
+ * <li>toOneLower</li>
  * </ul>
  * 
  * @see IQueryGroup
@@ -51,11 +59,15 @@ public final class CodegenControl extends BaseGeneratedPatternGroup {
   
   private CodegenControl() {
     querySpecifications.add(MangledNameCollision.instance());
-    querySpecifications.add(MangledNameInPackage.instance());
+    querySpecifications.add(MangledNameInNamespace.instance());
     querySpecifications.add(MangledName.instance());
-    querySpecifications.add(PackableElementToGen.instance());
+    querySpecifications.add(NamedElementToGen.instance());
     querySpecifications.add(BlockToGen.instance());
+    querySpecifications.add(PortToGen.instance());
+    querySpecifications.add(MandatoryPartToGen.instance());
     querySpecifications.add(Block.instance());
+    querySpecifications.add(ToOneUpper.instance());
+    querySpecifications.add(ToOneLower.instance());
   }
   
   public MangledNameCollision getMangledNameCollision() {
@@ -66,12 +78,12 @@ public final class CodegenControl extends BaseGeneratedPatternGroup {
     return MangledNameCollision.Matcher.on(engine);
   }
   
-  public MangledNameInPackage getMangledNameInPackage() {
-    return MangledNameInPackage.instance();
+  public MangledNameInNamespace getMangledNameInNamespace() {
+    return MangledNameInNamespace.instance();
   }
   
-  public MangledNameInPackage.Matcher getMangledNameInPackage(final ViatraQueryEngine engine) {
-    return MangledNameInPackage.Matcher.on(engine);
+  public MangledNameInNamespace.Matcher getMangledNameInNamespace(final ViatraQueryEngine engine) {
+    return MangledNameInNamespace.Matcher.on(engine);
   }
   
   public MangledName getMangledName() {
@@ -82,12 +94,12 @@ public final class CodegenControl extends BaseGeneratedPatternGroup {
     return MangledName.Matcher.on(engine);
   }
   
-  public PackableElementToGen getPackableElementToGen() {
-    return PackableElementToGen.instance();
+  public NamedElementToGen getNamedElementToGen() {
+    return NamedElementToGen.instance();
   }
   
-  public PackableElementToGen.Matcher getPackableElementToGen(final ViatraQueryEngine engine) {
-    return PackableElementToGen.Matcher.on(engine);
+  public NamedElementToGen.Matcher getNamedElementToGen(final ViatraQueryEngine engine) {
+    return NamedElementToGen.Matcher.on(engine);
   }
   
   public BlockToGen getBlockToGen() {
@@ -98,11 +110,43 @@ public final class CodegenControl extends BaseGeneratedPatternGroup {
     return BlockToGen.Matcher.on(engine);
   }
   
+  public PortToGen getPortToGen() {
+    return PortToGen.instance();
+  }
+  
+  public PortToGen.Matcher getPortToGen(final ViatraQueryEngine engine) {
+    return PortToGen.Matcher.on(engine);
+  }
+  
+  public MandatoryPartToGen getMandatoryPartToGen() {
+    return MandatoryPartToGen.instance();
+  }
+  
+  public MandatoryPartToGen.Matcher getMandatoryPartToGen(final ViatraQueryEngine engine) {
+    return MandatoryPartToGen.Matcher.on(engine);
+  }
+  
   public Block getBlock() {
     return Block.instance();
   }
   
   public Block.Matcher getBlock(final ViatraQueryEngine engine) {
     return Block.Matcher.on(engine);
+  }
+  
+  public ToOneUpper getToOneUpper() {
+    return ToOneUpper.instance();
+  }
+  
+  public ToOneUpper.Matcher getToOneUpper(final ViatraQueryEngine engine) {
+    return ToOneUpper.Matcher.on(engine);
+  }
+  
+  public ToOneLower getToOneLower() {
+    return ToOneLower.instance();
+  }
+  
+  public ToOneLower.Matcher getToOneLower(final ViatraQueryEngine engine) {
+    return ToOneLower.Matcher.on(engine);
   }
 }

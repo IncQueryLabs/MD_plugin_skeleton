@@ -16,6 +16,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.eclipse.xtext.xbase.lib.Pure;
+
 /**
  * @author Gabor Bergmann
  *
@@ -32,6 +34,7 @@ public class CodegenUtil {
 			Pattern.compile("[^a-zA-Z0-9]|(?<![A-Z])(?=[A-Z])|(?<=[A-Z][A-Z])(?![A-Z])");
 
 	public static final String V4MD_PREFIX = "_v4md";
+	public static final String V4MD_FIELD_PREFIX = V4MD_PREFIX+ "_field_";
 	public static final Set<String> RESERVED = new HashSet<String>(Arrays.asList(
 			// Python keywords in v3.7
 			"False", "None", "True", "and", "as", "assert", "async", "await", "break", "class", "continue", "def",
@@ -61,6 +64,7 @@ public class CodegenUtil {
 			"super", "tuple", "type", "vars", "zip"
 	));
 
+	@Pure
 	public static String mangleName(String umlName) {
 		String joined = SEPARATORS.splitAsStream(umlName).filter((seg) -> !seg.isEmpty()).map(
 				(seg) -> seg.equals(seg.toUpperCase()) ? seg /* skip lower casing all-caps abbreviations, e.g. UML */
