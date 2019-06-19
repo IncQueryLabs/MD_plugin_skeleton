@@ -56,7 +56,7 @@ class GenPython {
 		modelPackagesToGen.forEach[ pack |
 			queryEngine.blockToGen.streamAllValuesOfblock(pack).forEach[ block |
 				if (block.checkName)
-					//block.doGenBlockFile
+					block.doGenBlockFile
 					System.out.println(block.genBlockCode)
 			]
 		]
@@ -65,18 +65,23 @@ class GenPython {
 	def doGenBlockFile(Class block) {
 		if (checkName(block)) {
 			val blockFilePath = block.genBlockFilePath.toString
+			println("generating " + blockFilePath)
+			
 			
 			val blockFile = new File(blockFilePath)
 			if (blockFile.exists) 
 				blockFile.delete
 			
+			blockFile.parentFile.mkdirs
 			blockFile.createNewFile
 			val blockFileWriter = new FileWriter(blockFile, false)
 			blockFileWriter.write(block.genBlockCode.toString)
 			blockFileWriter.close
 			
 			// ensure package is created
-			new File(block.genPackageFilePath.toString).createNewFile
+			val packageFile = new File(block.genPackageFilePath.toString)
+			packageFile.parentFile.mkdirs
+			packageFile.createNewFile
 		}
 	}
 	
