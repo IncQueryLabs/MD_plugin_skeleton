@@ -11,6 +11,13 @@
       <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.block"/>
       <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.toOneUpper"/>
       <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.toOneLower"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.connectorToGen"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.endToGen"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.connectorEndNestedPath"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.delegationEnd"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.delegationToGen"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.assemblyToGen"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.plugin.example.queries.blockMustImport"/>
     </group>
   </extension>
   <extension id="com.incquerylabs.magicdraw.plugin.example.queries.SearchQueries" point="org.eclipse.viatra.query.runtime.queryspecification">

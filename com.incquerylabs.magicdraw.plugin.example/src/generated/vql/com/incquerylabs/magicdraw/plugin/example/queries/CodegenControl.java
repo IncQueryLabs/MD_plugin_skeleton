@@ -3,8 +3,15 @@
  */
 package com.incquerylabs.magicdraw.plugin.example.queries;
 
+import com.incquerylabs.magicdraw.plugin.example.queries.AssemblyToGen;
 import com.incquerylabs.magicdraw.plugin.example.queries.Block;
+import com.incquerylabs.magicdraw.plugin.example.queries.BlockMustImport;
 import com.incquerylabs.magicdraw.plugin.example.queries.BlockToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.ConnectorEndNestedPath;
+import com.incquerylabs.magicdraw.plugin.example.queries.ConnectorToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.DelegationEnd;
+import com.incquerylabs.magicdraw.plugin.example.queries.DelegationToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.EndToGen;
 import com.incquerylabs.magicdraw.plugin.example.queries.MandatoryPartToGen;
 import com.incquerylabs.magicdraw.plugin.example.queries.MangledName;
 import com.incquerylabs.magicdraw.plugin.example.queries.MangledNameCollision;
@@ -34,6 +41,13 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <li>block</li>
  * <li>toOneUpper</li>
  * <li>toOneLower</li>
+ * <li>connectorToGen</li>
+ * <li>endToGen</li>
+ * <li>connectorEndNestedPath</li>
+ * <li>delegationEnd</li>
+ * <li>delegationToGen</li>
+ * <li>assemblyToGen</li>
+ * <li>blockMustImport</li>
  * </ul>
  * 
  * @see IQueryGroup
@@ -68,6 +82,13 @@ public final class CodegenControl extends BaseGeneratedPatternGroup {
     querySpecifications.add(Block.instance());
     querySpecifications.add(ToOneUpper.instance());
     querySpecifications.add(ToOneLower.instance());
+    querySpecifications.add(ConnectorToGen.instance());
+    querySpecifications.add(EndToGen.instance());
+    querySpecifications.add(ConnectorEndNestedPath.instance());
+    querySpecifications.add(DelegationEnd.instance());
+    querySpecifications.add(DelegationToGen.instance());
+    querySpecifications.add(AssemblyToGen.instance());
+    querySpecifications.add(BlockMustImport.instance());
   }
   
   public MangledNameCollision getMangledNameCollision() {
@@ -148,5 +169,61 @@ public final class CodegenControl extends BaseGeneratedPatternGroup {
   
   public ToOneLower.Matcher getToOneLower(final ViatraQueryEngine engine) {
     return ToOneLower.Matcher.on(engine);
+  }
+  
+  public ConnectorToGen getConnectorToGen() {
+    return ConnectorToGen.instance();
+  }
+  
+  public ConnectorToGen.Matcher getConnectorToGen(final ViatraQueryEngine engine) {
+    return ConnectorToGen.Matcher.on(engine);
+  }
+  
+  public EndToGen getEndToGen() {
+    return EndToGen.instance();
+  }
+  
+  public EndToGen.Matcher getEndToGen(final ViatraQueryEngine engine) {
+    return EndToGen.Matcher.on(engine);
+  }
+  
+  public ConnectorEndNestedPath getConnectorEndNestedPath() {
+    return ConnectorEndNestedPath.instance();
+  }
+  
+  public ConnectorEndNestedPath.Matcher getConnectorEndNestedPath(final ViatraQueryEngine engine) {
+    return ConnectorEndNestedPath.Matcher.on(engine);
+  }
+  
+  public DelegationEnd getDelegationEnd() {
+    return DelegationEnd.instance();
+  }
+  
+  public DelegationEnd.Matcher getDelegationEnd(final ViatraQueryEngine engine) {
+    return DelegationEnd.Matcher.on(engine);
+  }
+  
+  public DelegationToGen getDelegationToGen() {
+    return DelegationToGen.instance();
+  }
+  
+  public DelegationToGen.Matcher getDelegationToGen(final ViatraQueryEngine engine) {
+    return DelegationToGen.Matcher.on(engine);
+  }
+  
+  public AssemblyToGen getAssemblyToGen() {
+    return AssemblyToGen.instance();
+  }
+  
+  public AssemblyToGen.Matcher getAssemblyToGen(final ViatraQueryEngine engine) {
+    return AssemblyToGen.Matcher.on(engine);
+  }
+  
+  public BlockMustImport getBlockMustImport() {
+    return BlockMustImport.instance();
+  }
+  
+  public BlockMustImport.Matcher getBlockMustImport(final ViatraQueryEngine engine) {
+    return BlockMustImport.Matcher.on(engine);
   }
 }

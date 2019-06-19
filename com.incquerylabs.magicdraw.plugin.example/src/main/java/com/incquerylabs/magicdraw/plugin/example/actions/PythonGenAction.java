@@ -40,7 +40,10 @@ public class PythonGenAction extends MDAction {
 		ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project);
 		AdvancedViatraQueryEngine engine = adapter.getEngine();
 		
-		GenPython gen = new GenPython(engine, "<output-folder>", "gen_project", project.getModels());
+		GenPython gen = new GenPython(engine, 
+				"<codegen_outlet_folder>", 
+				"gen_project", 
+				project.getModels());
 		gen.doGen();
 		
 		JOptionPane.showMessageDialog(MDDialogParentProvider.getProvider().getDialogParent(), "The code generation has been performed");
