@@ -11,17 +11,19 @@
 package com.incquerylabs.magicdraw.plugin.example.actions;
 
 import java.awt.event.ActionEvent;
-
-import javax.swing.JOptionPane;
+import java.io.File;
+import java.util.List;
 
 import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine;
 
 import com.incquerylabs.magicdraw.plugin.example.codegen.GenPython;
+import com.incquerylabs.magicdraw.plugin.example.ui.wizard.SelectPackageAndOutputDirectoryWizard;
+import com.incquerylabs.magicdraw.plugin.example.ui.wizard.SelectPackageAndOutputDirectoryWizard.FinalizeWizardAction;
 import com.incquerylabs.v4md.ViatraQueryAdapter;
 import com.nomagic.magicdraw.actions.MDAction;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
-import com.nomagic.magicdraw.ui.dialogs.MDDialogParentProvider;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package;
 
 /**
  * @author Gabor Bergmann
@@ -36,16 +38,25 @@ public class PythonGenAction extends MDAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Project project = Application.getInstance().getProject();
-		ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project);
-		AdvancedViatraQueryEngine engine = adapter.getEngine();
 		
-		GenPython gen = new GenPython(engine, 
-				"<codegen_outlet_folder>", 
-				"gen_project", 
-				project.getModels());
-		gen.doGen();
+		SelectPackageAndOutputDirectoryWizard wizard = new SelectPackageAndOutputDirectoryWizard(new FinalizeWizardAction() {
+			
+			@Override
+			public void finalizeWizard(List<Package> selectedPackages, File selectedFolder) {
+				Project project = Application.getInstance().getProject();
+				ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project);
+				AdvancedViatraQueryEngine engine = adapter.getEngine();
+				
+				GenPython gen = new GenPython(engine, 
+						selectedFolder.toString(), 
+						"gen_project", 
+						selectedPackages);
+				gen.doGen();
+			}
+		});
 		
-		JOptionPane.showMessageDialog(MDDialogParentProvider.getProvider().getDialogParent(), "The code generation has been performed");
+		wizard.setVisible(true);
+		
+		//JOptionPane.showMessageDialog(MDDialogParentProvider.getProvider().getDialogParent(), "The code generation has been performed");
 	}
 }
