@@ -72,9 +72,9 @@ public class CodegenUtil {
 				.collect(Collectors.joining("_"));
 
 		// Prefix if prefix or entire string is not permitted
-		if (joined.isEmpty() || RESERVED.contains(joined) || Character.isDigit(joined.charAt(0)) || joined.startsWith(V4MD_PREFIX))
-			return "_" + joined;
-		else
-			return joined;
+		while (joined.isEmpty() || RESERVED.contains(joined) || Character.isDigit(joined.charAt(0)) || joined.startsWith(V4MD_PREFIX))
+			joined = "_" + joined;
+			
+		return joined;
 	}
 }

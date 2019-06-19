@@ -3,8 +3,15 @@
  */
 package com.incquerylabs.magicdraw.plugin.example.queries.internal;
 
+import com.incquerylabs.magicdraw.plugin.example.queries.AssemblyToGen;
 import com.incquerylabs.magicdraw.plugin.example.queries.Block;
+import com.incquerylabs.magicdraw.plugin.example.queries.BlockMustImport;
 import com.incquerylabs.magicdraw.plugin.example.queries.BlockToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.ConnectorEndNestedPath;
+import com.incquerylabs.magicdraw.plugin.example.queries.ConnectorToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.DelegationEnd;
+import com.incquerylabs.magicdraw.plugin.example.queries.DelegationToGen;
+import com.incquerylabs.magicdraw.plugin.example.queries.EndToGen;
 import com.incquerylabs.magicdraw.plugin.example.queries.MandatoryPartToGen;
 import com.incquerylabs.magicdraw.plugin.example.queries.MangledName;
 import com.incquerylabs.magicdraw.plugin.example.queries.MangledNameCollision;
@@ -33,6 +40,13 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <li>block</li>
  * <li>toOneUpper</li>
  * <li>toOneLower</li>
+ * <li>connectorToGen</li>
+ * <li>endToGen</li>
+ * <li>connectorEndNestedPath</li>
+ * <li>delegationEnd</li>
+ * <li>delegationToGen</li>
+ * <li>assemblyToGen</li>
+ * <li>blockMustImport</li>
  * </ul>
  * 
  * @see IQueryGroup
@@ -68,5 +82,12 @@ public final class CodegenControlAll extends BaseGeneratedPatternGroup {
     querySpecifications.add(Block.instance());
     querySpecifications.add(ToOneUpper.instance());
     querySpecifications.add(ToOneLower.instance());
+    querySpecifications.add(ConnectorToGen.instance());
+    querySpecifications.add(EndToGen.instance());
+    querySpecifications.add(ConnectorEndNestedPath.instance());
+    querySpecifications.add(DelegationEnd.instance());
+    querySpecifications.add(DelegationToGen.instance());
+    querySpecifications.add(AssemblyToGen.instance());
+    querySpecifications.add(BlockMustImport.instance());
   }
 }
