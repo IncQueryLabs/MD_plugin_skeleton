@@ -49,7 +49,7 @@ public class PythonGenAction extends MDAction {
 				
 				GenPython gen = new GenPython(engine, 
 						selectedFolder.toString(), 
-						"gen_project", 
+						java.util.Collections.emptyList(), 
 						selectedPackages);
 				gen.doGen();
 			}
