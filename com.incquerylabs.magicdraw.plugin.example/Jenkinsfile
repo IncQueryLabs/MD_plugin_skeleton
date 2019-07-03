@@ -2,7 +2,7 @@
 pipeline {
 	
 	agent {
-		label 'magicdraw'
+		label 'magicdraw19'
 	}
 	
 	// Keep only the last 5 builds
@@ -11,7 +11,6 @@ pipeline {
 	}
 	
 	tools { 
-		maven 'Maven 3.3.9' 
 		jdk 'Oracle JDK 8' 
 	}
 
@@ -20,22 +19,14 @@ pipeline {
 			steps {
 				sh 'rm -rf build/dependency-cache'
 				sh './gradlew clean'
-				sh './gradlew build publish --refresh-dependencies'
+				sh './gradlew build publish'
 			}
 		}
-		stage('Packaging') {
-			steps{
-				sh './package.sh'
-			}
-		}
-
 	}
 
 	post {
 		always {
 			archiveArtifacts artifacts: 'com.incquerylabs.magicdraw.plugin.example/build/distributions/com.incquerylabs.magicdraw.plugin.example-*.zip', onlyIfSuccessful: true
-			archiveArtifacts artifacts: 'md_skeleton-*.zip', onlyIfSuccessful: true
-			archiveArtifacts artifacts: 'com.incquerylabs.magicdraw.plugin.example/out.map', onlyIfSuccessful: true
 		}
 	}
 }
