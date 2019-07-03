@@ -21,7 +21,7 @@ pipeline {
 				    cd com.incquerylabs.magicdraw.plugin.example
 				    rm -rf build/dependency-cache
 				    ./gradlew clean
-				    ./gradlew build publish
+				    ./gradlew build assemble
 				'''
 			}
 		}
