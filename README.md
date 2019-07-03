@@ -3,7 +3,9 @@ How to use:
 
 - Install product: Eclipse IDE for Eclipse Committers, version: Photon
 - Install VIATRA SDK 2.0.1 http://download.eclipse.org/viatra/updates/release/latest
-- Install UML 2.5.1 metamodel: http://albert.internal.incquerylabs.com:10080/magicdraw.metamodel/
+- Install UML 2.5.1 metamodel: 
+    * [Wiki page](https://github.com/IncQueryLabs/MD_plugin_skeleton/wiki/Install-UML-Metamodel-to-Eclipse) describing the workflow of this process 
+    * For users on internal IncQueryLabs network - http://albert.internal.incquerylabs.com:10080/magicdraw.metamodel/
 - Clone this repo
 - Import the projects in it
 - Right click project com.incquerylabs.magicdraw.plugin.example > Configure > Add Gradle Nature
