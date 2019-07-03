@@ -17,9 +17,12 @@ pipeline {
 	stages { 
 		stage('Build Plug-in') { 
 			steps {
-				sh 'rm -rf com.incquerylabs.magicdraw.plugin.example/build/dependency-cache'
-				sh 'com.incquerylabs.magicdraw.plugin.example/gradlew clean'
-				sh 'com.incquerylabs.magicdraw.plugin.example/gradlew build publish'
+				sh '''
+				    cd com.incquerylabs.magicdraw.plugin.example
+				    rm -rf build/dependency-cache
+				    ./gradlew clean
+				    ./gradlew build publish
+				'''
 			}
 		}
 	}
