@@ -3,8 +3,8 @@
 ## How to use:
 
 - Install product: Eclipse IDE for Eclipse Committers, version: Photon
-- Install VIATRA SDK 2.0.1 or newer http://download.eclipse.org/viatra/updates/release/latest
-- Install UML 2.5.1 metamodel or newer: 
+- Install VIATRA SDK 2.2.0  http://download.eclipse.org/viatra/updates/release/latest
+- Install UML 2.5.1 metamodel: 
     * Check section **Install UML Metamodel to Eclipse** describing the workflow of this process 
     * Users on the internal IncQueryLabs network can use http://albert.internal.incquerylabs.com:10080/magicdraw.metamodel/
 - Clone this repo
