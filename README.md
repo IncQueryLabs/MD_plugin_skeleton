@@ -1,8 +1,10 @@
+[![Build Status](https://build.incquerylabs.com/jenkins/buildStatus/icon?job=MagicDraw-OSS%2Fplugin-skeleton%2Fmaster)](https://build.incquerylabs.com/jenkins/job/MagicDraw-OSS/job/plugin-skeleton/job/master/)
+
 ## How to use:
 
 - Install product: Eclipse IDE for Eclipse Committers, version: Photon
-- Install VIATRA SDK 2.0.1 http://download.eclipse.org/viatra/updates/release/latest
-- Install UML 2.5.1 metamodel: 
+- Install VIATRA SDK 2.0.1 or newer http://download.eclipse.org/viatra/updates/release/latest
+- Install UML 2.5.1 metamodel or newer: 
     * Check section **Install UML Metamodel to Eclipse** describing the workflow of this process 
     * Users on the internal IncQueryLabs network can use http://albert.internal.incquerylabs.com:10080/magicdraw.metamodel/
 - Clone this repo
@@ -22,7 +24,7 @@
 
 ## Install UML Metamodel to Eclipse 
 
-Viatra engine requires the UML Metamodel to be able to define queries and execute transformations. Hence it is necessary to install UML Metamodel to Eclipse if someone would like to use/extend the _MD_plugin_skeleton_ project. On this page, we propose a generic workflow to install UML Metamodel as a _p2 repository_.
+To define and compile queries in the VQL language, VIATRA requires the UML Metamodel to be installed. Here is a generic workflow to install UML Metamodel as a _p2 repository_.
 
 ### 1 Import MagicDraw's example project to Eclipse and change the target platform
  1. Start Eclipse
@@ -37,7 +39,7 @@ Viatra engine requires the UML Metamodel to be able to define queries and execut
 	* Feature Name: `UML Metamodel`
 	* Feature Version: 1.0.0.*
  1. Click on "Next" to select the referenced plugins
- 1. Select "com.nomagic.magicdraw.uml2" and its dependencies (check section **Dependencies of UML2 plugin** at the [wiki page](https://github.com/IncQueryLabs/MD_plugin_skeleton/wiki/Install-UML-Metamodel-to-Eclipse))
+ 1. Select "com.nomagic.magicdraw.uml2" and its dependencies (check this [wiki page](https://github.com/IncQueryLabs/MD_plugin_skeleton/wiki/Dependencies-of-UML2-Plugin) for the current list)
  1. Right click on the project and select "Export" > "Deployable Feature" > "Finish"
 	* Destination: Directory - Select the destination where p2 repository will be hosted `$UML p2 repository$`
 	* Options: "Package as individual JAR archives" and "Generate p2 repository"
@@ -56,8 +58,5 @@ Viatra engine requires the UML Metamodel to be able to define queries and execut
 - MagicDraw does not start, saying `Unable to create the actorSystem`
   - Try to start it again
 - Installation of the UML Metamodel fails: `Cannot complete the install because one or more required items could not be found` 
-  - There are missing dependencies of "com.nomagic.magicdraw.uml2" in the feature: check section **Dependencies of UML2 plugin** at the [wiki page](https://github.com/IncQueryLabs/MD_plugin_skeleton/wiki/Install-UML-Metamodel-to-Eclipse).
-  
-## Continuous Integration
-[![Build Status](https://build.incquerylabs.com/jenkins/buildStatus/icon?job=MagicDraw-OSS%2Fplugin-skeleton%2Fmaster)](https://build.incquerylabs.com/jenkins/job/MagicDraw-OSS/job/plugin-skeleton/job/master/)
+  - There are missing dependencies of "com.nomagic.magicdraw.uml2" in the feature: check this [wiki page](https://github.com/IncQueryLabs/MD_plugin_skeleton/wiki/Dependencies-of-UML2-Plugin) for the current list.
   
