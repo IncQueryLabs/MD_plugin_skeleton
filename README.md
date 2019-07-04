@@ -57,3 +57,7 @@ Viatra engine requires the UML Metamodel to be able to define queries and execut
   - Try to start it again
 - Installation of the UML Metamodel fails: `Cannot complete the install because one or more required items could not be found` 
   - There are missing dependencies of "com.nomagic.magicdraw.uml2" in the feature: check section **Dependencies of UML2 plugin** at the [wiki page](https://github.com/IncQueryLabs/MD_plugin_skeleton/wiki/Install-UML-Metamodel-to-Eclipse).
+  
+## Continuous Integration
+[![Build Status](https://build.incquerylabs.com/jenkins/buildStatus/icon?job=MagicDraw-OSS%2Fplugin-skeleton%2Fmaster)](https://build.incquerylabs.com/jenkins/job/MagicDraw-OSS/job/plugin-skeleton/job/master/)
+  
