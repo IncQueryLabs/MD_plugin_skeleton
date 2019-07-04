@@ -56,4 +56,4 @@ Viatra engine requires the UML Metamodel to be able to define queries and execut
 - MagicDraw does not start, saying `Unable to create the actorSystem`
   - Try to start it again
 - Installation of the UML Metamodel fails: `Cannot complete the install because one or more required items could not be found` 
-  - There are missing dependencies of "com.nomagic.magicdraw.uml2" in the feautre: check section **Dependencies of UML2 plugin** at the [wiki page](https://github.com/IncQueryLabs/MD_plugin_skeleton/wiki/Install-UML-Metamodel-to-Eclipse).
+  - There are missing dependencies of "com.nomagic.magicdraw.uml2" in the feature: check section **Dependencies of UML2 plugin** at the [wiki page](https://github.com/IncQueryLabs/MD_plugin_skeleton/wiki/Install-UML-Metamodel-to-Eclipse).
