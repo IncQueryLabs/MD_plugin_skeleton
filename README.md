@@ -37,7 +37,7 @@ Viatra engine requires the UML Metamodel to be able to define queries and execut
 	* Feature Name: `UML Metamodel`
 	* Feature Version: 1.0.0.*
  1. Click on "Next" to select the referenced plugins
- 1. Select "com.nomagic.magicdraw.uml2" and its dependencies
+ 1. Select "com.nomagic.magicdraw.uml2" and its dependencies (check section **Dependencies of UML2 plugin** at the [wiki page](https://github.com/IncQueryLabs/MD_plugin_skeleton/wiki/Install-UML-Metamodel-to-Eclipse))
  1. Right click on the project and select "Export" > "Deployable Feature" > "Finish"
 	* Destination: Directory - Select the destination where p2 repository will be hosted `$UML p2 repository$`
 	* Options: "Package as individual JAR archives" and "Generate p2 repository"
