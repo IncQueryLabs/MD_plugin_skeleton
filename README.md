@@ -2,7 +2,7 @@
 
 ## What is this skeleton?
 
-This is an open source skeleton project for MagicDraw plugin development. It contains (i) the definition of a simple action that uses VIATRA queries and transformations, (ii) Gradle-based building infrastructure (iii) and Jenkins-based CI configuration.
+This is an open source skeleton project for MagicDraw plugin development. It contains (i) the definition of a simple action that uses VIATRA queries and transformations, (ii) Gradle-based building infrastructure and (iii) Jenkins-based CI configuration.
  
 ## How to use:
 
