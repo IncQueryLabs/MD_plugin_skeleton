@@ -1,0 +1,27 @@
+= MagicDraw Plugin Skeleton
+v1.0.0, March 7, 2019
+:orgname: IncQuery Labs Ltd.
+:phone: +36 70 633 3973
+:addressline1: 1113 Rákóczi út 36.
+:addressline2: Budapest, Hungary
+:webpage: https://incquerylabs.com
+:rootdir: .
+:resourcesdir: {rootdir}/../resources
+:pdf-fontsdir: {resourcesdir}/fonts
+:pdf-stylesdir: {resourcesdir}/themes
+:pdf-style: iqlabs-theme.yml
+:source-highlighter: coderay
+:imagesdir: {rootdir}/images
+:toclevels: 2
+:toc:
+:toc2:
+:icons: font
+:chapterdir: .
+:experimental:
+:sectlinks:
+:sectnums:
+
+:chapterdir: .
+
+<<<
+include::{chapterdir}/Chapter.adoc[leveloffset=+1]

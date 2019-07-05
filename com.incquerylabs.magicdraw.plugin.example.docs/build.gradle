@@ -1,0 +1,25 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.16'
+    }
+}
+
+plugins {
+    id 'org.asciidoctor.convert' version '1.5.7'
+}
+
+asciidoctor {
+    sourceDir = file('src/main/asciidoc')
+    sources {
+        include 'MagicDraw_Plugin_Skeleton.asciidoc'
+    }
+    backends = ['pdf']
+    options doctype: 'book'
+    attributes \
+      'resourcesdir' : file('src/main/resources'),
+      'rootdir' : file('src/main/asciidoc'),
+      'imagesdir': file('src/main/asciidoc/images')
+}
