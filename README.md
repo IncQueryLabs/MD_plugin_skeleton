@@ -1,5 +1,9 @@
 [![Build Status](https://build.incquerylabs.com/jenkins/buildStatus/icon?job=MagicDraw-OSS%2Fplugin-skeleton%2Fmaster)](https://build.incquerylabs.com/jenkins/job/MagicDraw-OSS/job/plugin-skeleton/job/master/)
 
+## What is this skeleton?
+
+This is an open source skeleton project for MagicDraw plugin development. It contains (i) the definition of a simple action that uses VIATRA queries and transformations, (ii) Gradle-based building infrastructure (iii) and Jenkins-based CI configuration.
+ 
 ## How to use:
 
 - Install product: Eclipse IDE for Eclipse Committers, version: Photon
