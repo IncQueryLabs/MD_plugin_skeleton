@@ -2,18 +2,32 @@
 
 ## What is this skeleton?
 
-This is an open source skeleton project for MagicDraw plugin development. It contains (i) the definition of a simple action that uses VIATRA queries and transformations, (ii) Gradle-based building infrastructure and (iii) Jenkins-based CI configuration.
+This is an open source skeleton project for MagicDraw plugin development. It contains (i) the definition of a two actions that uses VIATRA queries and transformations, (ii) Gradle-based building infrastructure and (iii) Jenkins-based CI configuration.
+
+### Actions
+* Run menu "Examples" > "Correct all port types", it should run a transformation to add types to Ports that have no type specified, but are connected to a typed port.
+* Run menu "Examples" > "Generate Python code", it should run a transformation to generate python code from the model. User has to select the top-level package from the transformation will start and the target folder to store the generated files. 
+
+### Gradle
+This skeleton project uses [gradle](https://gradle.org/)-based building infrastructure. Gradle jobs are defined in `com.incquerylabs.magicdraw.plugin.example/build.gradle` including the extraction of dependencies and building an installable plugin.
+
+### Jenkins
+This repository is connected to a [Jenkins](https://jenkins.io/) build job to provide automated build and deployment of the source code. The presented badge shows the status of the jenkins job running on the IncQuery Labs' infrastructure. The actual job is accessible from [here](https://build.incquerylabs.com/jenkins/job/MagicDraw-OSS/job/plugin-skeleton/).
+
+[![Build Status](https://build.incquerylabs.com/jenkins/buildStatus/icon?job=MagicDraw-OSS%2Fplugin-skeleton%2Fmaster)](https://build.incquerylabs.com/jenkins/job/MagicDraw-OSS/job/plugin-skeleton/job/master/)
+
  
 ## How to use:
 
-- Install product: Eclipse IDE for Eclipse Committers, version: Photon
+- Install product: Eclipse IDE for Eclipse Committers, version: latest (tested with up to 2019-06)
 - Install VIATRA SDK 2.2.0  http://download.eclipse.org/viatra/updates/release/latest
 - Install UML 2.5.1 metamodel: 
     * Check section **Install UML Metamodel to Eclipse** describing the workflow of this process 
     * Users on the internal IncQueryLabs network can use http://albert.internal.incquerylabs.com:10080/magicdraw.metamodel/
 - Clone this repo
 - Import the projects in it
-- Right click project com.incquerylabs.magicdraw.plugin.example > Configure > Add Gradle Nature
+- Right click project com.incquerylabs.magicdraw.plugin.example > "Configure" > "Add Gradle Nature"
+  - (If nature is automatically recognized and added, right click project > "Gradle" > "Refresh" instead)
   - This will synchronize it (loads tasks, and downloads dependencies from maven)
 - run 'extractDependencies' task (downloads and sets up MagicDraw)
   - Show View: Gradle Tasks
@@ -24,7 +38,7 @@ This is an open source skeleton project for MagicDraw plugin development. It con
   - This will synchronize it again (loads MD dependencies)
 - run 'runJava' task (this will start MagicDraw)
 - Create or open a project
-- Run menu Example > Example Action, it should display a list of classes
+- Run menu "Examples" > "Correct all port types", it should run a transformation to add types to Ports that have no type specified, but are connected to a typed port.
 
 ## Install UML Metamodel to Eclipse 
 
