@@ -5,6 +5,7 @@
         version="${human.version}"
         provider-name="IncQuery Labs Ltd."
         class-lookup="LocalFirst"
+		ownClassloader="true"
         class="com.incquerylabs.magicdraw.plugin.example.ExamplePlugin">
     
 	<requires>
