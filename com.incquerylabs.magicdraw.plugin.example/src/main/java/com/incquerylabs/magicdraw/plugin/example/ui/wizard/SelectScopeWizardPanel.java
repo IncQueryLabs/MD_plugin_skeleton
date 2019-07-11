@@ -74,7 +74,7 @@ public class SelectScopeWizardPanel extends ExtendedPanel implements SkippableWi
 		selectionPanel.setSelectionMode(SelectionMode.MULTIPLE_MODE);
 		ElementSingleSelectionPanel multipleSelectionPanel = selectionPanel.getSingleSelectionPanel();
 		multipleSelectionPanel.getSelectionConfiguration().setElementCreationEnabled(false);
-		Object[] initialSelection = new Object[] { Application.getInstance().getProject().getPrimaryModel() };
+		Object[] initialSelection = new Object[0];
 		TypeFilter packageFilter = new PackageFilter(ClassTypes.getSubtypes(Package.class));
 		selectionPanel.initialize(getRoots(), packageFilter, packageFilter, initialSelection);
 		selectionPanel.getSelectionModeButton().setVisible(false);
