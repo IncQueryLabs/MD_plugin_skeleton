@@ -229,6 +229,7 @@ def platformConfigSetting =
 tasks.withType(JavaExec) {
 	doFirst {
         classpath fileTree(dir: 'build/install', include: ['lib/**/*.jar'])
+        classpath fileTree(dir: 'build/install', include: ['lib/**/*.jar'], exclude: ['lib/**/*akka*.jar'])
     }
 
 	workingDir 'build/install'
