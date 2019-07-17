@@ -47,7 +47,9 @@ pipeline {
 				}
 			}
 			steps {
-				sh "./com.incquerylabs.magicdraw.plugin.example/gradlew clean runCodeGen -p com.incquerylabs.magicdraw.plugin.example"
+				wrap([$class: 'Xvnc']) {
+					sh "./com.incquerylabs.magicdraw.plugin.example/gradlew clean runCodeGen -p com.incquerylabs.magicdraw.plugin.example"
+				}
 			}
 		}
 	}
