@@ -4,6 +4,12 @@ pipeline {
 	agent {
 		label 'magicdraw19'
 	}
+
+	parameters {
+		booleanParam 	defaultValue: false,
+						description: 'Flag to opt-in code generation.',
+						name: 'RUN_CODE_GEN'
+	}
 	
 	// Keep only the last 5 builds
 	options {
@@ -31,6 +37,17 @@ pipeline {
 				wrap([$class: 'Xvnc']) {
 					sh "./com.incquerylabs.magicdraw.plugin.example/gradlew clean runTest -p com.incquerylabs.magicdraw.plugin.example"
 				}
+			}
+		}
+
+		stage('Run Python Code Generation'){
+			when {
+				expression {
+					params.RUN_CODE_GEN
+				}
+			}
+			steps {
+				sh "./com.incquerylabs.magicdraw.plugin.example/gradlew clean runCodeGen -p com.incquerylabs.magicdraw.plugin.example"
 			}
 		}
 	}
