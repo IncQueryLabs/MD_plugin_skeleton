@@ -177,6 +177,15 @@ task debugTest(type: JavaExec) {
 }
 debugTest.dependsOn installTest
 
+def codeGenArgs = [
+	'-Dcom.nomagic.magicdraw.launcher=com.nomagic.magicdraw.commandline.CommandLineActionLauncher',
+ 	'-Dcom.nomagic.magicdraw.commandline.action=com.incquerylabs.magicdraw.plugin.example.commands.CodeGenRunner'
+]
+task runCodeGen(type: JavaExec) {
+	jvmArgs += codeGenArgs
+}
+runCodeGen.dependsOn installDist
+
 class PreDist extends DefaultTask {
     String humanVersion
     String internalVersion
