@@ -8,7 +8,7 @@ pipeline {
 	parameters {
 		booleanParam 	defaultValue: false,
 						description: 'Flag to opt-in code generation.',
-						name: 'RUN_CODE_GEN'
+						name: 'CODE_GEN'
 	}
 	
 	// Keep only the last 5 builds
@@ -35,7 +35,7 @@ pipeline {
 		stage('Run Plugin Tests') {
 			steps {
 				wrap([$class: 'Xvnc']) {
-					sh "./com.incquerylabs.magicdraw.plugin.example/gradlew clean runTest -p com.incquerylabs.magicdraw.plugin.example"
+					sh "./com.incquerylabs.magicdraw.plugin.example/gradlew runTest -p com.incquerylabs.magicdraw.plugin.example"
 				}
 			}
 		}
@@ -43,14 +43,14 @@ pipeline {
 		stage('Run Python Code Generation'){
 			when {
 				expression {
-					params.RUN_CODE_GEN
+					params.CODE_GEN
 				}
 			}
 			steps {
 				wrap([$class: 'Xvnc']) {
-					sh "./com.incquerylabs.magicdraw.plugin.example/gradlew clean runCodeGen -p com.incquerylabs.magicdraw.plugin.example"
+					sh "./com.incquerylabs.magicdraw.plugin.example/gradlew runCodeGen -p com.incquerylabs.magicdraw.plugin.example"
 				}
-				archiveArtifacts allowEmptyArchive: true, artifacts: 'com.incquerylabs.magicdraw.plugin.example/build/install/target/codegen', onlyIfSuccessful: true
+				archiveArtifacts allowEmptyArchive: true, artifacts: 'com.incquerylabs.magicdraw.plugin.example/build/install/target/codegen/', onlyIfSuccessful: true
 			}
 		}
 	}
