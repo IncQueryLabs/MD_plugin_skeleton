@@ -1,0 +1,19 @@
+<plugin
+		id="com.incquerylabs.magicdraw.plugin.example.test"
+		name="Plugin Example Test Plugin"
+		version="19.0"
+		ownClassloader="false"
+		class-lookup="GlobalFirst"
+		provider-name="No Magic"
+		class="com.incquerylabs.magicdraw.plugin.example.test.runner.TestPlugin">
+    
+    <requires>
+		<required-plugin id="com.incquerylabs.magicdraw.plugin.example" name="IncQuery Labs MagicDraw Plugin Example"/>
+	</requires>
+
+    <runtime>
+        <!-- START AUTO-GENERATED -->
+        <!-- END AUTO-GENERATED -->
+    </runtime>
+
+</plugin>

@@ -12,6 +12,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFPQuery;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificationWithGenericMatcher;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
@@ -69,7 +70,7 @@ public final class ConnectedPort extends BaseGeneratedEMFQuerySpecificationWithG
    * 
    */
   private static class LazyHolder {
-    private final static ConnectedPort INSTANCE = new ConnectedPort();
+    private static final ConnectedPort INSTANCE = new ConnectedPort();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -78,7 +79,7 @@ public final class ConnectedPort extends BaseGeneratedEMFQuerySpecificationWithG
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
      * 
      */
-    private final static Object STATIC_INITIALIZER = ensureInitialized();
+    private static final Object STATIC_INITIALIZER = ensureInitialized();
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternal();
@@ -87,13 +88,13 @@ public final class ConnectedPort extends BaseGeneratedEMFQuerySpecificationWithG
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private final static ConnectedPort.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final ConnectedPort.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pOne = new PParameter("one", "com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")), PParameterDirection.INOUT);
+    private final PParameter parameter_one = new PParameter("one", "com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_pOther = new PParameter("other", "com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")), PParameterDirection.INOUT);
+    private final PParameter parameter_other = new PParameter("other", "com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_pOne, parameter_pOther);
+    private final List<PParameter> parameters = Arrays.asList(parameter_one, parameter_other);
     
     private GeneratedPQuery() {
       super(PVisibility.PRIVATE);
@@ -116,6 +117,7 @@ public final class ConnectedPort extends BaseGeneratedEMFQuerySpecificationWithG
     
     @Override
     public Set<PBody> doGetContainedBodies() {
+      setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
@@ -127,8 +129,8 @@ public final class ConnectedPort extends BaseGeneratedEMFQuerySpecificationWithG
           new TypeConstraint(body, Tuples.flatTupleOf(var_one), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")));
           new TypeConstraint(body, Tuples.flatTupleOf(var_other), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_one, parameter_pOne),
-             new ExportedParameter(body, var_other, parameter_pOther)
+             new ExportedParameter(body, var_one, parameter_one),
+             new ExportedParameter(body, var_other, parameter_other)
           ));
           // 	Port.end(one, oneEnd)
           new TypeConstraint(body, Tuples.flatTupleOf(var_one), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")));

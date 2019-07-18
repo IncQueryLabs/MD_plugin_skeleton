@@ -28,6 +28,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
@@ -246,7 +247,7 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
-   * e.g. in conjunction with {@link ViatraQueryEngine#on(Notifier)}.
+   * e.g. in conjunction with {@link ViatraQueryEngine#on(QueryScope)}.
    * 
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
@@ -291,11 +292,11 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
       return new Matcher();
     }
     
-    private final static int POSITION_PORT = 0;
+    private static final int POSITION_PORT = 0;
     
-    private final static int POSITION_TYPE = 1;
+    private static final int POSITION_TYPE = 1;
     
-    private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(DeduciblePortType.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(DeduciblePortType.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -628,7 +629,7 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
    * 
    */
   private static class LazyHolder {
-    private final static DeduciblePortType INSTANCE = new DeduciblePortType();
+    private static final DeduciblePortType INSTANCE = new DeduciblePortType();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -637,7 +638,7 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
      * 
      */
-    private final static Object STATIC_INITIALIZER = ensureInitialized();
+    private static final Object STATIC_INITIALIZER = ensureInitialized();
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternal();
@@ -646,13 +647,13 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private final static DeduciblePortType.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final DeduciblePortType.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pPort = new PParameter("port", "com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")), PParameterDirection.INOUT);
+    private final PParameter parameter_port = new PParameter("port", "com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_pType = new PParameter("type", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Type", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Type")), PParameterDirection.INOUT);
+    private final PParameter parameter_type = new PParameter("type", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Type", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Type")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_pPort, parameter_pType);
+    private final List<PParameter> parameters = Arrays.asList(parameter_port, parameter_type);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -675,6 +676,7 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
     
     @Override
     public Set<PBody> doGetContainedBodies() {
+      setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
@@ -684,8 +686,8 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
           new TypeConstraint(body, Tuples.flatTupleOf(var_port), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Port")));
           new TypeConstraint(body, Tuples.flatTupleOf(var_type), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.nomagic.com/magicdraw/UML/2.5.1", "Type")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_port, parameter_pPort),
-             new ExportedParameter(body, var_type, parameter_pType)
+             new ExportedParameter(body, var_port, parameter_port),
+             new ExportedParameter(body, var_type, parameter_type)
           ));
           // 	neg find PortWithSpecifiedType(port)
           new NegativePatternCall(body, Tuples.flatTupleOf(var_port), PortWithSpecifiedType.instance().getInternalQueryRepresentation());
