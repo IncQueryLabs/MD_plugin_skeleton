@@ -1,0 +1,198 @@
+/**
+ * Queries blocks to generate transitively contained by certain packages. Package will be the scope of the code generation.
+ * WARNING: Do not change the name the parameters of the pattern. It is required by the code generation. (Body of the pattern can be modified)
+ */
+pattern blockToGen(block : Class, pack: Package) {
+	find Block(block, _);
+	Package.packagedElement+(pack, block);
+}
+
+/**
+ * Queries ports to generate owned by a block.
+ * WARNING: Do not change the name the parameters of the pattern. It is required by the code generation. (Body of the pattern can be modified)
+ */
+pattern portToGen(port : Port, block: Class) {
+	// find toOneUpper(port);
+	find blockToGen(block, _);
+	find elementInNamespace(port, block);
+}
+
+/**
+ * Queries properties to generate owned by a block where the multiplicity is "1..1".
+ * WARNING: Do not change the name the parameters of the pattern. It is required by the code generation. (Body of the pattern can be modified)
+ */
+pattern mandatoryPartToGen(part : Property, block: Class) {
+	Property.aggregation(part, ::composite);
+	find toOneUpper(part);
+	find toOneLower(part);
+	find blockToGen(block, _);
+	find elementInNamespace(part, block);
+}
+
+/**
+ * Queries block and importedBlock pairs where the block needs to import another block to be compliant.
+ * WARNING: Do not change the name the parameters of the pattern. It is required by the code generation. (Body of the pattern can be modified)
+ */
+pattern blockMustImport(block: Class, importedBlock: Class) {
+	find mandatoryPartToGen(part, block);
+	TypedElement.type(part, importedBlock);
+	importedBlock != block;
+}
+
+/**
+ * Queries all the elements the code generator will use. It is required to produce correct variable names.
+ * WARNING: Do not change the name the parameters of the pattern. It is required by the code generation. (Body of the pattern can be modified)
+ */
+pattern namedElementToGen(element : NamedElement) {
+	find blockToGen(element, _);
+} or {
+	find portToGen(element, _);
+} or {
+	find mandatoryPartToGen(element, _);
+} // or {...} // extend as needed
+
+/**
+ * WARNING: Do not change the name the parameters of the pattern. It is required by the code generation. (Body of the pattern can be modified)
+ */
+pattern connectorEndNestedPath(end: ConnectorEnd, propertyPath: Slot) {
+	find NestedConnectorEnd(end, nestedConnectorEnd);
+	InstanceSpecification.slot(nestedConnectorEnd, propertyPath);
+	Slot.definingFeature.name(propertyPath, "propertyPath");
+}
+
+/**
+ * WARNING: Do not change the name the parameters of the pattern. It is required by the code generation. (Body of the pattern can be modified)
+ */
+pattern delegationToGen(externalPort: Port, connector: Connector, otherEnd: ConnectorEnd, block : Class) {
+	find delegationEnd(externalPort, connector, externalEnd, block);
+	find endToGen(connector, otherEnd, _otherPort);
+	externalEnd != otherEnd;
+}
+
+/**
+ * WARNING: Do not change the name the parameters of the pattern. It is required by the code generation. (Body of the pattern can be modified)
+ */
+pattern assemblyToGen(connector: Connector, block: Class) {
+	find connectorToGen(connector, block);
+	neg find delegationEnd(_, connector, _, block);
+}
+
+/////////////////////////////////////////////
+/// Helper Functions for Code Generation
+/////////////////////////////////////////////
+
+/**
+ * Queries elements owned by packages or classes.
+ */
+private pattern elementInNamespace(element : NamedElement, namespace: Namespace) {
+	Package.packagedElement(namespace, element);
+} or {
+	Class.ownedAttribute(namespace, element);
+} // or {...} // extend as needed
+
+/**
+ * MultiplicityElement elements where the upper value is set to 1.
+ */
+private pattern toOneUpper(multiplicityElement: MultiplicityElement) {
+	MultiplicityElement.upperValue(multiplicityElement, upperValue);
+	LiteralUnlimitedNatural.value(upperValue, 1);
+}
+/**
+ * MultiplicityElement elements where the lower value is set to 1.
+ */
+private pattern toOneLower(multiplicityElement: MultiplicityElement) {
+	MultiplicityElement.lowerValue(multiplicityElement, lowerValue);
+	LiteralInteger.value(lowerValue, 1);
+}
+
+/**
+ * Queries "connector, block" pairs where a "connector" is owned by "block" and it has exactly two ends.
+ */
+private pattern connectorToGen(connector: Connector, block: Class) {
+	find blockToGen(block, _);
+	Class.ownedConnector(block, connector);
+	2 == count find endToGen(connector, _, _);
+}
+
+/**
+ * Queries "port, connector, end" triples where a "connector" is attached to a "port" using the parameter "end"
+ */
+private pattern endToGen(connector: Connector, end: ConnectorEnd, port: Port) {
+	Connector.end(connector, end);
+	ConnectorEnd.role(end, port);
+	find portToGen(port, _);
+}
+
+/**
+ * Queries "port, connector, end, block" tuples where 
+ */
+pattern delegationEnd(port: Port, connector: Connector, end: ConnectorEnd, block : Class) {
+	find connectorToGen(connector, block);
+	find endToGen(connector, end, port);
+	neg find connectorEndNestedPath(end, _);
+}
+
+/////////////////////////////////////////////
+/// SysML Helper Patterns
+/////////////////////////////////////////////
+
+/*
+ * Pattern that queries elements with the stereotype 'NestedConnectorEnd' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'ConnectorEnd' object with the stereotype NestedConnectorEnd.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern NestedConnectorEnd(element : ConnectorEnd, domainStereotypeInstance : InstanceSpecification){
+	find stereotypedElement(element, domainStereotypeInstance, "SysML", "NestedConnectorEnd");
+}
+/*
+ * Pattern that queries elements with the stereotype 'Block' or other stereotypes generalizing it.
+ *
+ * Parameters:
+ * element : 'Class' object with the stereotype Block.
+ * domainStereotypeInstance : Stereotype Application instance
+ */
+pattern Block(element : Class, domainStereotypeInstance : InstanceSpecification){
+	find stereotypedElement(element, domainStereotypeInstance, "SysML", "Block");
+}
+/*
+ * Collects the InstanceSpecification of the given Element having the stereotype with the given name
+ */
+pattern stereotypedElement(element : Element, domainStereotypeInstance : InstanceSpecification, profileName : String, stereotypeName : String) {
+	Element.appliedStereotypeInstance(element, domainStereotypeInstance);
+	InstanceSpecification.classifier(domainStereotypeInstance, domainStereotype);
+	find compatibleClassifier(domainStereotype, superStereotype);
+	Stereotype.owningPackage(superStereotype, owner);
+	find owningPackageOrSelf(owner, profile);
+	Profile.name(profile, profileName);
+	Stereotype.name(superStereotype, stereotypeName);
+}
+/* 
+ * Matches if the parameter`classifier` can be substituted with the parameter
+ * `classifier`: they are either the same, or there is an `indirectGeneralization`
+ * relationship between them. 
+ */
+pattern compatibleClassifier(classifier : Classifier, general: Classifier) {
+	find generalizedClassifier*(classifier, general);	
+}
+/*
+ * Matches the parameter `element` with its direct or indirect owning packages or itself
+ */
+pattern owningPackageOrSelf(element : Package, owner : Package) {
+	find owningPackage*(element, owner);
+}
+/*
+ * Matches the parameter `element` and its direct owning Package
+ */
+pattern owningPackage(element : Package, owner : Package){
+	Package.owningPackage(element, owner);
+}
+/*
+ * Matches if the parameter `general` is connected by a single
+ * generalization relation to parameter `classifier`
+ */
+pattern generalizedClassifier(classifier : Classifier, general: Classifier) {
+	Generalization.general(gen, general);
+	Generalization.specific(gen, classifier);
+}
