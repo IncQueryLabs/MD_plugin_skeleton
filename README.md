@@ -11,8 +11,12 @@ This is an open source skeleton project for MagicDraw plugin development. It con
 ### Gradle
 This skeleton project uses [gradle](https://gradle.org/)-based building infrastructure. Gradle jobs are defined in `com.incquerylabs.magicdraw.plugin.example/build.gradle` including the extraction of dependencies and building an installable plugin.
 
+For more details check the related [wiki page](../../wiki/Build-and-CI)
+
 ### Jenkins
 This repository is connected to a [Jenkins](https://jenkins.io/) build job to provide automated build and deployment of the source code. The presented badge shows the status of the jenkins job running on the IncQuery Labs' infrastructure. The actual job is accessible from [here](https://build.incquerylabs.com/jenkins/job/MagicDraw-OSS/job/plugin-skeleton/).
+
+For more details check the related [wiki page](../../wiki/Build-and-CI)
 
 [![Build Status](https://build.incquerylabs.com/jenkins/buildStatus/icon?job=MagicDraw-OSS%2Fplugin-skeleton%2Fmaster)](https://build.incquerylabs.com/jenkins/job/MagicDraw-OSS/job/plugin-skeleton/job/master/)
 
