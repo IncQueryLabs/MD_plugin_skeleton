@@ -6,9 +6,18 @@ pipeline {
 	}
 
 	parameters {
-		booleanParam 	defaultValue: false,
-						description: 'Flag to opt-in code generation.',
-						name: 'CODE_GEN'
+		booleanParam( 
+			defaultValue: false,
+			description: 'Flag to opt-in code generation.',
+			name: 'CODE_GEN' 
+		)
+
+		string(	
+			defaultValue: '../../resources/codegen/Python_Codegen_Example.mdzip',
+			description: 'Relative or absolute path of the MD Project, wich will be the input of the code generation.',
+			name: 'INPUT_PROJECT'
+		)
+
 	}
 	
 	// Keep only the last 5 builds
@@ -48,7 +57,7 @@ pipeline {
 			}
 			steps {
 				wrap([$class: 'Xvnc']) {
-					sh "./com.incquerylabs.magicdraw.plugin.example/gradlew runCodeGen -p com.incquerylabs.magicdraw.plugin.example"
+					sh "./com.incquerylabs.magicdraw.plugin.example/gradlew runCodeGen ${params.INPUT_PROJECT} -p com.incquerylabs.magicdraw.plugin.example"
 				}
 				archiveArtifacts allowEmptyArchive: true, artifacts: 'com.incquerylabs.magicdraw.plugin.example/build/install/target/codegen/', onlyIfSuccessful: true
 			}
