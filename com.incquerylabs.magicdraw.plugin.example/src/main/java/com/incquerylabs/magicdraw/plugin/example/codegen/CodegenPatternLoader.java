@@ -18,15 +18,22 @@ import com.nomagic.magicdraw.uml.Finder;
 import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdbasicbehaviors.OpaqueBehavior;
 
 public class CodegenPatternLoader {
-
+ 
+	/**
+	 * Patterns need to be in the model.
+	 */
 	private static final String CONNECTOR_END_NESTED_PATH = "connectorEndNestedPath";
 	private static final String DELEGATION_TO_GEN = "delegationToGen";
 	private static final String ASSEMBLY_TO_GEN = "assemblyToGen";
 	private static final String BLOCK_MUST_IMPORT = "blockMustImport";
 	private static final String MANDATORY_PART_TO_GEN = "mandatoryPartToGen";
-	private static final String MANGLED_NAME_COLLISION = "mangledNameCollision";
 	private static final String BLOCK_TO_GEN = "blockToGen";
 	private static final String PORT_TO_GEN = "portToGen";
+
+	/**
+	 * Patterns stored in {@link GenPythonHelper}.
+	 */
+	private static final String MANGLED_NAME_COLLISION = "mangledNameCollision";
 	
 	public static final String QUERY_DEFINITION_NAME_FOR_CODE_GEN = "QueryDefinitionForCodeGen";
 	private PatternParsingResults parsingResults;
@@ -54,6 +61,7 @@ public class CodegenPatternLoader {
 	}
 
 	private void parseQueryDefinitions(OpaqueBehavior queryDefinition) {
+		
 		String queryDefinitionSerialized = GenPythonHelper.prepare(queryDefinition).toString();
 
 		PatternParserBuilder parserBuilder = new PatternParserBuilder();

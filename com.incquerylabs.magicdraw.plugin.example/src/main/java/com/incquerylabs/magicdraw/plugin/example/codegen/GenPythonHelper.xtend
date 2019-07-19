@@ -82,6 +82,23 @@ class GenPythonHelper {
 	import "http://www.nomagic.com/magicdraw/UML/2.5.1"
 	import java com.incquerylabs.magicdraw.plugin.example.codegen.CodegenUtil;
 	
+	pattern mangledNameCollision(namespace: Namespace, element : NamedElement, mangledName: java String) {
+		find mangledNameInNamespace(namespace, element, mangledName);
+		sameMangledNameElements == count find mangledNameInNamespace(namespace, _, mangledName);
+		check(sameMangledNameElements > 1);
+	}
+	
+	pattern mangledNameInNamespace(namespace: Namespace, element : NamedElement, mangledName: java String) {
+		find elementInNamespace(element, namespace);
+		find namedElementToGen(element);
+		find mangledName(element, mangledName);
+	}
+	
+	pattern mangledName(element : NamedElement, mangledName: java String) {
+		NamedElement.name(element, name);
+		mangledName == eval(CodegenUtil.mangleName(name));
+	}
+	
 	«queryDefinition.body.get(0)»
 	'''
 	
