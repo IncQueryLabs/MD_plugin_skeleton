@@ -59,7 +59,7 @@ pipeline {
 				wrap([$class: 'Xvnc']) {
 					sh "./com.incquerylabs.magicdraw.plugin.example/gradlew -PcodeGenInput='${params.INPUT_PROJECT}' runCodeGen -p com.incquerylabs.magicdraw.plugin.example"
 				}
-				archiveArtifacts allowEmptyArchive: true, artifacts: 'com.incquerylabs.magicdraw.plugin.example/build/install/target/codegen/', onlyIfSuccessful: true
+				archiveArtifacts allowEmptyArchive: true, artifacts: 'com.incquerylabs.magicdraw.plugin.example/build/install/target/*.zip', onlyIfSuccessful: true
 			}
 		}
 	}

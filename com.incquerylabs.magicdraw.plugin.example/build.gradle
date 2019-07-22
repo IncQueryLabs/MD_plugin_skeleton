@@ -179,6 +179,8 @@ debugTest.dependsOn installTest
 
 String defaultCodeGenInpot = '../../resources/Python_Codegen_Example.mdzip'
 String codeGenInput = project.hasProperty('codeGenInput') ? project.getProperty('codeGenInput') : defaultCodeGenInpot
+def codeGenFilePath = codeGenInput.split(File.separator)
+def codeGenFileName = codeGenFilePath.last().split("\\.").first()
 
 def codeGenArgs = [
 	'-Dcom.nomagic.magicdraw.launcher=com.nomagic.magicdraw.commandline.CommandLineActionLauncher',
@@ -188,6 +190,12 @@ def codeGenArgs = [
 task runCodeGen(type: JavaExec) {
 	args "${codeGenInput}"
 	jvmArgs += codeGenArgs
+	
+	doLast {
+        ant.zip(destfile: "build/install/target/${codeGenFileName}_generated.zip") {
+            fileset(dir: 'build/install/target/codegen') {}
+        }
+    }
 }
 runCodeGen.dependsOn installDist
 
