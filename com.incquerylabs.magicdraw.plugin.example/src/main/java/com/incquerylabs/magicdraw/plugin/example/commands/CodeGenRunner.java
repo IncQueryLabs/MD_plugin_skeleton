@@ -4,6 +4,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.util.Arrays;
 
 import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine;
@@ -13,18 +15,21 @@ import com.incquerylabs.v4md.ViatraQueryAdapter;
 import com.nomagic.magicdraw.commandline.CommandLineAction;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.magicdraw.tests.MagicDrawTestCase;
-import com.nomagic.magicdraw.uml.Finder;
+import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package;
+import com.nomagic.uml2.ext.magicdraw.mdprofiles.Profile;
+import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 public class CodeGenRunner implements CommandLineAction {
 
-	private final static String MODEL_SCOPE = "Model";
 	private final static String OUTPUT_DIR = "./target/codegen";
 	
-	public Project loadProject(String testFile) {
-    	File file = new File("../../resources/codegen", testFile);
-    	assertTrue(file.getAbsolutePath(), file.exists());
-    	String path = file.getAbsolutePath();
+	public Project loadProject(String testFile) throws IOException {
+		//String filePath = FileSystems.getDefault().getPath(testFile).normalize().toAbsolutePath().toString();
+    	File file = new File(testFile);
+    	String path = file.getCanonicalPath();
+    	
+    	assertTrue(path, file.exists());
     	Project project = MagicDrawTestCase.loadProject(path);
     	assertNotNull(project);
     	return project;
@@ -32,19 +37,32 @@ public class CodeGenRunner implements CommandLineAction {
 
 
 	@Override
-	public byte execute(String[] arg0) {
+	public byte execute(String[] args) {
+		if(args.length >= 1 && args[0].contains("mdzip")) {
+			String projectPath = args[0];
+
+			Project project;
+			try {
+				project = loadProject(projectPath);
+				ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project);
+				AdvancedViatraQueryEngine engine = adapter.getEngine();
+				
+				Profile mdSkeletonProfile = StereotypesHelper.getProfile(project, "MD Skeleton Profile");
+				Stereotype codeGenScopeStereotype = StereotypesHelper.getStereotype(project, "CodeGenerationScope", mdSkeletonProfile);
+				
+				StereotypesHelper.getExtendedElements(codeGenScopeStereotype).forEach(scopePackage -> {
+					GenPython gen = new GenPython(engine, 
+							OUTPUT_DIR, 
+							java.util.Collections.emptyList(), 
+							Arrays.asList((Package)scopePackage));
+					gen.doGen();
+				});
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
-		Project project = loadProject("Python_Codegen_Example.mdzip");
-		ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project);
-		AdvancedViatraQueryEngine engine = adapter.getEngine();
-		
-		Package scopePackage = Finder.byQualifiedName().find(project, MODEL_SCOPE, Package.class);
-		
-		GenPython gen = new GenPython(engine, 
-				OUTPUT_DIR, 
-				java.util.Collections.emptyList(), 
-				Arrays.asList(scopePackage));
-		gen.doGen();
 		
 		return 0;
 	}
