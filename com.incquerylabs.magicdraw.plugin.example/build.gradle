@@ -7,7 +7,7 @@ plugins {
   id "org.xtext.xtend" version "1.0.21"
 }
 
-xtext.version = "2.13.0"
+xtext.version = xtextVersion
 
 String buildNumber = project.hasProperty('buildNumber') ? project.getProperty('buildNumber') : System.currentTimeSeconds()
 String timestamp = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm").format(LocalDateTime.now())
@@ -70,13 +70,45 @@ configurations {
     preCompile
 }
 
-dependencies {      
+dependencies {    
+
+	def exclusions = {
+        exclude group: 'com.google.guava', module: 'guava'
+        exclude module: 'viatra-query-runtime'
+        exclude module: 'org.eclipse.emf.ecore'
+        exclude module: 'org.eclipse.emf.ecore.common'
+        exclude module: 'org.eclipse.emf.ecore.xmi'
+        exclude module: 'org.eclipse.emf.common'
+        exclude module: 'org.eclipse.equinox.common'
+        exclude module: 'asm'
+        exclude module: 'log4j'
+        exclude module: 'org.eclipse.osgi'
+        exclude module: 'org.eclipse.xtext.xbase.lib' //provided by V4MD
+        exclude module: 'org.eclipse.xtend.lib.macro' //provided by V4MD
+        exclude module: 'org.eclipse.xtext' //version number replacement
+        exclude module: 'org.eclipse.xtext.xbase' //version number replacement
+        exclude module: 'org.eclipse.xtext.xtext.generator' //version number replacement
+        
+    }
+
+
+  
     preCompile group: 'com.nomagic', name: 'magicdraw', version: '190', classifier: 'MagicDraw_190_no_install', ext: 'zip'
     preCompile group: 'com.nomagic', name: 'sysml', version: '190', classifier: 'SysML_Plugin_190_bundle', ext: 'zip'
     preCompile group: 'com.incquerylabs.v4md', name: 'com.incquerylabs.v4md', version: v4mdVersion, classifier: 'plugin', ext: 'zip'
     
-    implementation group: 'org.eclipse.viatra', name: 'viatra-query-runtime', version: viatraVersion
-	implementation group: 'org.eclipse.viatra', name: 'viatra-transformation-runtime', version: viatraVersion     
+    compile group: 'org.eclipse.viatra', name: 'viatra-query-language', version: viatraVersion, exclusions
+    compile group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext', version: xtextVersion, exclusions
+    compile group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.xbase', version: xtextVersion, exclusions
+    compile group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.xtext.generator', version: xtextVersion, exclusions
+    compile group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.common.types', version: xtextVersion, exclusions
+    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.codegen', version: '2.10.0-v20140901-1055', exclusions
+    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.codegen.ecore', version: '2.10.1-v20140901-1055', exclusions
+    compile group: 'org.ow2.asm', name: 'asm', version: '6.2.1'
+    
+    
+ 	implementation group: 'org.eclipse.viatra', name: 'viatra-query-runtime', version: viatraVersion, exclusions
+    implementation group: 'org.eclipse.viatra', name: 'viatra-transformation-runtime', version: viatraVersion, exclusions    
     
     // This ensures classpath load order to match the MagicDraw provided order and then includes extras needed for non-OpenAPI stuff.
     compile files(classpathLibraries.collect { 'build/dependency-cache/extracted/' + it })

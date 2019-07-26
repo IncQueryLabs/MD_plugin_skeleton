@@ -10,7 +10,6 @@
  *******************************************************************************/
 package com.incquerylabs.magicdraw.plugin.example.codegen
 
-import com.incquerylabs.magicdraw.plugin.example.queries.CodegenControl
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.ElementValue
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement
@@ -23,12 +22,12 @@ import com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.C
 import com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port
 import java.io.File
 import java.io.FileWriter
+import java.util.ArrayList
 import java.util.Collection
 import java.util.List
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 
 import static com.incquerylabs.magicdraw.plugin.example.codegen.CodegenUtil.mangleName
-import java.util.ArrayList
 
 /**
  * @author Gabor Bergmann
@@ -46,16 +45,14 @@ class GenPython {
 		this.pythonRootPackage = pythonRootPackage
 		this.modelPackagesToGen = modelPackagesToGen
 	}
-	
-	
-	val extension CodegenControl codegenControl = CodegenControl.instance
-	
-	
-	
+		
+	val extension CodegenPatternLoader codegenControl = new CodegenPatternLoader()
+	val extension GenPythonHelper genPythonHelper = new GenPythonHelper()
 
 	def doGen() {
+		init();
 		modelPackagesToGen.forEach[ pack |
-			queryEngine.blockToGen.streamAllValuesOfblock(pack).forEach[ block |
+			queryEngine.blockToGen.getAllValuesOfblock(pack).forEach[ block |
 				if (block.checkName)
 					block.doGenBlockFile
 					System.out.println(block.genBlockCode)
@@ -183,7 +180,7 @@ class GenPython {
 	                    self.«CodegenUtil.V4MD_FIELD_PREFIX»«port.genName» = value
 	                    if (value):
 	                        «FOR delegation : queryEngine.delegationToGen.getAllMatches(port, null, null, block)»
-	                        	self«delegation.otherEnd.genPathToPort» = value
+	                        	self«(delegation.get("otherEnd") as ConnectorEnd).genPathToPort» = value
 	                        «ENDFOR»
 	                        pass
 	                        
@@ -240,5 +237,4 @@ class GenPython {
 		checkConnectableIsPort(portRole)
 		return '''«end.genPathToPortOwner».«portRole.genName»'''
 	}
-	
 }

@@ -28,7 +28,6 @@ public class SelectPackageAndOutputDirectoryWizard extends WizardDlg {
 	public SelectPackageAndOutputDirectoryWizard(FinalizeWizardAction action) {
 			super(MDDialogParentProvider.getProvider().getDialogParent(), "Select Package and Output Directory", true);
 			this.action = action;
-			System.out.println("SelectPackageAndOutputDirectoryWizard ctor" + action);
 			init(); // Panels have to be created
 	}
 
@@ -36,7 +35,6 @@ public class SelectPackageAndOutputDirectoryWizard extends WizardDlg {
 	protected WizardPanel[] createWizardPanels() {
 		Wizard panel = this.getWizardPanel();
 		
-		System.out.println("SelectPackageAndOutputDirectoryWizard createWizardPanels" + action);
 		Controller controller = new Controller(this, panel, action);
 		panel.setWizardController(controller);
 
