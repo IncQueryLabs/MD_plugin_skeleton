@@ -81,4 +81,5 @@ To define and compile queries in the VQL language, VIATRA requires the UML Metam
   - Try to start it again
 - Installation of the UML Metamodel fails: `Cannot complete the install because one or more required items could not be found` 
   - There are missing dependencies of "com.nomagic.magicdraw.uml2" in the feature: check this [wiki page](https://github.com/IncQueryLabs/MD_plugin_skeleton/wiki/Dependencies-of-UML2-Plugin) for the current list.
-  
+- Installation of the UML Metamodel fails: `Could not find the exported unit with id: [feature name].feature.group version: 1.0.0.[current date]`
+  - Restart Eclipse
