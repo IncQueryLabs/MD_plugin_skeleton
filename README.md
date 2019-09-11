@@ -83,3 +83,5 @@ To define and compile queries in the VQL language, VIATRA requires the UML Metam
   - There are missing dependencies of "com.nomagic.magicdraw.uml2" in the feature: check this [wiki page](https://github.com/IncQueryLabs/MD_plugin_skeleton/wiki/Dependencies-of-UML2-Plugin) for the current list.
 - Installation of the UML Metamodel fails: `Could not find the exported unit with id: [feature name].feature.group version: 1.0.0.[current date]`
   - Restart Eclipse
+- Gradle task shows error but nothing appears on the console.
+  - Remove the Gradle nature and builder from project (you can do that by editing `.project` file). Then add the Gradle nature to the project (Right click on project -> Configure -> Add Gradle nature...)
