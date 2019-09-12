@@ -232,6 +232,7 @@ task runCodeGen(type: JavaExec) {
 runCodeGen.dependsOn installDist
 
 class PreDist extends DefaultTask {
+    String descriptor
     String humanVersion
     String internalVersion
     String groupName
@@ -262,10 +263,24 @@ class PreDist extends DefaultTask {
             filter { String line -> line.replace('${plugin.name}', pluginUserVisibleName) }
             into "build/${distributionFolderName}/plugins/${groupName}"
         }
+        
+        String descriptorFiles = ''
+        project.fileTree(dir: 'build/generated-dist').each { file ->
+            String relativePath = file.absolutePath.replaceAll(/.*build${sep}generated-dist${sep}/, '')
+            descriptorFiles += '\t\t<file from=\"' + relativePath + '\" to=\"' + relativePath + '\"/>' + System.lineSeparator()
+        }
+        project.copy {
+            from "src/main/dist/template/data/resourcemanager/${descriptor}"
+            filter { String line -> line.replace('<!-- START AUTO-GENERATED -->', '<!-- START AUTO-GENERATED -->' + System.lineSeparator() + System.lineSeparator() + descriptorFiles) }
+            filter { String line -> line.replace('${human.version}', humanVersion) }
+            filter { String line -> line.replace('${internal.version}', internalVersion) }
+            into 'build/generated-dist/data/resourcemanager'
+        }
     }
 }
 
 task preDist(type: PreDist) {
+	descriptor = descriptorFile
     humanVersion = version
     internalVersion = buildNumber
     groupName = magicDrawGroupName
@@ -291,17 +306,6 @@ task preDist(type: PreDist) {
         }
         project.fileTree(dir: 'build/generated-dist', include: '**/*${group}*/**').each { file ->
             file.renameTo(project.file(file.getAbsolutePath().replace('${group}', "${groupName}")))
-        }
-    }
-
-    doLast {
-    	String buildTimestamp = timestamp
-    	String descriptor = descriptorFile
-	    String descriptorFiles = ''
-	    String sep = "\\" + File.separator
-        project.fileTree(dir: 'build/generated-dist').each { file ->
-            String relativePath = file.absolutePath.replaceAll(/.*build${sep}generated-dist${sep}/, '')
-            descriptorFiles += '\t\t<file from=\"' + relativePath + '\" to=\"' + relativePath + '\"/>' + System.lineSeparator()
         }
     }
 }
