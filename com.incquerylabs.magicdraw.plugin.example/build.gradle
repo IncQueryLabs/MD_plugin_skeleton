@@ -209,9 +209,9 @@ task debugTest(type: JavaExec) {
 }
 debugTest.dependsOn installTest
 
-String defaultCodeGenInpot = '../../resources/Python_Codegen_Example.mdzip'
-String codeGenInput = project.hasProperty('codeGenInput') ? project.getProperty('codeGenInput') : defaultCodeGenInpot
-def codeGenFilePath = codeGenInput.split(File.separator)
+String defaultCodeGenInput = '../../resources/Python_Codegen_Example.mdzip'
+String codeGenInput = project.hasProperty('codeGenInput') ? project.getProperty('codeGenInput') : defaultCodeGenInput
+def codeGenFilePath = codeGenInput.split("\\" + File.separator)
 def codeGenFileName = codeGenFilePath.last().split("\\.").first()
 
 def codeGenArgs = [
