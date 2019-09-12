@@ -92,9 +92,20 @@ public final class PhysicalRequirement_Derived extends BaseGeneratedEMFQuerySpec
     
     @Override
     public Object get(final String parameterName) {
-      if ("element".equals(parameterName)) return this.fElement;
-      if ("value".equals(parameterName)) return this.fValue;
-      return null;
+      switch(parameterName) {
+          case "element": return this.fElement;
+          case "value": return this.fValue;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fElement;
+          case 1: return this.fValue;
+          default: return null;
+      }
     }
     
     public com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class getElement() {
@@ -632,9 +643,9 @@ public final class PhysicalRequirement_Derived extends BaseGeneratedEMFQuerySpec
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: sysml.PhysicalRequirement_Derived (visibility: PUBLIC, simpleName: PhysicalRequirement_Derived, identifier: sysml.PhysicalRequirement_Derived, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link PhysicalRequirement_Derived} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: sysml.PhysicalRequirement_Derived (visibility: PUBLIC, simpleName: PhysicalRequirement_Derived, identifier: sysml.PhysicalRequirement_Derived, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link PhysicalRequirement_Derived#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

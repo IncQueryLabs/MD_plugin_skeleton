@@ -87,9 +87,20 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
     
     @Override
     public Object get(final String parameterName) {
-      if ("port".equals(parameterName)) return this.fPort;
-      if ("type".equals(parameterName)) return this.fType;
-      return null;
+      switch(parameterName) {
+          case "port": return this.fPort;
+          case "type": return this.fType;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fPort;
+          case 1: return this.fType;
+          default: return null;
+      }
     }
     
     public Port getPort() {
@@ -621,9 +632,9 @@ public final class DeduciblePortType extends BaseGeneratedEMFQuerySpecification<
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.DeduciblePortType (visibility: PUBLIC, simpleName: DeduciblePortType, identifier: com.incquerylabs.magicdraw.plugin.example.queries.DeduciblePortType, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link DeduciblePortType} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.DeduciblePortType (visibility: PUBLIC, simpleName: DeduciblePortType, identifier: com.incquerylabs.magicdraw.plugin.example.queries.DeduciblePortType, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link DeduciblePortType#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

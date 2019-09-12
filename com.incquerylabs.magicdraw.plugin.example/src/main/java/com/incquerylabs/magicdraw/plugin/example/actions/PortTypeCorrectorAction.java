@@ -36,11 +36,15 @@ public class PortTypeCorrectorAction extends MDAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Project project = Application.getInstance().getProject();
-		ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project);
+		String engineId = PortTypeCorrectorAction.class.getName();
+
+		ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project,engineId);
 		AdvancedViatraQueryEngine engine = adapter.getEngine();
 		
 		FullModelBatchTransformation trafo = new FullModelBatchTransformation(engine);
 		trafo.execute();
+		
+		adapter.dispose(engineId);
 		
 		JOptionPane.showMessageDialog(MDDialogParentProvider.getProvider().getDialogParent(), "The correction has been performed");
 	}

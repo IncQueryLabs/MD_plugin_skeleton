@@ -84,9 +84,20 @@ public final class BlockMustImport extends BaseGeneratedEMFQuerySpecification<Bl
     
     @Override
     public Object get(final String parameterName) {
-      if ("block".equals(parameterName)) return this.fBlock;
-      if ("importedBlock".equals(parameterName)) return this.fImportedBlock;
-      return null;
+      switch(parameterName) {
+          case "block": return this.fBlock;
+          case "importedBlock": return this.fImportedBlock;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fBlock;
+          case 1: return this.fImportedBlock;
+          default: return null;
+      }
     }
     
     public com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class getBlock() {
@@ -618,9 +629,9 @@ public final class BlockMustImport extends BaseGeneratedEMFQuerySpecification<Bl
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.BlockMustImport (visibility: PUBLIC, simpleName: BlockMustImport, identifier: com.incquerylabs.magicdraw.plugin.example.queries.BlockMustImport, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link BlockMustImport} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.BlockMustImport (visibility: PUBLIC, simpleName: BlockMustImport, identifier: com.incquerylabs.magicdraw.plugin.example.queries.BlockMustImport, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link BlockMustImport#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

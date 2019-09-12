@@ -92,9 +92,20 @@ public final class ParticipantProperty_end extends BaseGeneratedEMFQuerySpecific
     
     @Override
     public Object get(final String parameterName) {
-      if ("element".equals(parameterName)) return this.fElement;
-      if ("value".equals(parameterName)) return this.fValue;
-      return null;
+      switch(parameterName) {
+          case "element": return this.fElement;
+          case "value": return this.fValue;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fElement;
+          case 1: return this.fValue;
+          default: return null;
+      }
     }
     
     public Property getElement() {
@@ -632,9 +643,9 @@ public final class ParticipantProperty_end extends BaseGeneratedEMFQuerySpecific
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: sysml.ParticipantProperty_end (visibility: PUBLIC, simpleName: ParticipantProperty_end, identifier: sysml.ParticipantProperty_end, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link ParticipantProperty_end} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: sysml.ParticipantProperty_end (visibility: PUBLIC, simpleName: ParticipantProperty_end, identifier: sysml.ParticipantProperty_end, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link ParticipantProperty_end#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

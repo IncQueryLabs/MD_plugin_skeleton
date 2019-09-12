@@ -44,7 +44,9 @@ public class CodeGenRunner implements CommandLineAction {
 			Project project;
 			try {
 				project = loadProject(projectPath);
-				ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project);
+				String engineId = CodeGenRunner.class.getName();
+
+				ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project, engineId);
 				AdvancedViatraQueryEngine engine = adapter.getEngine();
 				
 				Profile mdSkeletonProfile = StereotypesHelper.getProfile(project, "MD Skeleton Profile");
@@ -57,6 +59,8 @@ public class CodeGenRunner implements CommandLineAction {
 							Arrays.asList((Package)scopePackage));
 					gen.doGen();
 				});
+				
+				adapter.dispose(engineId);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -90,9 +90,20 @@ public final class ElementGroup_size extends BaseGeneratedEMFQuerySpecification<
     
     @Override
     public Object get(final String parameterName) {
-      if ("element".equals(parameterName)) return this.fElement;
-      if ("valuespec".equals(parameterName)) return this.fValuespec;
-      return null;
+      switch(parameterName) {
+          case "element": return this.fElement;
+          case "valuespec": return this.fValuespec;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fElement;
+          case 1: return this.fValuespec;
+          default: return null;
+      }
     }
     
     public Comment getElement() {
@@ -629,9 +640,9 @@ public final class ElementGroup_size extends BaseGeneratedEMFQuerySpecification<
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: sysml.ElementGroup_size (visibility: PUBLIC, simpleName: ElementGroup_size, identifier: sysml.ElementGroup_size, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link ElementGroup_size} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: sysml.ElementGroup_size (visibility: PUBLIC, simpleName: ElementGroup_size, identifier: sysml.ElementGroup_size, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link ElementGroup_size#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

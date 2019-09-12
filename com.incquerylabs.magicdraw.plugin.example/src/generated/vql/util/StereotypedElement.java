@@ -100,11 +100,24 @@ public final class StereotypedElement extends BaseGeneratedEMFQuerySpecification
     
     @Override
     public Object get(final String parameterName) {
-      if ("element".equals(parameterName)) return this.fElement;
-      if ("domainStereotypeInstance".equals(parameterName)) return this.fDomainStereotypeInstance;
-      if ("profileName".equals(parameterName)) return this.fProfileName;
-      if ("stereotypeName".equals(parameterName)) return this.fStereotypeName;
-      return null;
+      switch(parameterName) {
+          case "element": return this.fElement;
+          case "domainStereotypeInstance": return this.fDomainStereotypeInstance;
+          case "profileName": return this.fProfileName;
+          case "stereotypeName": return this.fStereotypeName;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fElement;
+          case 1: return this.fDomainStereotypeInstance;
+          case 2: return this.fProfileName;
+          case 3: return this.fStereotypeName;
+          default: return null;
+      }
     }
     
     public Element getElement() {
@@ -838,9 +851,9 @@ public final class StereotypedElement extends BaseGeneratedEMFQuerySpecification
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: util.StereotypedElement (visibility: PUBLIC, simpleName: StereotypedElement, identifier: util.StereotypedElement, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: util) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link StereotypedElement} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: util.StereotypedElement (visibility: PUBLIC, simpleName: StereotypedElement, identifier: util.StereotypedElement, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: util) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link StereotypedElement#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

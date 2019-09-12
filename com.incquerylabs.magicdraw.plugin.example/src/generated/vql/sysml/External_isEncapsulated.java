@@ -89,9 +89,20 @@ public final class External_isEncapsulated extends BaseGeneratedEMFQuerySpecific
     
     @Override
     public Object get(final String parameterName) {
-      if ("element".equals(parameterName)) return this.fElement;
-      if ("valuespec".equals(parameterName)) return this.fValuespec;
-      return null;
+      switch(parameterName) {
+          case "element": return this.fElement;
+          case "valuespec": return this.fValuespec;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fElement;
+          case 1: return this.fValuespec;
+          default: return null;
+      }
     }
     
     public com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class getElement() {
@@ -628,9 +639,9 @@ public final class External_isEncapsulated extends BaseGeneratedEMFQuerySpecific
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: sysml.External_isEncapsulated (visibility: PUBLIC, simpleName: External_isEncapsulated, identifier: sysml.External_isEncapsulated, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link External_isEncapsulated} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: sysml.External_isEncapsulated (visibility: PUBLIC, simpleName: External_isEncapsulated, identifier: sysml.External_isEncapsulated, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link External_isEncapsulated#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

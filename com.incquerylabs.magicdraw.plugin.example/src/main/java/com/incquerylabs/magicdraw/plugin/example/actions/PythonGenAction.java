@@ -44,7 +44,9 @@ public class PythonGenAction extends MDAction {
 			@Override
 			public void finalizeWizard(List<Package> selectedPackages, File selectedFolder) {
 				Project project = Application.getInstance().getProject();
-				ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project);
+				String engineId = PythonGenAction.class.getName();
+				
+				ViatraQueryAdapter adapter = ViatraQueryAdapter.getOrCreateAdapter(project, engineId);
 				AdvancedViatraQueryEngine engine = adapter.getEngine();
 				
 				GenPython gen = new GenPython(engine, 
@@ -52,6 +54,8 @@ public class PythonGenAction extends MDAction {
 						java.util.Collections.emptyList(), 
 						selectedPackages);
 				gen.doGen();
+				
+				adapter.dispose(engineId);				
 			}
 		});
 		

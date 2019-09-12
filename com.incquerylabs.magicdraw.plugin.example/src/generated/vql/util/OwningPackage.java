@@ -81,9 +81,20 @@ public final class OwningPackage extends BaseGeneratedEMFQuerySpecification<Owni
     
     @Override
     public Object get(final String parameterName) {
-      if ("element".equals(parameterName)) return this.fElement;
-      if ("owner".equals(parameterName)) return this.fOwner;
-      return null;
+      switch(parameterName) {
+          case "element": return this.fElement;
+          case "owner": return this.fOwner;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fElement;
+          case 1: return this.fOwner;
+          default: return null;
+      }
     }
     
     public com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package getElement() {
@@ -615,9 +626,9 @@ public final class OwningPackage extends BaseGeneratedEMFQuerySpecification<Owni
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: util.OwningPackage (visibility: PUBLIC, simpleName: OwningPackage, identifier: util.OwningPackage, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: util) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link OwningPackage} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: util.OwningPackage (visibility: PUBLIC, simpleName: OwningPackage, identifier: util.OwningPackage, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: util) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link OwningPackage#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

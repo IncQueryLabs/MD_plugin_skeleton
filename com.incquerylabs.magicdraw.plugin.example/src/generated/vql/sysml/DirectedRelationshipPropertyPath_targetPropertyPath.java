@@ -93,9 +93,20 @@ public final class DirectedRelationshipPropertyPath_targetPropertyPath extends B
     
     @Override
     public Object get(final String parameterName) {
-      if ("element".equals(parameterName)) return this.fElement;
-      if ("value".equals(parameterName)) return this.fValue;
-      return null;
+      switch(parameterName) {
+          case "element": return this.fElement;
+          case "value": return this.fValue;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fElement;
+          case 1: return this.fValue;
+          default: return null;
+      }
     }
     
     public DirectedRelationship getElement() {
@@ -633,9 +644,9 @@ public final class DirectedRelationshipPropertyPath_targetPropertyPath extends B
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: sysml.DirectedRelationshipPropertyPath_targetPropertyPath (visibility: PUBLIC, simpleName: DirectedRelationshipPropertyPath_targetPropertyPath, identifier: sysml.DirectedRelationshipPropertyPath_targetPropertyPath, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link DirectedRelationshipPropertyPath_targetPropertyPath} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: sysml.DirectedRelationshipPropertyPath_targetPropertyPath (visibility: PUBLIC, simpleName: DirectedRelationshipPropertyPath_targetPropertyPath, identifier: sysml.DirectedRelationshipPropertyPath_targetPropertyPath, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link DirectedRelationshipPropertyPath_targetPropertyPath#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

@@ -90,10 +90,22 @@ public final class MangledNameInNamespace extends BaseGeneratedEMFQuerySpecifica
     
     @Override
     public Object get(final String parameterName) {
-      if ("namespace".equals(parameterName)) return this.fNamespace;
-      if ("element".equals(parameterName)) return this.fElement;
-      if ("mangledName".equals(parameterName)) return this.fMangledName;
-      return null;
+      switch(parameterName) {
+          case "namespace": return this.fNamespace;
+          case "element": return this.fElement;
+          case "mangledName": return this.fMangledName;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fNamespace;
+          case 1: return this.fElement;
+          case 2: return this.fMangledName;
+          default: return null;
+      }
     }
     
     public Namespace getNamespace() {
@@ -723,9 +735,9 @@ public final class MangledNameInNamespace extends BaseGeneratedEMFQuerySpecifica
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInNamespace (visibility: PUBLIC, simpleName: MangledNameInNamespace, identifier: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInNamespace, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link MangledNameInNamespace} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInNamespace (visibility: PUBLIC, simpleName: MangledNameInNamespace, identifier: com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInNamespace, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link MangledNameInNamespace#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

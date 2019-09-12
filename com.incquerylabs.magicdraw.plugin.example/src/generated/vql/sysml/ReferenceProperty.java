@@ -88,9 +88,20 @@ public final class ReferenceProperty extends BaseGeneratedEMFQuerySpecification<
     
     @Override
     public Object get(final String parameterName) {
-      if ("element".equals(parameterName)) return this.fElement;
-      if ("domainStereotypeInstance".equals(parameterName)) return this.fDomainStereotypeInstance;
-      return null;
+      switch(parameterName) {
+          case "element": return this.fElement;
+          case "domainStereotypeInstance": return this.fDomainStereotypeInstance;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fElement;
+          case 1: return this.fDomainStereotypeInstance;
+          default: return null;
+      }
     }
     
     public Property getElement() {
@@ -626,9 +637,9 @@ public final class ReferenceProperty extends BaseGeneratedEMFQuerySpecification<
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: sysml.ReferenceProperty (visibility: PUBLIC, simpleName: ReferenceProperty, identifier: sysml.ReferenceProperty, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link ReferenceProperty} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: sysml.ReferenceProperty (visibility: PUBLIC, simpleName: ReferenceProperty, identifier: sysml.ReferenceProperty, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link ReferenceProperty#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

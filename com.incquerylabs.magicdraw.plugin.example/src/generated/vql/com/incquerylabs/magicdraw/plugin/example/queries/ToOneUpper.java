@@ -81,8 +81,18 @@ public final class ToOneUpper extends BaseGeneratedEMFQuerySpecification<ToOneUp
     
     @Override
     public Object get(final String parameterName) {
-      if ("multiplicityElement".equals(parameterName)) return this.fMultiplicityElement;
-      return null;
+      switch(parameterName) {
+          case "multiplicityElement": return this.fMultiplicityElement;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fMultiplicityElement;
+          default: return null;
+      }
     }
     
     public MultiplicityElement getMultiplicityElement() {
@@ -469,9 +479,9 @@ public final class ToOneUpper extends BaseGeneratedEMFQuerySpecification<ToOneUp
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.ToOneUpper (visibility: PUBLIC, simpleName: ToOneUpper, identifier: com.incquerylabs.magicdraw.plugin.example.queries.ToOneUpper, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link ToOneUpper} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.ToOneUpper (visibility: PUBLIC, simpleName: ToOneUpper, identifier: com.incquerylabs.magicdraw.plugin.example.queries.ToOneUpper, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link ToOneUpper#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

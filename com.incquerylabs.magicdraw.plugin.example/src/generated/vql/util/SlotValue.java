@@ -90,10 +90,22 @@ public final class SlotValue extends BaseGeneratedEMFQuerySpecification<SlotValu
     
     @Override
     public Object get(final String parameterName) {
-      if ("domainStereotypeInstance".equals(parameterName)) return this.fDomainStereotypeInstance;
-      if ("featureName".equals(parameterName)) return this.fFeatureName;
-      if ("valuespec".equals(parameterName)) return this.fValuespec;
-      return null;
+      switch(parameterName) {
+          case "domainStereotypeInstance": return this.fDomainStereotypeInstance;
+          case "featureName": return this.fFeatureName;
+          case "valuespec": return this.fValuespec;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fDomainStereotypeInstance;
+          case 1: return this.fFeatureName;
+          case 2: return this.fValuespec;
+          default: return null;
+      }
     }
     
     public InstanceSpecification getDomainStereotypeInstance() {
@@ -725,9 +737,9 @@ public final class SlotValue extends BaseGeneratedEMFQuerySpecification<SlotValu
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: util.SlotValue (visibility: PUBLIC, simpleName: SlotValue, identifier: util.SlotValue, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: util) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link SlotValue} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: util.SlotValue (visibility: PUBLIC, simpleName: SlotValue, identifier: util.SlotValue, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: util) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link SlotValue#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

@@ -88,9 +88,20 @@ public final class ConnectorEndNestedPath extends BaseGeneratedEMFQuerySpecifica
     
     @Override
     public Object get(final String parameterName) {
-      if ("end".equals(parameterName)) return this.fEnd;
-      if ("propertyPath".equals(parameterName)) return this.fPropertyPath;
-      return null;
+      switch(parameterName) {
+          case "end": return this.fEnd;
+          case "propertyPath": return this.fPropertyPath;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fEnd;
+          case 1: return this.fPropertyPath;
+          default: return null;
+      }
     }
     
     public ConnectorEnd getEnd() {
@@ -622,9 +633,9 @@ public final class ConnectorEndNestedPath extends BaseGeneratedEMFQuerySpecifica
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.ConnectorEndNestedPath (visibility: PUBLIC, simpleName: ConnectorEndNestedPath, identifier: com.incquerylabs.magicdraw.plugin.example.queries.ConnectorEndNestedPath, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link ConnectorEndNestedPath} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: com.incquerylabs.magicdraw.plugin.example.queries.ConnectorEndNestedPath (visibility: PUBLIC, simpleName: ConnectorEndNestedPath, identifier: com.incquerylabs.magicdraw.plugin.example.queries.ConnectorEndNestedPath, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: com.incquerylabs.magicdraw.plugin.example.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link ConnectorEndNestedPath#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

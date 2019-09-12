@@ -90,9 +90,20 @@ public final class AbstractRequirement_Text extends BaseGeneratedEMFQuerySpecifi
     
     @Override
     public Object get(final String parameterName) {
-      if ("element".equals(parameterName)) return this.fElement;
-      if ("valuespec".equals(parameterName)) return this.fValuespec;
-      return null;
+      switch(parameterName) {
+          case "element": return this.fElement;
+          case "valuespec": return this.fValuespec;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fElement;
+          case 1: return this.fValuespec;
+          default: return null;
+      }
     }
     
     public NamedElement getElement() {
@@ -629,9 +640,9 @@ public final class AbstractRequirement_Text extends BaseGeneratedEMFQuerySpecifi
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: sysml.AbstractRequirement_Text (visibility: PUBLIC, simpleName: AbstractRequirement_Text, identifier: sysml.AbstractRequirement_Text, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link AbstractRequirement_Text} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: sysml.AbstractRequirement_Text (visibility: PUBLIC, simpleName: AbstractRequirement_Text, identifier: sysml.AbstractRequirement_Text, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: sysml) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link AbstractRequirement_Text#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
