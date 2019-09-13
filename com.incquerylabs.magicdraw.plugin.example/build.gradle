@@ -91,10 +91,14 @@ dependencies {
         
     }
 
-
-  
+    // Use Cameo System Modeller 
+    //preCompile group: 'com.nomagic', name: 'csm', version: '190sp2', classifier: 'Cameo_Systems_Modeler_190_sp2_no_install', ext: 'zip'
+    //preCompile group: 'com.nomagic', name: 'ccfortwc', version: '190sp2', classifier: 'Cameo_Collaborator_Publisher_Plugin_190_sp2', ext: 'zip'
+    
+    // Use MagicDraw 
     preCompile group: 'com.nomagic', name: 'magicdraw', version: '190', classifier: 'MagicDraw_190_no_install', ext: 'zip'
     preCompile group: 'com.nomagic', name: 'sysml', version: '190', classifier: 'SysML_Plugin_190_bundle', ext: 'zip'
+    
     preCompile group: 'com.incquerylabs.v4md', name: 'com.incquerylabs.v4md', version: v4mdVersion, classifier: 'plugin', ext: 'zip'
     
     compile group: 'org.eclipse.viatra', name: 'viatra-query-language', version: viatraVersion, exclusions
