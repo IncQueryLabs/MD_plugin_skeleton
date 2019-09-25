@@ -101,14 +101,14 @@ dependencies {
     
     preCompile group: 'com.incquerylabs.v4md', name: 'com.incquerylabs.v4md', version: v4mdVersion, classifier: 'plugin', ext: 'zip'
     
-    compile group: 'org.eclipse.viatra', name: 'viatra-query-language', version: viatraVersion, exclusions
-    compile group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext', version: xtextVersion, exclusions
-    compile group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.xbase', version: xtextVersion, exclusions
-    compile group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.xtext.generator', version: xtextVersion, exclusions
-    compile group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.common.types', version: xtextVersion, exclusions
-    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.codegen', version: '2.10.0-v20140901-1055', exclusions
-    compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.codegen.ecore', version: '2.10.1-v20140901-1055', exclusions
-    compile group: 'org.ow2.asm', name: 'asm', version: '6.2.1'
+    plugin group: 'org.eclipse.viatra', name: 'viatra-query-language', version: viatraVersion, exclusions
+    plugin group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext', version: xtextVersion, exclusions
+    plugin group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.xbase', version: xtextVersion, exclusions
+    plugin group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.xtext.generator', version: xtextVersion, exclusions
+    plugin group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.common.types', version: xtextVersion, exclusions
+    plugin group: 'org.eclipse.emf', name: 'org.eclipse.emf.codegen', version: '2.10.0-v20140901-1055', exclusions
+    plugin group: 'org.eclipse.emf', name: 'org.eclipse.emf.codegen.ecore', version: '2.10.1-v20140901-1055', exclusions
+    plugin group: 'org.ow2.asm', name: 'asm', version: '7.0'
     
     
  	implementation group: 'org.eclipse.viatra', name: 'viatra-query-runtime', version: viatraVersion, exclusions
