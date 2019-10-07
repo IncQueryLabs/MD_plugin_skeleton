@@ -21,12 +21,6 @@ class FullModelEventDrivenTransformation {
     protected EventDrivenTransformationRule<?,?> portTypeCorrectorRule = createRule(DeduciblePortType.instance)
     		.name("Port_Type_Corrector")
             .action(CRUDActivationStateEnum.CREATED) [ it.port.type = it.type ]
-            .addLifeCycle(Lifecycles.getDefault(false, false))
-//			If you want register for updated and deleted events remove the previous two lines and uncomment the next four lines
-//          .action(CRUDActivationStateEnum.CREATED) [ it.port.type = it.type ]
-//          .action(CRUDActivationStateEnum.UPDATED) [  ]
-//          .action(CRUDActivationStateEnum.DELETED) [  ]
-//          .addLifeCycle(Lifecycles.getDefault(true, true))
             .build
 
     private new(ViatraQueryEngine engine) {
