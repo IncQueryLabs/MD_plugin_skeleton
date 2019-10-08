@@ -120,6 +120,10 @@ dependencies {
     compile fileTree(dir: 'lib', include: ['**/*.jar'])
 
     testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-swing-junit:3.9.2'
+    testCompile 'org.assertj:assertj-swing-jide:3.9.0'
+    testCompile 'org.assertj:assertj-swing:3.9.2'
+    testCompile 'org.assertj:assertj-core:3.13.0'
     testCompile 'org.apache.maven.surefire:maven-surefire-common:2.19.1'
     testCompile 'org.apache.maven.surefire:surefire-api:2.19.1'
     testCompile 'org.apache.maven.surefire:surefire-junit4:2.19.1'
