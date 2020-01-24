@@ -85,3 +85,5 @@ To define and compile queries in the VQL language, VIATRA requires the UML Metam
   - Restart Eclipse
 - Gradle task shows error but nothing appears on the console.
   - Remove the Gradle nature and builder from project (you can do that by editing `.project` file). Then add the Gradle nature to the project (Right click on project -> Configure -> Add Gradle nature...)
+- Eclipse cannot resolve (import) dependencies
+  - Refresh the project by Gradle: right click on the project > Gradle > Refresh Gradle Project 
