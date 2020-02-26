@@ -23,6 +23,7 @@ For more details check the related [wiki page](https://github.com/IncQueryLabs/M
  
 ## How to use:
 
+- Ensure you have Java 8 (newer Java is only supported in Gradle 5+, but our current build script requires Gradle 4.3).
 - Install product: Eclipse IDE for Eclipse Committers, version: latest (tested with up to 2020-03)
 - Install VIATRA SDK 2.3.0  http://download.eclipse.org/viatra/updates/release/latest
 - Install UML 2.5.1 metamodel: 
