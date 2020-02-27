@@ -86,4 +86,6 @@ To define and compile queries in the VQL language, VIATRA requires the UML Metam
 - Gradle task shows error but nothing appears on the console.
   - Remove the Gradle nature and builder from project (you can do that by editing `.project` file). Then add the Gradle nature to the project (Right click on project -> Configure -> Add Gradle nature...)
 - Eclipse cannot resolve (import) dependencies
-  - Refresh the project by Gradle: right click on the project > Gradle > Refresh Gradle Project 
+  - Refresh the project by Gradle: right click on the project > Gradle > Refresh Gradle Project  
+- Receiving the following error when MagicDraw tries to download a model from Teamwork Cloud: `Reply message has unexpected type: com.nomagic.esi.core.msg.LoginReply`
+  - OpenAPI related jars appear twice on the classpath, hence you should temporarily exclude `lib/bundles/com.nomagic.esi*.jar` files from the gradle script.
