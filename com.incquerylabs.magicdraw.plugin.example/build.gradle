@@ -104,6 +104,7 @@ dependencies {
     plugin group: 'org.eclipse.viatra', name: 'viatra-query-language', version: viatraVersion, exclusions
     plugin group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext', version: xtextVersion, exclusions
     plugin group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.xbase', version: xtextVersion, exclusions
+    plugin group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.xbase.lib', version: xtextVersion, exclusions
     plugin group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.xtext.generator', version: xtextVersion, exclusions
     plugin group: 'org.eclipse.xtext',  name: 'org.eclipse.xtext.common.types', version: xtextVersion, exclusions
     plugin group: 'org.eclipse.emf', name: 'org.eclipse.emf.codegen', version: '2.10.0-v20140901-1055', exclusions

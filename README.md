@@ -23,8 +23,9 @@ For more details check the related [wiki page](https://github.com/IncQueryLabs/M
  
 ## How to use:
 
-- Install product: Eclipse IDE for Eclipse Committers, version: latest (tested with up to 2019-06)
-- Install VIATRA SDK 2.2.0  http://download.eclipse.org/viatra/updates/release/latest
+- Ensure you have Java 8 (newer Java is only supported in Gradle 5+, but our current build script requires Gradle 4.3).
+- Install product: Eclipse IDE for Eclipse Committers, version: latest (tested with up to 2020-03)
+- Install VIATRA SDK 2.3.0  http://download.eclipse.org/viatra/updates/release/latest
 - Install UML 2.5.1 metamodel: 
     * Check section **Install UML Metamodel to Eclipse** describing the workflow of this process 
     * Users on the internal IncQueryLabs network can use http://albert.internal.incquerylabs.com:10080/magicdraw.metamodel/
