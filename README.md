@@ -90,3 +90,5 @@ To define and compile queries in the VQL language, VIATRA requires the UML Metam
   - Refresh the project by Gradle: right click on the project > Gradle > Refresh Gradle Project  
 - Receiving the following error when MagicDraw tries to download a model from Teamwork Cloud: `Reply message has unexpected type: com.nomagic.esi.core.msg.LoginReply`
   - OpenAPI related jars appear twice on the classpath, hence you should temporarily exclude `lib/bundles/com.nomagic.esi*.jar` files from the gradle script.
+- Gradle synchronization error when trying to build: `Could not determine java version from '13.X.Y'.`
+  - Install Eclipse with jdk 8 selected for VM.
