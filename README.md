@@ -23,7 +23,7 @@ For more details check the related [wiki page](https://github.com/IncQueryLabs/M
  
 ## How to use:
 
-- Install product: Eclipse IDE for Eclipse Committers, version: latest (tested with up to 2019-06)
+- Install product: Eclipse IDE for Eclipse Committers with java 8 VM, version: latest (tested with up to 2019-06)
 - Install VIATRA SDK 2.2.0  http://download.eclipse.org/viatra/updates/release/latest
 - Install UML 2.5.1 metamodel: 
     * Check section **Install UML Metamodel to Eclipse** describing the workflow of this process 
@@ -89,3 +89,5 @@ To define and compile queries in the VQL language, VIATRA requires the UML Metam
   - Refresh the project by Gradle: right click on the project > Gradle > Refresh Gradle Project  
 - Receiving the following error when MagicDraw tries to download a model from Teamwork Cloud: `Reply message has unexpected type: com.nomagic.esi.core.msg.LoginReply`
   - OpenAPI related jars appear twice on the classpath, hence you should temporarily exclude `lib/bundles/com.nomagic.esi*.jar` files from the gradle script.
+- Gradle synchronization error when trying to build: `Could not determine java version from '13.X.Y'.`
+  - Install Eclipse with jdk 8 selected for VM.
