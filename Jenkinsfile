@@ -26,7 +26,7 @@ pipeline {
 	}
 	
 	tools { 
-		jdk 'Oracle JDK 8' 
+		jdk 'OpenJDK 8' 
 	}
 
 	stages { 
