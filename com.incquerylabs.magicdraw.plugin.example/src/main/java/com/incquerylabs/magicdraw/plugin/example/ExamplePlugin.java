@@ -28,20 +28,9 @@ public class ExamplePlugin extends Plugin {
 	public void init() {
 
 		ActionsConfiguratorsManager manager = ActionsConfiguratorsManager.getInstance();
-		manager.addMainMenuConfigurator(
-				new ExampleMainMenuConfigurator(new PortTypeCorrectorAction(), new PythonGenAction()));
-		manager.addContainmentBrowserContextConfigurator(new EventDrivenPortTypeCorrectorConfigurator());
+//		manager.addMainMenuConfigurator(
+//				new ExampleMainMenuConfigurator(new EdgeCheckAction());
 
-		CommandLineActionManager.getInstance().addAction(new CodeGenRunner());
-		// Initializing Xtext infrastructure
-		PatternLanguagePackage.eINSTANCE.getClass();
-
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtextbin",
-				new BinaryGrammarResourceFactoryImpl());
-
-		EMFPatternLanguageStandaloneSetup setup = new EMFPatternLanguageStandaloneSetup();
-		languageInjector = Guice.createInjector(new StandaloneParserModule());
-		setup.register(languageInjector);
 	}
 
 	@Override

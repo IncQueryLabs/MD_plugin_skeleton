@@ -4,8 +4,6 @@
 package com.incquerylabs.magicdraw.plugin.example.queries;
 
 import com.incquerylabs.magicdraw.plugin.example.queries.MangledNameInNamespace;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -16,7 +14,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
@@ -77,15 +74,15 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private Namespace fNamespace;
+    private com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace fNamespace;
     
-    private NamedElement fElement;
+    private com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement fElement;
     
     private String fMangledName;
     
     private static List<String> parameterNames = makeImmutableList("namespace", "element", "mangledName");
     
-    private Match(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+    private Match(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
       this.fNamespace = pNamespace;
       this.fElement = pElement;
       this.fMangledName = pMangledName;
@@ -111,11 +108,11 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
       }
     }
     
-    public Namespace getNamespace() {
+    public com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace getNamespace() {
       return this.fNamespace;
     }
     
-    public NamedElement getElement() {
+    public com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement getElement() {
       return this.fElement;
     }
     
@@ -127,11 +124,11 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("namespace".equals(parameterName) ) {
-          this.fNamespace = (Namespace) newValue;
+          this.fNamespace = (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace) newValue;
           return true;
       }
       if ("element".equals(parameterName) ) {
-          this.fElement = (NamedElement) newValue;
+          this.fElement = (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement) newValue;
           return true;
       }
       if ("mangledName".equals(parameterName) ) {
@@ -141,12 +138,12 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
       return false;
     }
     
-    public void setNamespace(final Namespace pNamespace) {
+    public void setNamespace(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fNamespace = pNamespace;
     }
     
-    public void setElement(final NamedElement pElement) {
+    public void setElement(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fElement = pElement;
     }
@@ -236,7 +233,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static MangledNameCollision.Match newMutableMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+    public static MangledNameCollision.Match newMutableMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
       return new Mutable(pNamespace, pElement, pMangledName);
     }
     
@@ -250,12 +247,12 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the (partial) match object.
      * 
      */
-    public static MangledNameCollision.Match newMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+    public static MangledNameCollision.Match newMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
       return new Immutable(pNamespace, pElement, pMangledName);
     }
     
     private static final class Mutable extends MangledNameCollision.Match {
-      Mutable(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+      Mutable(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
         super(pNamespace, pElement, pMangledName);
       }
       
@@ -266,7 +263,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
     }
     
     private static final class Immutable extends MangledNameCollision.Match {
-      Immutable(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+      Immutable(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
         super(pNamespace, pElement, pMangledName);
       }
       
@@ -333,7 +330,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
     
     private static final int POSITION_MANGLEDNAME = 2;
     
-    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(MangledNameCollision.Matcher.class);
+    private static final org.apache.log4j.Logger LOGGER = ViatraQueryLoggingUtil.getLogger(MangledNameCollision.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -355,7 +352,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<MangledNameCollision.Match> getAllMatches(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+    public Collection<MangledNameCollision.Match> getAllMatches(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
       return rawStreamAllMatches(new Object[]{pNamespace, pElement, pMangledName}).collect(Collectors.toSet());
     }
     
@@ -371,7 +368,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<MangledNameCollision.Match> streamAllMatches(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+    public Stream<MangledNameCollision.Match> streamAllMatches(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
       return rawStreamAllMatches(new Object[]{pNamespace, pElement, pMangledName});
     }
     
@@ -384,7 +381,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<MangledNameCollision.Match> getOneArbitraryMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+    public Optional<MangledNameCollision.Match> getOneArbitraryMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
       return rawGetOneArbitraryMatch(new Object[]{pNamespace, pElement, pMangledName});
     }
     
@@ -397,7 +394,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+    public boolean hasMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
       return rawHasMatch(new Object[]{pNamespace, pElement, pMangledName});
     }
     
@@ -409,7 +406,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+    public int countMatches(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
       return rawCountMatches(new Object[]{pNamespace, pElement, pMangledName});
     }
     
@@ -423,7 +420,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName, final Consumer<? super MangledNameCollision.Match> processor) {
+    public boolean forOneArbitraryMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName, final Consumer<? super MangledNameCollision.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pNamespace, pElement, pMangledName}, processor);
     }
     
@@ -437,7 +434,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the (partial) match object.
      * 
      */
-    public MangledNameCollision.Match newMatch(final Namespace pNamespace, final NamedElement pElement, final String pMangledName) {
+    public MangledNameCollision.Match newMatch(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
       return MangledNameCollision.Match.newMatch(pNamespace, pElement, pMangledName);
     }
     
@@ -446,8 +443,8 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Namespace> rawStreamAllValuesOfnamespace(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_NAMESPACE, parameters).map(Namespace.class::cast);
+    protected /* Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace> */Object rawStreamAllValuesOfnamespace(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_NAMESPACE, parameters).map(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace.class::cast);
     }
     
     /**
@@ -455,7 +452,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Namespace> getAllValuesOfnamespace() {
+    public /* Set<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace> */Object getAllValuesOfnamespace() {
       return rawStreamAllValuesOfnamespace(emptyArray()).collect(Collectors.toSet());
     }
     
@@ -464,7 +461,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Namespace> streamAllValuesOfnamespace() {
+    public /* Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace> */Object streamAllValuesOfnamespace() {
       return rawStreamAllValuesOfnamespace(emptyArray());
     }
     
@@ -478,7 +475,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Namespace> streamAllValuesOfnamespace(final MangledNameCollision.Match partialMatch) {
+    public /* Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace> */Object streamAllValuesOfnamespace(final MangledNameCollision.Match partialMatch) {
       return rawStreamAllValuesOfnamespace(partialMatch.toArray());
     }
     
@@ -492,7 +489,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Namespace> streamAllValuesOfnamespace(final NamedElement pElement, final String pMangledName) {
+    public /* Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace> */Object streamAllValuesOfnamespace(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
       return rawStreamAllValuesOfnamespace(new Object[]{null, pElement, pMangledName});
     }
     
@@ -501,7 +498,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Namespace> getAllValuesOfnamespace(final MangledNameCollision.Match partialMatch) {
+    public /* Set<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace> */Object getAllValuesOfnamespace(final MangledNameCollision.Match partialMatch) {
       return rawStreamAllValuesOfnamespace(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
@@ -510,7 +507,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Namespace> getAllValuesOfnamespace(final NamedElement pElement, final String pMangledName) {
+    public /* Set<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace> */Object getAllValuesOfnamespace(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement, final String pMangledName) {
       return rawStreamAllValuesOfnamespace(new Object[]{null, pElement, pMangledName}).collect(Collectors.toSet());
     }
     
@@ -519,8 +516,8 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<NamedElement> rawStreamAllValuesOfelement(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_ELEMENT, parameters).map(NamedElement.class::cast);
+    protected /* Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement> */Object rawStreamAllValuesOfelement(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_ELEMENT, parameters).map(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement.class::cast);
     }
     
     /**
@@ -528,7 +525,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<NamedElement> getAllValuesOfelement() {
+    public /* Set<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement> */Object getAllValuesOfelement() {
       return rawStreamAllValuesOfelement(emptyArray()).collect(Collectors.toSet());
     }
     
@@ -537,7 +534,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<NamedElement> streamAllValuesOfelement() {
+    public /* Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement> */Object streamAllValuesOfelement() {
       return rawStreamAllValuesOfelement(emptyArray());
     }
     
@@ -551,7 +548,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<NamedElement> streamAllValuesOfelement(final MangledNameCollision.Match partialMatch) {
+    public /* Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement> */Object streamAllValuesOfelement(final MangledNameCollision.Match partialMatch) {
       return rawStreamAllValuesOfelement(partialMatch.toArray());
     }
     
@@ -565,7 +562,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<NamedElement> streamAllValuesOfelement(final Namespace pNamespace, final String pMangledName) {
+    public /* Stream<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement> */Object streamAllValuesOfelement(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final String pMangledName) {
       return rawStreamAllValuesOfelement(new Object[]{pNamespace, null, pMangledName});
     }
     
@@ -574,7 +571,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<NamedElement> getAllValuesOfelement(final MangledNameCollision.Match partialMatch) {
+    public /* Set<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement> */Object getAllValuesOfelement(final MangledNameCollision.Match partialMatch) {
       return rawStreamAllValuesOfelement(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
@@ -583,7 +580,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<NamedElement> getAllValuesOfelement(final Namespace pNamespace, final String pMangledName) {
+    public /* Set<com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement> */Object getAllValuesOfelement(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final String pMangledName) {
       return rawStreamAllValuesOfelement(new Object[]{pNamespace, null, pMangledName}).collect(Collectors.toSet());
     }
     
@@ -638,7 +635,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<String> streamAllValuesOfmangledName(final Namespace pNamespace, final NamedElement pElement) {
+    public Stream<String> streamAllValuesOfmangledName(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement) {
       return rawStreamAllValuesOfmangledName(new Object[]{pNamespace, pElement, null});
     }
     
@@ -656,14 +653,14 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfmangledName(final Namespace pNamespace, final NamedElement pElement) {
+    public Set<String> getAllValuesOfmangledName(final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace pNamespace, final com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement pElement) {
       return rawStreamAllValuesOfmangledName(new Object[]{pNamespace, pElement, null}).collect(Collectors.toSet());
     }
     
     @Override
     protected MangledNameCollision.Match tupleToMatch(final Tuple t) {
       try {
-          return MangledNameCollision.Match.newMatch((Namespace) t.get(POSITION_NAMESPACE), (NamedElement) t.get(POSITION_ELEMENT), (String) t.get(POSITION_MANGLEDNAME));
+          return MangledNameCollision.Match.newMatch(() t.get(POSITION_NAMESPACE), () t.get(POSITION_ELEMENT), (String) t.get(POSITION_MANGLEDNAME));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -673,7 +670,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
     @Override
     protected MangledNameCollision.Match arrayToMatch(final Object[] match) {
       try {
-          return MangledNameCollision.Match.newMatch((Namespace) match[POSITION_NAMESPACE], (NamedElement) match[POSITION_ELEMENT], (String) match[POSITION_MANGLEDNAME]);
+          return MangledNameCollision.Match.newMatch(() match[POSITION_NAMESPACE], () match[POSITION_ELEMENT], (String) match[POSITION_MANGLEDNAME]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -683,7 +680,7 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
     @Override
     protected MangledNameCollision.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return MangledNameCollision.Match.newMutableMatch((Namespace) match[POSITION_NAMESPACE], (NamedElement) match[POSITION_ELEMENT], (String) match[POSITION_MANGLEDNAME]);
+          return MangledNameCollision.Match.newMutableMatch(() match[POSITION_NAMESPACE], () match[POSITION_ELEMENT], (String) match[POSITION_MANGLEDNAME]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -766,9 +763,9 @@ public final class MangledNameCollision extends BaseGeneratedEMFQuerySpecificati
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final MangledNameCollision.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_namespace = new PParameter("namespace", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Namespace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Namespace")), PParameterDirection.INOUT);
+    private final PParameter parameter_namespace = new PParameter("namespace", "", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "Namespace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_element = new PParameter("element", "com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "NamedElement")), PParameterDirection.INOUT);
+    private final PParameter parameter_element = new PParameter("element", "", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.nomagic.com/magicdraw/UML/2.5.1", "NamedElement")), PParameterDirection.INOUT);
     
     private final PParameter parameter_mangledName = new PParameter("mangledName", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
     
