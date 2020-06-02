@@ -1,0 +1,8 @@
+package com.incquerylabs.magicdraw.plugin.example.queries
+
+import "http://www.nomagic.com/magicdraw/UML/2.5.1"
+
+pattern edgeTest(edge: Abstraction){
+	Abstraction.client.name(edge, "UniqueAbstractionClient");
+	Abstraction.supplier.name(edge, "UniqueAbstractionSupplier");
+}
